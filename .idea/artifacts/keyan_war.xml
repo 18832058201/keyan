@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="keyan:war">
+    <output-path>$PROJECT_DIR$/target</output-path>
+    <root id="archive" name="keyan.war">
+      <element id="artifact" artifact-name="keyan:war exploded" />
+    </root>
+  </artifact>
+</component>

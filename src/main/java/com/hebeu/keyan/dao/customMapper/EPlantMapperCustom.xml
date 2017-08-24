@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hebeu.keyan.dao.customMapper.EPlantMapperCustom">
+
+    <select id="selectPlantByWorkNum" resultType="com.hebeu.keyan.po.customPO.EPlantCustom">
+        SELECT v.*,r.* FROM view_plant v LEFT JOIN r_person_project_result r ON v.plant_id = r.id WHERE work_num = #{workNum}
+    </select>
+    <select id="selectPlantResultInfoById" resultType="com.hebeu.keyan.po.customPO.EPlantCustom">
+        SELECT * FROM view_plant b WHERE b.plant_id = #{plantId}
+    </select>
+    <select id="selectPersonListByPlantId" resultType="com.hebeu.keyan.vo.PersonListVO">
+        SELECT r.* FROM r_person_project_result  r
+        WHERE r.id = #{plantId}
+    </select>
+</mapper>

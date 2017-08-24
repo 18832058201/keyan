@@ -1,0 +1,908 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hebeu.keyan.dao.BudgetMoneyMapper" >
+  <resultMap id="BaseResultMap" type="com.hebeu.keyan.po.BudgetMoney" >
+    <id column="budget_id" property="budgetId" jdbcType="INTEGER" />
+    <result column="project_id" property="projectId" jdbcType="VARCHAR" />
+    <result column="publish_total" property="publishTotal" jdbcType="DOUBLE" />
+    <result column="publish_payment" property="publishPayment" jdbcType="DOUBLE" />
+    <result column="publish_apply" property="publishApply" jdbcType="DOUBLE" />
+    <result column="materials_total" property="materialsTotal" jdbcType="DOUBLE" />
+    <result column="materials_payment" property="materialsPayment" jdbcType="DOUBLE" />
+    <result column="materials_apply" property="materialsApply" jdbcType="DOUBLE" />
+    <result column="test_total" property="testTotal" jdbcType="DOUBLE" />
+    <result column="test_payment" property="testPayment" jdbcType="DOUBLE" />
+    <result column="test_apply" property="testApply" jdbcType="DOUBLE" />
+    <result column="fuel_total" property="fuelTotal" jdbcType="DOUBLE" />
+    <result column="fuel_payment" property="fuelPayment" jdbcType="DOUBLE" />
+    <result column="fuel_apply" property="fuelApply" jdbcType="DOUBLE" />
+    <result column="travel_total" property="travelTotal" jdbcType="DOUBLE" />
+    <result column="travel_payment" property="travelPayment" jdbcType="DOUBLE" />
+    <result column="travel_apply" property="travelApply" jdbcType="DOUBLE" />
+    <result column="meet_total" property="meetTotal" jdbcType="DOUBLE" />
+    <result column="meet_payment" property="meetPayment" jdbcType="DOUBLE" />
+    <result column="meet_apply" property="meetApply" jdbcType="DOUBLE" />
+    <result column="international_total" property="internationalTotal" jdbcType="DOUBLE" />
+    <result column="international_payment" property="internationalPayment" jdbcType="DOUBLE" />
+    <result column="international_apply" property="internationalApply" jdbcType="DOUBLE" />
+    <result column="facility_total" property="facilityTotal" jdbcType="DOUBLE" />
+    <result column="facility_payment" property="facilityPayment" jdbcType="DOUBLE" />
+    <result column="facility_apply" property="facilityApply" jdbcType="DOUBLE" />
+    <result column="labour_total" property="labourTotal" jdbcType="DOUBLE" />
+    <result column="labour_payment" property="labourPayment" jdbcType="DOUBLE" />
+    <result column="labour_apply" property="labourApply" jdbcType="DOUBLE" />
+    <result column="expert_total" property="expertTotal" jdbcType="DOUBLE" />
+    <result column="expert_payment" property="expertPayment" jdbcType="DOUBLE" />
+    <result column="expert_apply" property="expertApply" jdbcType="DOUBLE" />
+    <result column="datum_total" property="datumTotal" jdbcType="DOUBLE" />
+    <result column="datum_payment" property="datumPayment" jdbcType="DOUBLE" />
+    <result column="datum_apply" property="datumApply" jdbcType="DOUBLE" />
+    <result column="data_total" property="dataTotal" jdbcType="DOUBLE" />
+    <result column="data_payment" property="dataPayment" jdbcType="DOUBLE" />
+    <result column="data_apply" property="dataApply" jdbcType="DOUBLE" />
+    <result column="print_total" property="printTotal" jdbcType="DOUBLE" />
+    <result column="print_payment" property="printPayment" jdbcType="DOUBLE" />
+    <result column="print_apply" property="printApply" jdbcType="DOUBLE" />
+    <result column="other_total" property="otherTotal" jdbcType="DOUBLE" />
+    <result column="other_payment" property="otherPayment" jdbcType="DOUBLE" />
+    <result column="other_apply" property="otherApply" jdbcType="DOUBLE" />
+    <result column="manage_total" property="manageTotal" jdbcType="DOUBLE" />
+    <result column="post_total" property="postTotal" jdbcType="DOUBLE" />
+    <result column="post_payment" property="postPayment" jdbcType="DOUBLE" />
+    <result column="post_apply" property="postApply" jdbcType="DOUBLE" />
+    <result column="post_num" property="postNum" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    budget_id, project_id, publish_total, publish_payment, publish_apply, materials_total, 
+    materials_payment, materials_apply, test_total, test_payment, test_apply, fuel_total, 
+    fuel_payment, fuel_apply, travel_total, travel_payment, travel_apply, meet_total, 
+    meet_payment, meet_apply, international_total, international_payment, international_apply, 
+    facility_total, facility_payment, facility_apply, labour_total, labour_payment, labour_apply, 
+    expert_total, expert_payment, expert_apply, datum_total, datum_payment, datum_apply, 
+    data_total, data_payment, data_apply, print_total, print_payment, print_apply, other_total, 
+    other_payment, other_apply, manage_total, post_total, post_payment, post_apply, post_num
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.hebeu.keyan.po.BudgetMoneyExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from budget_money
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from budget_money
+    where budget_id = #{budgetId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from budget_money
+    where budget_id = #{budgetId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.hebeu.keyan.po.BudgetMoneyExample" >
+    delete from budget_money
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.hebeu.keyan.po.BudgetMoney" >
+    insert into budget_money (budget_id, project_id, publish_total, 
+      publish_payment, publish_apply, materials_total, 
+      materials_payment, materials_apply, test_total, 
+      test_payment, test_apply, fuel_total, 
+      fuel_payment, fuel_apply, travel_total, 
+      travel_payment, travel_apply, meet_total, 
+      meet_payment, meet_apply, international_total, 
+      international_payment, international_apply, 
+      facility_total, facility_payment, facility_apply, 
+      labour_total, labour_payment, labour_apply, 
+      expert_total, expert_payment, expert_apply, 
+      datum_total, datum_payment, datum_apply, 
+      data_total, data_payment, data_apply, 
+      print_total, print_payment, print_apply, 
+      other_total, other_payment, other_apply, 
+      manage_total, post_total, post_payment, 
+      post_apply, post_num)
+    values (#{budgetId,jdbcType=INTEGER}, #{projectId,jdbcType=VARCHAR}, #{publishTotal,jdbcType=DOUBLE}, 
+      #{publishPayment,jdbcType=DOUBLE}, #{publishApply,jdbcType=DOUBLE}, #{materialsTotal,jdbcType=DOUBLE}, 
+      #{materialsPayment,jdbcType=DOUBLE}, #{materialsApply,jdbcType=DOUBLE}, #{testTotal,jdbcType=DOUBLE}, 
+      #{testPayment,jdbcType=DOUBLE}, #{testApply,jdbcType=DOUBLE}, #{fuelTotal,jdbcType=DOUBLE}, 
+      #{fuelPayment,jdbcType=DOUBLE}, #{fuelApply,jdbcType=DOUBLE}, #{travelTotal,jdbcType=DOUBLE}, 
+      #{travelPayment,jdbcType=DOUBLE}, #{travelApply,jdbcType=DOUBLE}, #{meetTotal,jdbcType=DOUBLE}, 
+      #{meetPayment,jdbcType=DOUBLE}, #{meetApply,jdbcType=DOUBLE}, #{internationalTotal,jdbcType=DOUBLE}, 
+      #{internationalPayment,jdbcType=DOUBLE}, #{internationalApply,jdbcType=DOUBLE}, 
+      #{facilityTotal,jdbcType=DOUBLE}, #{facilityPayment,jdbcType=DOUBLE}, #{facilityApply,jdbcType=DOUBLE}, 
+      #{labourTotal,jdbcType=DOUBLE}, #{labourPayment,jdbcType=DOUBLE}, #{labourApply,jdbcType=DOUBLE}, 
+      #{expertTotal,jdbcType=DOUBLE}, #{expertPayment,jdbcType=DOUBLE}, #{expertApply,jdbcType=DOUBLE}, 
+      #{datumTotal,jdbcType=DOUBLE}, #{datumPayment,jdbcType=DOUBLE}, #{datumApply,jdbcType=DOUBLE}, 
+      #{dataTotal,jdbcType=DOUBLE}, #{dataPayment,jdbcType=DOUBLE}, #{dataApply,jdbcType=DOUBLE}, 
+      #{printTotal,jdbcType=DOUBLE}, #{printPayment,jdbcType=DOUBLE}, #{printApply,jdbcType=DOUBLE}, 
+      #{otherTotal,jdbcType=DOUBLE}, #{otherPayment,jdbcType=DOUBLE}, #{otherApply,jdbcType=DOUBLE}, 
+      #{manageTotal,jdbcType=DOUBLE}, #{postTotal,jdbcType=DOUBLE}, #{postPayment,jdbcType=DOUBLE}, 
+      #{postApply,jdbcType=DOUBLE}, #{postNum,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.hebeu.keyan.po.BudgetMoney" >
+    insert into budget_money
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="budgetId != null" >
+        budget_id,
+      </if>
+      <if test="projectId != null" >
+        project_id,
+      </if>
+      <if test="publishTotal != null" >
+        publish_total,
+      </if>
+      <if test="publishPayment != null" >
+        publish_payment,
+      </if>
+      <if test="publishApply != null" >
+        publish_apply,
+      </if>
+      <if test="materialsTotal != null" >
+        materials_total,
+      </if>
+      <if test="materialsPayment != null" >
+        materials_payment,
+      </if>
+      <if test="materialsApply != null" >
+        materials_apply,
+      </if>
+      <if test="testTotal != null" >
+        test_total,
+      </if>
+      <if test="testPayment != null" >
+        test_payment,
+      </if>
+      <if test="testApply != null" >
+        test_apply,
+      </if>
+      <if test="fuelTotal != null" >
+        fuel_total,
+      </if>
+      <if test="fuelPayment != null" >
+        fuel_payment,
+      </if>
+      <if test="fuelApply != null" >
+        fuel_apply,
+      </if>
+      <if test="travelTotal != null" >
+        travel_total,
+      </if>
+      <if test="travelPayment != null" >
+        travel_payment,
+      </if>
+      <if test="travelApply != null" >
+        travel_apply,
+      </if>
+      <if test="meetTotal != null" >
+        meet_total,
+      </if>
+      <if test="meetPayment != null" >
+        meet_payment,
+      </if>
+      <if test="meetApply != null" >
+        meet_apply,
+      </if>
+      <if test="internationalTotal != null" >
+        international_total,
+      </if>
+      <if test="internationalPayment != null" >
+        international_payment,
+      </if>
+      <if test="internationalApply != null" >
+        international_apply,
+      </if>
+      <if test="facilityTotal != null" >
+        facility_total,
+      </if>
+      <if test="facilityPayment != null" >
+        facility_payment,
+      </if>
+      <if test="facilityApply != null" >
+        facility_apply,
+      </if>
+      <if test="labourTotal != null" >
+        labour_total,
+      </if>
+      <if test="labourPayment != null" >
+        labour_payment,
+      </if>
+      <if test="labourApply != null" >
+        labour_apply,
+      </if>
+      <if test="expertTotal != null" >
+        expert_total,
+      </if>
+      <if test="expertPayment != null" >
+        expert_payment,
+      </if>
+      <if test="expertApply != null" >
+        expert_apply,
+      </if>
+      <if test="datumTotal != null" >
+        datum_total,
+      </if>
+      <if test="datumPayment != null" >
+        datum_payment,
+      </if>
+      <if test="datumApply != null" >
+        datum_apply,
+      </if>
+      <if test="dataTotal != null" >
+        data_total,
+      </if>
+      <if test="dataPayment != null" >
+        data_payment,
+      </if>
+      <if test="dataApply != null" >
+        data_apply,
+      </if>
+      <if test="printTotal != null" >
+        print_total,
+      </if>
+      <if test="printPayment != null" >
+        print_payment,
+      </if>
+      <if test="printApply != null" >
+        print_apply,
+      </if>
+      <if test="otherTotal != null" >
+        other_total,
+      </if>
+      <if test="otherPayment != null" >
+        other_payment,
+      </if>
+      <if test="otherApply != null" >
+        other_apply,
+      </if>
+      <if test="manageTotal != null" >
+        manage_total,
+      </if>
+      <if test="postTotal != null" >
+        post_total,
+      </if>
+      <if test="postPayment != null" >
+        post_payment,
+      </if>
+      <if test="postApply != null" >
+        post_apply,
+      </if>
+      <if test="postNum != null" >
+        post_num,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="budgetId != null" >
+        #{budgetId,jdbcType=INTEGER},
+      </if>
+      <if test="projectId != null" >
+        #{projectId,jdbcType=VARCHAR},
+      </if>
+      <if test="publishTotal != null" >
+        #{publishTotal,jdbcType=DOUBLE},
+      </if>
+      <if test="publishPayment != null" >
+        #{publishPayment,jdbcType=DOUBLE},
+      </if>
+      <if test="publishApply != null" >
+        #{publishApply,jdbcType=DOUBLE},
+      </if>
+      <if test="materialsTotal != null" >
+        #{materialsTotal,jdbcType=DOUBLE},
+      </if>
+      <if test="materialsPayment != null" >
+        #{materialsPayment,jdbcType=DOUBLE},
+      </if>
+      <if test="materialsApply != null" >
+        #{materialsApply,jdbcType=DOUBLE},
+      </if>
+      <if test="testTotal != null" >
+        #{testTotal,jdbcType=DOUBLE},
+      </if>
+      <if test="testPayment != null" >
+        #{testPayment,jdbcType=DOUBLE},
+      </if>
+      <if test="testApply != null" >
+        #{testApply,jdbcType=DOUBLE},
+      </if>
+      <if test="fuelTotal != null" >
+        #{fuelTotal,jdbcType=DOUBLE},
+      </if>
+      <if test="fuelPayment != null" >
+        #{fuelPayment,jdbcType=DOUBLE},
+      </if>
+      <if test="fuelApply != null" >
+        #{fuelApply,jdbcType=DOUBLE},
+      </if>
+      <if test="travelTotal != null" >
+        #{travelTotal,jdbcType=DOUBLE},
+      </if>
+      <if test="travelPayment != null" >
+        #{travelPayment,jdbcType=DOUBLE},
+      </if>
+      <if test="travelApply != null" >
+        #{travelApply,jdbcType=DOUBLE},
+      </if>
+      <if test="meetTotal != null" >
+        #{meetTotal,jdbcType=DOUBLE},
+      </if>
+      <if test="meetPayment != null" >
+        #{meetPayment,jdbcType=DOUBLE},
+      </if>
+      <if test="meetApply != null" >
+        #{meetApply,jdbcType=DOUBLE},
+      </if>
+      <if test="internationalTotal != null" >
+        #{internationalTotal,jdbcType=DOUBLE},
+      </if>
+      <if test="internationalPayment != null" >
+        #{internationalPayment,jdbcType=DOUBLE},
+      </if>
+      <if test="internationalApply != null" >
+        #{internationalApply,jdbcType=DOUBLE},
+      </if>
+      <if test="facilityTotal != null" >
+        #{facilityTotal,jdbcType=DOUBLE},
+      </if>
+      <if test="facilityPayment != null" >
+        #{facilityPayment,jdbcType=DOUBLE},
+      </if>
+      <if test="facilityApply != null" >
+        #{facilityApply,jdbcType=DOUBLE},
+      </if>
+      <if test="labourTotal != null" >
+        #{labourTotal,jdbcType=DOUBLE},
+      </if>
+      <if test="labourPayment != null" >
+        #{labourPayment,jdbcType=DOUBLE},
+      </if>
+      <if test="labourApply != null" >
+        #{labourApply,jdbcType=DOUBLE},
+      </if>
+      <if test="expertTotal != null" >
+        #{expertTotal,jdbcType=DOUBLE},
+      </if>
+      <if test="expertPayment != null" >
+        #{expertPayment,jdbcType=DOUBLE},
+      </if>
+      <if test="expertApply != null" >
+        #{expertApply,jdbcType=DOUBLE},
+      </if>
+      <if test="datumTotal != null" >
+        #{datumTotal,jdbcType=DOUBLE},
+      </if>
+      <if test="datumPayment != null" >
+        #{datumPayment,jdbcType=DOUBLE},
+      </if>
+      <if test="datumApply != null" >
+        #{datumApply,jdbcType=DOUBLE},
+      </if>
+      <if test="dataTotal != null" >
+        #{dataTotal,jdbcType=DOUBLE},
+      </if>
+      <if test="dataPayment != null" >
+        #{dataPayment,jdbcType=DOUBLE},
+      </if>
+      <if test="dataApply != null" >
+        #{dataApply,jdbcType=DOUBLE},
+      </if>
+      <if test="printTotal != null" >
+        #{printTotal,jdbcType=DOUBLE},
+      </if>
+      <if test="printPayment != null" >
+        #{printPayment,jdbcType=DOUBLE},
+      </if>
+      <if test="printApply != null" >
+        #{printApply,jdbcType=DOUBLE},
+      </if>
+      <if test="otherTotal != null" >
+        #{otherTotal,jdbcType=DOUBLE},
+      </if>
+      <if test="otherPayment != null" >
+        #{otherPayment,jdbcType=DOUBLE},
+      </if>
+      <if test="otherApply != null" >
+        #{otherApply,jdbcType=DOUBLE},
+      </if>
+      <if test="manageTotal != null" >
+        #{manageTotal,jdbcType=DOUBLE},
+      </if>
+      <if test="postTotal != null" >
+        #{postTotal,jdbcType=DOUBLE},
+      </if>
+      <if test="postPayment != null" >
+        #{postPayment,jdbcType=DOUBLE},
+      </if>
+      <if test="postApply != null" >
+        #{postApply,jdbcType=DOUBLE},
+      </if>
+      <if test="postNum != null" >
+        #{postNum,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.hebeu.keyan.po.BudgetMoneyExample" resultType="java.lang.Integer" >
+    select count(*) from budget_money
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update budget_money
+    <set >
+      <if test="record.budgetId != null" >
+        budget_id = #{record.budgetId,jdbcType=INTEGER},
+      </if>
+      <if test="record.projectId != null" >
+        project_id = #{record.projectId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.publishTotal != null" >
+        publish_total = #{record.publishTotal,jdbcType=DOUBLE},
+      </if>
+      <if test="record.publishPayment != null" >
+        publish_payment = #{record.publishPayment,jdbcType=DOUBLE},
+      </if>
+      <if test="record.publishApply != null" >
+        publish_apply = #{record.publishApply,jdbcType=DOUBLE},
+      </if>
+      <if test="record.materialsTotal != null" >
+        materials_total = #{record.materialsTotal,jdbcType=DOUBLE},
+      </if>
+      <if test="record.materialsPayment != null" >
+        materials_payment = #{record.materialsPayment,jdbcType=DOUBLE},
+      </if>
+      <if test="record.materialsApply != null" >
+        materials_apply = #{record.materialsApply,jdbcType=DOUBLE},
+      </if>
+      <if test="record.testTotal != null" >
+        test_total = #{record.testTotal,jdbcType=DOUBLE},
+      </if>
+      <if test="record.testPayment != null" >
+        test_payment = #{record.testPayment,jdbcType=DOUBLE},
+      </if>
+      <if test="record.testApply != null" >
+        test_apply = #{record.testApply,jdbcType=DOUBLE},
+      </if>
+      <if test="record.fuelTotal != null" >
+        fuel_total = #{record.fuelTotal,jdbcType=DOUBLE},
+      </if>
+      <if test="record.fuelPayment != null" >
+        fuel_payment = #{record.fuelPayment,jdbcType=DOUBLE},
+      </if>
+      <if test="record.fuelApply != null" >
+        fuel_apply = #{record.fuelApply,jdbcType=DOUBLE},
+      </if>
+      <if test="record.travelTotal != null" >
+        travel_total = #{record.travelTotal,jdbcType=DOUBLE},
+      </if>
+      <if test="record.travelPayment != null" >
+        travel_payment = #{record.travelPayment,jdbcType=DOUBLE},
+      </if>
+      <if test="record.travelApply != null" >
+        travel_apply = #{record.travelApply,jdbcType=DOUBLE},
+      </if>
+      <if test="record.meetTotal != null" >
+        meet_total = #{record.meetTotal,jdbcType=DOUBLE},
+      </if>
+      <if test="record.meetPayment != null" >
+        meet_payment = #{record.meetPayment,jdbcType=DOUBLE},
+      </if>
+      <if test="record.meetApply != null" >
+        meet_apply = #{record.meetApply,jdbcType=DOUBLE},
+      </if>
+      <if test="record.internationalTotal != null" >
+        international_total = #{record.internationalTotal,jdbcType=DOUBLE},
+      </if>
+      <if test="record.internationalPayment != null" >
+        international_payment = #{record.internationalPayment,jdbcType=DOUBLE},
+      </if>
+      <if test="record.internationalApply != null" >
+        international_apply = #{record.internationalApply,jdbcType=DOUBLE},
+      </if>
+      <if test="record.facilityTotal != null" >
+        facility_total = #{record.facilityTotal,jdbcType=DOUBLE},
+      </if>
+      <if test="record.facilityPayment != null" >
+        facility_payment = #{record.facilityPayment,jdbcType=DOUBLE},
+      </if>
+      <if test="record.facilityApply != null" >
+        facility_apply = #{record.facilityApply,jdbcType=DOUBLE},
+      </if>
+      <if test="record.labourTotal != null" >
+        labour_total = #{record.labourTotal,jdbcType=DOUBLE},
+      </if>
+      <if test="record.labourPayment != null" >
+        labour_payment = #{record.labourPayment,jdbcType=DOUBLE},
+      </if>
+      <if test="record.labourApply != null" >
+        labour_apply = #{record.labourApply,jdbcType=DOUBLE},
+      </if>
+      <if test="record.expertTotal != null" >
+        expert_total = #{record.expertTotal,jdbcType=DOUBLE},
+      </if>
+      <if test="record.expertPayment != null" >
+        expert_payment = #{record.expertPayment,jdbcType=DOUBLE},
+      </if>
+      <if test="record.expertApply != null" >
+        expert_apply = #{record.expertApply,jdbcType=DOUBLE},
+      </if>
+      <if test="record.datumTotal != null" >
+        datum_total = #{record.datumTotal,jdbcType=DOUBLE},
+      </if>
+      <if test="record.datumPayment != null" >
+        datum_payment = #{record.datumPayment,jdbcType=DOUBLE},
+      </if>
+      <if test="record.datumApply != null" >
+        datum_apply = #{record.datumApply,jdbcType=DOUBLE},
+      </if>
+      <if test="record.dataTotal != null" >
+        data_total = #{record.dataTotal,jdbcType=DOUBLE},
+      </if>
+      <if test="record.dataPayment != null" >
+        data_payment = #{record.dataPayment,jdbcType=DOUBLE},
+      </if>
+      <if test="record.dataApply != null" >
+        data_apply = #{record.dataApply,jdbcType=DOUBLE},
+      </if>
+      <if test="record.printTotal != null" >
+        print_total = #{record.printTotal,jdbcType=DOUBLE},
+      </if>
+      <if test="record.printPayment != null" >
+        print_payment = #{record.printPayment,jdbcType=DOUBLE},
+      </if>
+      <if test="record.printApply != null" >
+        print_apply = #{record.printApply,jdbcType=DOUBLE},
+      </if>
+      <if test="record.otherTotal != null" >
+        other_total = #{record.otherTotal,jdbcType=DOUBLE},
+      </if>
+      <if test="record.otherPayment != null" >
+        other_payment = #{record.otherPayment,jdbcType=DOUBLE},
+      </if>
+      <if test="record.otherApply != null" >
+        other_apply = #{record.otherApply,jdbcType=DOUBLE},
+      </if>
+      <if test="record.manageTotal != null" >
+        manage_total = #{record.manageTotal,jdbcType=DOUBLE},
+      </if>
+      <if test="record.postTotal != null" >
+        post_total = #{record.postTotal,jdbcType=DOUBLE},
+      </if>
+      <if test="record.postPayment != null" >
+        post_payment = #{record.postPayment,jdbcType=DOUBLE},
+      </if>
+      <if test="record.postApply != null" >
+        post_apply = #{record.postApply,jdbcType=DOUBLE},
+      </if>
+      <if test="record.postNum != null" >
+        post_num = #{record.postNum,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update budget_money
+    set budget_id = #{record.budgetId,jdbcType=INTEGER},
+      project_id = #{record.projectId,jdbcType=VARCHAR},
+      publish_total = #{record.publishTotal,jdbcType=DOUBLE},
+      publish_payment = #{record.publishPayment,jdbcType=DOUBLE},
+      publish_apply = #{record.publishApply,jdbcType=DOUBLE},
+      materials_total = #{record.materialsTotal,jdbcType=DOUBLE},
+      materials_payment = #{record.materialsPayment,jdbcType=DOUBLE},
+      materials_apply = #{record.materialsApply,jdbcType=DOUBLE},
+      test_total = #{record.testTotal,jdbcType=DOUBLE},
+      test_payment = #{record.testPayment,jdbcType=DOUBLE},
+      test_apply = #{record.testApply,jdbcType=DOUBLE},
+      fuel_total = #{record.fuelTotal,jdbcType=DOUBLE},
+      fuel_payment = #{record.fuelPayment,jdbcType=DOUBLE},
+      fuel_apply = #{record.fuelApply,jdbcType=DOUBLE},
+      travel_total = #{record.travelTotal,jdbcType=DOUBLE},
+      travel_payment = #{record.travelPayment,jdbcType=DOUBLE},
+      travel_apply = #{record.travelApply,jdbcType=DOUBLE},
+      meet_total = #{record.meetTotal,jdbcType=DOUBLE},
+      meet_payment = #{record.meetPayment,jdbcType=DOUBLE},
+      meet_apply = #{record.meetApply,jdbcType=DOUBLE},
+      international_total = #{record.internationalTotal,jdbcType=DOUBLE},
+      international_payment = #{record.internationalPayment,jdbcType=DOUBLE},
+      international_apply = #{record.internationalApply,jdbcType=DOUBLE},
+      facility_total = #{record.facilityTotal,jdbcType=DOUBLE},
+      facility_payment = #{record.facilityPayment,jdbcType=DOUBLE},
+      facility_apply = #{record.facilityApply,jdbcType=DOUBLE},
+      labour_total = #{record.labourTotal,jdbcType=DOUBLE},
+      labour_payment = #{record.labourPayment,jdbcType=DOUBLE},
+      labour_apply = #{record.labourApply,jdbcType=DOUBLE},
+      expert_total = #{record.expertTotal,jdbcType=DOUBLE},
+      expert_payment = #{record.expertPayment,jdbcType=DOUBLE},
+      expert_apply = #{record.expertApply,jdbcType=DOUBLE},
+      datum_total = #{record.datumTotal,jdbcType=DOUBLE},
+      datum_payment = #{record.datumPayment,jdbcType=DOUBLE},
+      datum_apply = #{record.datumApply,jdbcType=DOUBLE},
+      data_total = #{record.dataTotal,jdbcType=DOUBLE},
+      data_payment = #{record.dataPayment,jdbcType=DOUBLE},
+      data_apply = #{record.dataApply,jdbcType=DOUBLE},
+      print_total = #{record.printTotal,jdbcType=DOUBLE},
+      print_payment = #{record.printPayment,jdbcType=DOUBLE},
+      print_apply = #{record.printApply,jdbcType=DOUBLE},
+      other_total = #{record.otherTotal,jdbcType=DOUBLE},
+      other_payment = #{record.otherPayment,jdbcType=DOUBLE},
+      other_apply = #{record.otherApply,jdbcType=DOUBLE},
+      manage_total = #{record.manageTotal,jdbcType=DOUBLE},
+      post_total = #{record.postTotal,jdbcType=DOUBLE},
+      post_payment = #{record.postPayment,jdbcType=DOUBLE},
+      post_apply = #{record.postApply,jdbcType=DOUBLE},
+      post_num = #{record.postNum,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hebeu.keyan.po.BudgetMoney" >
+    update budget_money
+    <set >
+      <if test="projectId != null" >
+        project_id = #{projectId,jdbcType=VARCHAR},
+      </if>
+      <if test="publishTotal != null" >
+        publish_total = #{publishTotal,jdbcType=DOUBLE},
+      </if>
+      <if test="publishPayment != null" >
+        publish_payment = #{publishPayment,jdbcType=DOUBLE},
+      </if>
+      <if test="publishApply != null" >
+        publish_apply = #{publishApply,jdbcType=DOUBLE},
+      </if>
+      <if test="materialsTotal != null" >
+        materials_total = #{materialsTotal,jdbcType=DOUBLE},
+      </if>
+      <if test="materialsPayment != null" >
+        materials_payment = #{materialsPayment,jdbcType=DOUBLE},
+      </if>
+      <if test="materialsApply != null" >
+        materials_apply = #{materialsApply,jdbcType=DOUBLE},
+      </if>
+      <if test="testTotal != null" >
+        test_total = #{testTotal,jdbcType=DOUBLE},
+      </if>
+      <if test="testPayment != null" >
+        test_payment = #{testPayment,jdbcType=DOUBLE},
+      </if>
+      <if test="testApply != null" >
+        test_apply = #{testApply,jdbcType=DOUBLE},
+      </if>
+      <if test="fuelTotal != null" >
+        fuel_total = #{fuelTotal,jdbcType=DOUBLE},
+      </if>
+      <if test="fuelPayment != null" >
+        fuel_payment = #{fuelPayment,jdbcType=DOUBLE},
+      </if>
+      <if test="fuelApply != null" >
+        fuel_apply = #{fuelApply,jdbcType=DOUBLE},
+      </if>
+      <if test="travelTotal != null" >
+        travel_total = #{travelTotal,jdbcType=DOUBLE},
+      </if>
+      <if test="travelPayment != null" >
+        travel_payment = #{travelPayment,jdbcType=DOUBLE},
+      </if>
+      <if test="travelApply != null" >
+        travel_apply = #{travelApply,jdbcType=DOUBLE},
+      </if>
+      <if test="meetTotal != null" >
+        meet_total = #{meetTotal,jdbcType=DOUBLE},
+      </if>
+      <if test="meetPayment != null" >
+        meet_payment = #{meetPayment,jdbcType=DOUBLE},
+      </if>
+      <if test="meetApply != null" >
+        meet_apply = #{meetApply,jdbcType=DOUBLE},
+      </if>
+      <if test="internationalTotal != null" >
+        international_total = #{internationalTotal,jdbcType=DOUBLE},
+      </if>
+      <if test="internationalPayment != null" >
+        international_payment = #{internationalPayment,jdbcType=DOUBLE},
+      </if>
+      <if test="internationalApply != null" >
+        international_apply = #{internationalApply,jdbcType=DOUBLE},
+      </if>
+      <if test="facilityTotal != null" >
+        facility_total = #{facilityTotal,jdbcType=DOUBLE},
+      </if>
+      <if test="facilityPayment != null" >
+        facility_payment = #{facilityPayment,jdbcType=DOUBLE},
+      </if>
+      <if test="facilityApply != null" >
+        facility_apply = #{facilityApply,jdbcType=DOUBLE},
+      </if>
+      <if test="labourTotal != null" >
+        labour_total = #{labourTotal,jdbcType=DOUBLE},
+      </if>
+      <if test="labourPayment != null" >
+        labour_payment = #{labourPayment,jdbcType=DOUBLE},
+      </if>
+      <if test="labourApply != null" >
+        labour_apply = #{labourApply,jdbcType=DOUBLE},
+      </if>
+      <if test="expertTotal != null" >
+        expert_total = #{expertTotal,jdbcType=DOUBLE},
+      </if>
+      <if test="expertPayment != null" >
+        expert_payment = #{expertPayment,jdbcType=DOUBLE},
+      </if>
+      <if test="expertApply != null" >
+        expert_apply = #{expertApply,jdbcType=DOUBLE},
+      </if>
+      <if test="datumTotal != null" >
+        datum_total = #{datumTotal,jdbcType=DOUBLE},
+      </if>
+      <if test="datumPayment != null" >
+        datum_payment = #{datumPayment,jdbcType=DOUBLE},
+      </if>
+      <if test="datumApply != null" >
+        datum_apply = #{datumApply,jdbcType=DOUBLE},
+      </if>
+      <if test="dataTotal != null" >
+        data_total = #{dataTotal,jdbcType=DOUBLE},
+      </if>
+      <if test="dataPayment != null" >
+        data_payment = #{dataPayment,jdbcType=DOUBLE},
+      </if>
+      <if test="dataApply != null" >
+        data_apply = #{dataApply,jdbcType=DOUBLE},
+      </if>
+      <if test="printTotal != null" >
+        print_total = #{printTotal,jdbcType=DOUBLE},
+      </if>
+      <if test="printPayment != null" >
+        print_payment = #{printPayment,jdbcType=DOUBLE},
+      </if>
+      <if test="printApply != null" >
+        print_apply = #{printApply,jdbcType=DOUBLE},
+      </if>
+      <if test="otherTotal != null" >
+        other_total = #{otherTotal,jdbcType=DOUBLE},
+      </if>
+      <if test="otherPayment != null" >
+        other_payment = #{otherPayment,jdbcType=DOUBLE},
+      </if>
+      <if test="otherApply != null" >
+        other_apply = #{otherApply,jdbcType=DOUBLE},
+      </if>
+      <if test="manageTotal != null" >
+        manage_total = #{manageTotal,jdbcType=DOUBLE},
+      </if>
+      <if test="postTotal != null" >
+        post_total = #{postTotal,jdbcType=DOUBLE},
+      </if>
+      <if test="postPayment != null" >
+        post_payment = #{postPayment,jdbcType=DOUBLE},
+      </if>
+      <if test="postApply != null" >
+        post_apply = #{postApply,jdbcType=DOUBLE},
+      </if>
+      <if test="postNum != null" >
+        post_num = #{postNum,jdbcType=INTEGER},
+      </if>
+    </set>
+    where budget_id = #{budgetId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hebeu.keyan.po.BudgetMoney" >
+    update budget_money
+    set project_id = #{projectId,jdbcType=VARCHAR},
+      publish_total = #{publishTotal,jdbcType=DOUBLE},
+      publish_payment = #{publishPayment,jdbcType=DOUBLE},
+      publish_apply = #{publishApply,jdbcType=DOUBLE},
+      materials_total = #{materialsTotal,jdbcType=DOUBLE},
+      materials_payment = #{materialsPayment,jdbcType=DOUBLE},
+      materials_apply = #{materialsApply,jdbcType=DOUBLE},
+      test_total = #{testTotal,jdbcType=DOUBLE},
+      test_payment = #{testPayment,jdbcType=DOUBLE},
+      test_apply = #{testApply,jdbcType=DOUBLE},
+      fuel_total = #{fuelTotal,jdbcType=DOUBLE},
+      fuel_payment = #{fuelPayment,jdbcType=DOUBLE},
+      fuel_apply = #{fuelApply,jdbcType=DOUBLE},
+      travel_total = #{travelTotal,jdbcType=DOUBLE},
+      travel_payment = #{travelPayment,jdbcType=DOUBLE},
+      travel_apply = #{travelApply,jdbcType=DOUBLE},
+      meet_total = #{meetTotal,jdbcType=DOUBLE},
+      meet_payment = #{meetPayment,jdbcType=DOUBLE},
+      meet_apply = #{meetApply,jdbcType=DOUBLE},
+      international_total = #{internationalTotal,jdbcType=DOUBLE},
+      international_payment = #{internationalPayment,jdbcType=DOUBLE},
+      international_apply = #{internationalApply,jdbcType=DOUBLE},
+      facility_total = #{facilityTotal,jdbcType=DOUBLE},
+      facility_payment = #{facilityPayment,jdbcType=DOUBLE},
+      facility_apply = #{facilityApply,jdbcType=DOUBLE},
+      labour_total = #{labourTotal,jdbcType=DOUBLE},
+      labour_payment = #{labourPayment,jdbcType=DOUBLE},
+      labour_apply = #{labourApply,jdbcType=DOUBLE},
+      expert_total = #{expertTotal,jdbcType=DOUBLE},
+      expert_payment = #{expertPayment,jdbcType=DOUBLE},
+      expert_apply = #{expertApply,jdbcType=DOUBLE},
+      datum_total = #{datumTotal,jdbcType=DOUBLE},
+      datum_payment = #{datumPayment,jdbcType=DOUBLE},
+      datum_apply = #{datumApply,jdbcType=DOUBLE},
+      data_total = #{dataTotal,jdbcType=DOUBLE},
+      data_payment = #{dataPayment,jdbcType=DOUBLE},
+      data_apply = #{dataApply,jdbcType=DOUBLE},
+      print_total = #{printTotal,jdbcType=DOUBLE},
+      print_payment = #{printPayment,jdbcType=DOUBLE},
+      print_apply = #{printApply,jdbcType=DOUBLE},
+      other_total = #{otherTotal,jdbcType=DOUBLE},
+      other_payment = #{otherPayment,jdbcType=DOUBLE},
+      other_apply = #{otherApply,jdbcType=DOUBLE},
+      manage_total = #{manageTotal,jdbcType=DOUBLE},
+      post_total = #{postTotal,jdbcType=DOUBLE},
+      post_payment = #{postPayment,jdbcType=DOUBLE},
+      post_apply = #{postApply,jdbcType=DOUBLE},
+      post_num = #{postNum,jdbcType=INTEGER}
+    where budget_id = #{budgetId,jdbcType=INTEGER}
+  </update>
+</mapper>

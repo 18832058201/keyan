@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hebeu.keyan.dao.ManageApplyTypeMapper" >
+  <resultMap id="BaseResultMap" type="com.hebeu.keyan.po.ManageApplyType" >
+    <id column="apply_type_id" property="applyTypeId" jdbcType="INTEGER" />
+    <result column="apply_type_name" property="applyTypeName" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    apply_type_id, apply_type_name
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.hebeu.keyan.po.ManageApplyTypeExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from manage_apply_type
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from manage_apply_type
+    where apply_type_id = #{applyTypeId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from manage_apply_type
+    where apply_type_id = #{applyTypeId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.hebeu.keyan.po.ManageApplyTypeExample" >
+    delete from manage_apply_type
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.hebeu.keyan.po.ManageApplyType" >
+    insert into manage_apply_type (apply_type_id, apply_type_name)
+    values (#{applyTypeId,jdbcType=INTEGER}, #{applyTypeName,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.hebeu.keyan.po.ManageApplyType" >
+    insert into manage_apply_type
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="applyTypeId != null" >
+        apply_type_id,
+      </if>
+      <if test="applyTypeName != null" >
+        apply_type_name,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="applyTypeId != null" >
+        #{applyTypeId,jdbcType=INTEGER},
+      </if>
+      <if test="applyTypeName != null" >
+        #{applyTypeName,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.hebeu.keyan.po.ManageApplyTypeExample" resultType="java.lang.Integer" >
+    select count(*) from manage_apply_type
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update manage_apply_type
+    <set >
+      <if test="record.applyTypeId != null" >
+        apply_type_id = #{record.applyTypeId,jdbcType=INTEGER},
+      </if>
+      <if test="record.applyTypeName != null" >
+        apply_type_name = #{record.applyTypeName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update manage_apply_type
+    set apply_type_id = #{record.applyTypeId,jdbcType=INTEGER},
+      apply_type_name = #{record.applyTypeName,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hebeu.keyan.po.ManageApplyType" >
+    update manage_apply_type
+    <set >
+      <if test="applyTypeName != null" >
+        apply_type_name = #{applyTypeName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where apply_type_id = #{applyTypeId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hebeu.keyan.po.ManageApplyType" >
+    update manage_apply_type
+    set apply_type_name = #{applyTypeName,jdbcType=VARCHAR}
+    where apply_type_id = #{applyTypeId,jdbcType=INTEGER}
+  </update>
+</mapper>

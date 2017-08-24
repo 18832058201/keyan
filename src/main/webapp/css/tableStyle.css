@@ -1,0 +1,121 @@
+/*标题信息*/
+.title-h1 {
+    color: #666666;
+    font-size: 18px;
+    float: none;
+    text-shadow: 0 1px 0 #ffffff;
+    padding-top: 3px;
+    padding-bottom: 3px;
+    position: relative;
+    border-bottom: 2px solid #EE7600;
+    margin: 0 20px 10px 20px;
+}
+
+/*body体样式*/
+body {
+    margin-bottom: 50px;
+    padding-bottom: 50px;
+}
+
+/*table表格样式*/
+table {
+    font-size: 14px;
+    width: 95%;
+    background: #f7f7f7;
+    margin: 0 auto;
+    border-collapse: collapse;
+}
+
+/*tr样式边框*/
+table tr {
+    border: 1px dashed #ccc;
+}
+
+/*td样式*/
+table td {
+    padding: 2px 3px;
+    text-align: right;
+}
+
+/*td标签右边框*/
+.right {
+    border-right: 1px dotted #ccc;
+}
+
+/*td标签左边框*/
+.left {
+    border-left: 1px dotted #ccc;
+}
+
+/*内容靠左*/
+.ibg {
+    text-align: left;
+}
+
+/*内容居中*/
+.bbg {
+    text-align: center;
+}
+
+/*select选择框最小宽度*/
+.select-min {
+    min-width: 150px;
+    max-width: 800px;
+}
+
+/*居中*/
+.align-center {
+    text-align: center;
+}
+
+/*备注字体格式*/
+font {
+    color: red;
+    font-size: 14px;
+    font-family: 华文仿宋;
+    font-weight: bold;
+}
+
+.required {
+    color: red;
+    font-size: 14px;
+    font-family: 华文仿宋;
+    font-weight: bold;
+}
+
+/*定义标签的宽度*/
+.width-100 {
+    width: 100px;
+}
+
+.width-150 {
+    width: 150px;
+}
+
+.width-200 {
+    width: 200px;
+}
+
+.width-250 {
+    width: 250px;
+}
+
+.width-300 {
+    width: 300px;
+}
+
+.width-350 {
+    width: 350px;
+}
+
+.width-400 {
+    width: 400px;
+}
+
+.width-450 {
+    width: 450px;
+}
+
+.width-500 {
+    width: 500px;
+}

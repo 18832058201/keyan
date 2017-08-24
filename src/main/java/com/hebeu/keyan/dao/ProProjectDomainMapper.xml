@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hebeu.keyan.dao.ProProjectDomainMapper" >
+  <resultMap id="BaseResultMap" type="com.hebeu.keyan.po.ProProjectDomain" >
+    <id column="project_domain_id" property="projectDomainId" jdbcType="INTEGER" />
+    <result column="project_domain_name" property="projectDomainName" jdbcType="VARCHAR" />
+    <result column="is_effective" property="isEffective" jdbcType="INTEGER" />
+    <result column="rate" property="rate" jdbcType="DOUBLE" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    project_domain_id, project_domain_name, is_effective, rate
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.hebeu.keyan.po.ProProjectDomainExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from pro_project_domain
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from pro_project_domain
+    where project_domain_id = #{projectDomainId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from pro_project_domain
+    where project_domain_id = #{projectDomainId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.hebeu.keyan.po.ProProjectDomainExample" >
+    delete from pro_project_domain
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.hebeu.keyan.po.ProProjectDomain" >
+    insert into pro_project_domain (project_domain_id, project_domain_name, 
+      is_effective, rate)
+    values (#{projectDomainId,jdbcType=INTEGER}, #{projectDomainName,jdbcType=VARCHAR}, 
+      #{isEffective,jdbcType=INTEGER}, #{rate,jdbcType=DOUBLE})
+  </insert>
+  <insert id="insertSelective" parameterType="com.hebeu.keyan.po.ProProjectDomain" >
+    insert into pro_project_domain
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="projectDomainId != null" >
+        project_domain_id,
+      </if>
+      <if test="projectDomainName != null" >
+        project_domain_name,
+      </if>
+      <if test="isEffective != null" >
+        is_effective,
+      </if>
+      <if test="rate != null" >
+        rate,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="projectDomainId != null" >
+        #{projectDomainId,jdbcType=INTEGER},
+      </if>
+      <if test="projectDomainName != null" >
+        #{projectDomainName,jdbcType=VARCHAR},
+      </if>
+      <if test="isEffective != null" >
+        #{isEffective,jdbcType=INTEGER},
+      </if>
+      <if test="rate != null" >
+        #{rate,jdbcType=DOUBLE},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.hebeu.keyan.po.ProProjectDomainExample" resultType="java.lang.Integer" >
+    select count(*) from pro_project_domain
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update pro_project_domain
+    <set >
+      <if test="record.projectDomainId != null" >
+        project_domain_id = #{record.projectDomainId,jdbcType=INTEGER},
+      </if>
+      <if test="record.projectDomainName != null" >
+        project_domain_name = #{record.projectDomainName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isEffective != null" >
+        is_effective = #{record.isEffective,jdbcType=INTEGER},
+      </if>
+      <if test="record.rate != null" >
+        rate = #{record.rate,jdbcType=DOUBLE},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update pro_project_domain
+    set project_domain_id = #{record.projectDomainId,jdbcType=INTEGER},
+      project_domain_name = #{record.projectDomainName,jdbcType=VARCHAR},
+      is_effective = #{record.isEffective,jdbcType=INTEGER},
+      rate = #{record.rate,jdbcType=DOUBLE}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hebeu.keyan.po.ProProjectDomain" >
+    update pro_project_domain
+    <set >
+      <if test="projectDomainName != null" >
+        project_domain_name = #{projectDomainName,jdbcType=VARCHAR},
+      </if>
+      <if test="isEffective != null" >
+        is_effective = #{isEffective,jdbcType=INTEGER},
+      </if>
+      <if test="rate != null" >
+        rate = #{rate,jdbcType=DOUBLE},
+      </if>
+    </set>
+    where project_domain_id = #{projectDomainId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hebeu.keyan.po.ProProjectDomain" >
+    update pro_project_domain
+    set project_domain_name = #{projectDomainName,jdbcType=VARCHAR},
+      is_effective = #{isEffective,jdbcType=INTEGER},
+      rate = #{rate,jdbcType=DOUBLE}
+    where project_domain_id = #{projectDomainId,jdbcType=INTEGER}
+  </update>
+</mapper>

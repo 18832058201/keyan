@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hebeu.keyan.dao.ManageMoneyTotalMapper" >
+  <resultMap id="BaseResultMap" type="com.hebeu.keyan.po.ManageMoneyTotal" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="college_id" property="collegeId" jdbcType="INTEGER" />
+    <result column="year" property="year" jdbcType="INTEGER" />
+    <result column="total_money" property="totalMoney" jdbcType="DOUBLE" />
+    <result column="avail_money" property="availMoney" jdbcType="DOUBLE" />
+    <result column="apply_money" property="applyMoney" jdbcType="DOUBLE" />
+    <result column="payment_money" property="paymentMoney" jdbcType="DOUBLE" />
+    <result column="avail_apply" property="availApply" jdbcType="DOUBLE" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, college_id, year, total_money, avail_money, apply_money, payment_money, avail_apply
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.hebeu.keyan.po.ManageMoneyTotalExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from manage_money_total
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from manage_money_total
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from manage_money_total
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.hebeu.keyan.po.ManageMoneyTotalExample" >
+    delete from manage_money_total
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.hebeu.keyan.po.ManageMoneyTotal" >
+    insert into manage_money_total (id, college_id, year, 
+      total_money, avail_money, apply_money, 
+      payment_money, avail_apply)
+    values (#{id,jdbcType=INTEGER}, #{collegeId,jdbcType=INTEGER}, #{year,jdbcType=INTEGER}, 
+      #{totalMoney,jdbcType=DOUBLE}, #{availMoney,jdbcType=DOUBLE}, #{applyMoney,jdbcType=DOUBLE}, 
+      #{paymentMoney,jdbcType=DOUBLE}, #{availApply,jdbcType=DOUBLE})
+  </insert>
+  <insert id="insertSelective" parameterType="com.hebeu.keyan.po.ManageMoneyTotal" >
+    insert into manage_money_total
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="collegeId != null" >
+        college_id,
+      </if>
+      <if test="year != null" >
+        year,
+      </if>
+      <if test="totalMoney != null" >
+        total_money,
+      </if>
+      <if test="availMoney != null" >
+        avail_money,
+      </if>
+      <if test="applyMoney != null" >
+        apply_money,
+      </if>
+      <if test="paymentMoney != null" >
+        payment_money,
+      </if>
+      <if test="availApply != null" >
+        avail_apply,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="collegeId != null" >
+        #{collegeId,jdbcType=INTEGER},
+      </if>
+      <if test="year != null" >
+        #{year,jdbcType=INTEGER},
+      </if>
+      <if test="totalMoney != null" >
+        #{totalMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="availMoney != null" >
+        #{availMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="applyMoney != null" >
+        #{applyMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="paymentMoney != null" >
+        #{paymentMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="availApply != null" >
+        #{availApply,jdbcType=DOUBLE},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.hebeu.keyan.po.ManageMoneyTotalExample" resultType="java.lang.Integer" >
+    select count(*) from manage_money_total
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update manage_money_total
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.collegeId != null" >
+        college_id = #{record.collegeId,jdbcType=INTEGER},
+      </if>
+      <if test="record.year != null" >
+        year = #{record.year,jdbcType=INTEGER},
+      </if>
+      <if test="record.totalMoney != null" >
+        total_money = #{record.totalMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="record.availMoney != null" >
+        avail_money = #{record.availMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="record.applyMoney != null" >
+        apply_money = #{record.applyMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="record.paymentMoney != null" >
+        payment_money = #{record.paymentMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="record.availApply != null" >
+        avail_apply = #{record.availApply,jdbcType=DOUBLE},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update manage_money_total
+    set id = #{record.id,jdbcType=INTEGER},
+      college_id = #{record.collegeId,jdbcType=INTEGER},
+      year = #{record.year,jdbcType=INTEGER},
+      total_money = #{record.totalMoney,jdbcType=DOUBLE},
+      avail_money = #{record.availMoney,jdbcType=DOUBLE},
+      apply_money = #{record.applyMoney,jdbcType=DOUBLE},
+      payment_money = #{record.paymentMoney,jdbcType=DOUBLE},
+      avail_apply = #{record.availApply,jdbcType=DOUBLE}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hebeu.keyan.po.ManageMoneyTotal" >
+    update manage_money_total
+    <set >
+      <if test="collegeId != null" >
+        college_id = #{collegeId,jdbcType=INTEGER},
+      </if>
+      <if test="year != null" >
+        year = #{year,jdbcType=INTEGER},
+      </if>
+      <if test="totalMoney != null" >
+        total_money = #{totalMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="availMoney != null" >
+        avail_money = #{availMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="applyMoney != null" >
+        apply_money = #{applyMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="paymentMoney != null" >
+        payment_money = #{paymentMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="availApply != null" >
+        avail_apply = #{availApply,jdbcType=DOUBLE},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hebeu.keyan.po.ManageMoneyTotal" >
+    update manage_money_total
+    set college_id = #{collegeId,jdbcType=INTEGER},
+      year = #{year,jdbcType=INTEGER},
+      total_money = #{totalMoney,jdbcType=DOUBLE},
+      avail_money = #{availMoney,jdbcType=DOUBLE},
+      apply_money = #{applyMoney,jdbcType=DOUBLE},
+      payment_money = #{paymentMoney,jdbcType=DOUBLE},
+      avail_apply = #{availApply,jdbcType=DOUBLE}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

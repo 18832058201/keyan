@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd">
+
+    <!--start：shiro相关配置-->
+    <!-- Shiro 的Web过滤器 -->
+    <bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
+        <property name="securityManager" ref="securityManager"/>
+        <!-- loginUrl认证提交地址，如果没有认证将会请求此地址进行认证，请求此地址将由formAuthenticationFilter进行表单认证 -->
+        <property name="loginUrl" value="/login.action"/>
+        <!--认证成功统一跳转到index.action,建议不配置-->
+        <property name="successUrl" value="index.action"/>
+        <!-- 通过unauthorizedUrl指定没有权限操作时跳转页面-->
+        <property name="unauthorizedUrl" value="/refuse.action"/>
+        <!-- 过虑器链定义，从上向下顺序执行，一般将/**放在最下边 -->
+        <property name="filterChainDefinitions">
+            <value>
+                <!--favicon.ico这个文件被shiro保护了,如果不设置匿名访问登陆后可能会报404错误-->
+                /favicon.ico = anon
+                <!-- 退出拦截，请求logout.action执行退出操作 -->
+                /logout.action = logout
+                <!-- 无权访问页面 -->
+                /refuse.jsp = anon
+                <!--静态资源可以匿名方位-->
+                /css/** = anon
+                /font-awesome/** = anon
+                /images/** = anon
+                /img/** = anon
+                /js/** = anon
+                /My97DatePicker/** = anon
+
+                <!-- /**表示所有请求都需要认证 -->
+                /** = authc
+            </value>
+        </property>
+    </bean>
+
+    <!--开启shiro注解支持 -->
+    <bean class="org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor">
+        <property name="securityManager" ref="securityManager" />
+    </bean>
+
+    <!-- 安全管理器 -->
+    <bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
+        <!--自定义realm-->
+        <property name="realm" ref="customRealm"/>
+        <!-- 注入session管理器 -->
+        <property name="sessionManager" ref="sessionManager" />
+    </bean>
+
+    <!-- 自定义 realm -->
+    <bean id="customRealm" class="com.hebeu.keyan.shiro.CustomRealm">
+        <!-- 将凭证匹配器设置到realm中，realm按照凭证匹配器的要求进行散列 -->
+        <property name="credentialsMatcher" ref="credentialsMatcher"/>
+    </bean>
+    <!-- 凭证匹配器，这里采用MD5散列算法 -->
+    <bean id="credentialsMatcher"
+          class="org.apache.shiro.authc.credential.HashedCredentialsMatcher">
+        <property name="hashAlgorithmName" value="md5"/>  <!--散列算法为md5-->
+        <property name="hashIterations" value="1"/>       <!--散列次数为1次-->
+    </bean>
+
+    <!-- 会话管理器 -->
+    <bean id="sessionManager" class="org.apache.shiro.web.session.mgt.DefaultWebSessionManager">
+        <!-- session的失效时长，单位毫秒，设置为2小时 -->
+        <property name="globalSessionTimeout" value="7200000"/>
+        <!-- 删除失效的session -->
+        <property name="deleteInvalidSessions" value="true"/>
+    </bean>
+
+    <!--shiro配置结束-->
+
+</beans>

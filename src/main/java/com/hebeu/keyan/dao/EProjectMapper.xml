@@ -1,0 +1,769 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hebeu.keyan.dao.EProjectMapper" >
+  <resultMap id="BaseResultMap" type="com.hebeu.keyan.po.EProject" >
+    <id column="project_id" property="projectId" jdbcType="VARCHAR" />
+    <result column="subject_type_id" property="subjectTypeId" jdbcType="INTEGER" />
+    <result column="subject_first_id" property="subjectFirstId" jdbcType="INTEGER" />
+    <result column="project_name" property="projectName" jdbcType="VARCHAR" />
+    <result column="school_number" property="schoolNumber" jdbcType="VARCHAR" />
+    <result column="project_number" property="projectNumber" jdbcType="VARCHAR" />
+    <result column="project_source_id" property="projectSourceId" jdbcType="INTEGER" />
+    <result column="project_type1_id" property="projectType1Id" jdbcType="INTEGER" />
+    <result column="project_type2_id" property="projectType2Id" jdbcType="INTEGER" />
+    <result column="approve_date" property="approveDate" jdbcType="TIMESTAMP" />
+    <result column="research_type_id" property="researchTypeId" jdbcType="INTEGER" />
+    <result column="cooperation_type_id" property="cooperationTypeId" jdbcType="INTEGER" />
+    <result column="economics_target_id" property="economicsTargetId" jdbcType="INTEGER" />
+    <result column="organization_form_id" property="organizationFormId" jdbcType="INTEGER" />
+    <result column="cooperation_unit" property="cooperationUnit" jdbcType="VARCHAR" />
+    <result column="economics_industry1_id" property="economicsIndustry1Id" jdbcType="VARCHAR" />
+    <result column="economics_industry2_id" property="economicsIndustry2Id" jdbcType="VARCHAR" />
+    <result column="economics_industry3_id" property="economicsIndustry3Id" jdbcType="VARCHAR" />
+    <result column="result_form" property="resultForm" jdbcType="VARCHAR" />
+    <result column="start_date" property="startDate" jdbcType="TIMESTAMP" />
+    <result column="expect_end_date" property="expectEndDate" jdbcType="TIMESTAMP" />
+    <result column="approve_money" property="approveMoney" jdbcType="DOUBLE" />
+    <result column="inspect" property="inspect" jdbcType="INTEGER" />
+    <result column="project_domain_id" property="projectDomainId" jdbcType="INTEGER" />
+    <result column="important" property="important" jdbcType="INTEGER" />
+    <result column="project_grade_id" property="projectGradeId" jdbcType="INTEGER" />
+    <result column="end_status_id" property="endStatusId" jdbcType="INTEGER" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+    <result column="leader" property="leader" jdbcType="VARCHAR" />
+    <result column="registrant" property="registrant" jdbcType="VARCHAR" />
+    <result column="person_list" property="personList" jdbcType="VARCHAR" />
+    <result column="attachment" property="attachment" jdbcType="VARCHAR" />
+    <result column="audit_status_id" property="auditStatusId" jdbcType="INTEGER" />
+    <result column="audit_person_id1" property="auditPersonId1" jdbcType="VARCHAR" />
+    <result column="audit_poinion1" property="auditPoinion1" jdbcType="VARCHAR" />
+    <result column="audit_person_id2" property="auditPersonId2" jdbcType="VARCHAR" />
+    <result column="audit_poinion2" property="auditPoinion2" jdbcType="VARCHAR" />
+    <result column="insert_time" property="insertTime" jdbcType="TIMESTAMP" />
+    <result column="last_time" property="lastTime" jdbcType="TIMESTAMP" />
+    <result column="score" property="score" jdbcType="DOUBLE" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    project_id, subject_type_id, subject_first_id, project_name, school_number, project_number, 
+    project_source_id, project_type1_id, project_type2_id, approve_date, research_type_id, 
+    cooperation_type_id, economics_target_id, organization_form_id, cooperation_unit, 
+    economics_industry1_id, economics_industry2_id, economics_industry3_id, result_form, 
+    start_date, expect_end_date, approve_money, inspect, project_domain_id, important, 
+    project_grade_id, end_status_id, remark, leader, registrant, person_list, attachment, 
+    audit_status_id, audit_person_id1, audit_poinion1, audit_person_id2, audit_poinion2, 
+    insert_time, last_time, score
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.hebeu.keyan.po.EProjectExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from e_project
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from e_project
+    where project_id = #{projectId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from e_project
+    where project_id = #{projectId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.hebeu.keyan.po.EProjectExample" >
+    delete from e_project
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.hebeu.keyan.po.EProject" >
+    insert into e_project (project_id, subject_type_id, subject_first_id, 
+      project_name, school_number, project_number, 
+      project_source_id, project_type1_id, project_type2_id, 
+      approve_date, research_type_id, cooperation_type_id, 
+      economics_target_id, organization_form_id, 
+      cooperation_unit, economics_industry1_id, 
+      economics_industry2_id, economics_industry3_id, 
+      result_form, start_date, expect_end_date, 
+      approve_money, inspect, project_domain_id, 
+      important, project_grade_id, end_status_id, 
+      remark, leader, registrant, 
+      person_list, attachment, audit_status_id, 
+      audit_person_id1, audit_poinion1, audit_person_id2, 
+      audit_poinion2, insert_time, last_time, 
+      score)
+    values (#{projectId,jdbcType=VARCHAR}, #{subjectTypeId,jdbcType=INTEGER}, #{subjectFirstId,jdbcType=INTEGER}, 
+      #{projectName,jdbcType=VARCHAR}, #{schoolNumber,jdbcType=VARCHAR}, #{projectNumber,jdbcType=VARCHAR}, 
+      #{projectSourceId,jdbcType=INTEGER}, #{projectType1Id,jdbcType=INTEGER}, #{projectType2Id,jdbcType=INTEGER}, 
+      #{approveDate,jdbcType=TIMESTAMP}, #{researchTypeId,jdbcType=INTEGER}, #{cooperationTypeId,jdbcType=INTEGER}, 
+      #{economicsTargetId,jdbcType=INTEGER}, #{organizationFormId,jdbcType=INTEGER}, 
+      #{cooperationUnit,jdbcType=VARCHAR}, #{economicsIndustry1Id,jdbcType=VARCHAR}, 
+      #{economicsIndustry2Id,jdbcType=VARCHAR}, #{economicsIndustry3Id,jdbcType=VARCHAR}, 
+      #{resultForm,jdbcType=VARCHAR}, #{startDate,jdbcType=TIMESTAMP}, #{expectEndDate,jdbcType=TIMESTAMP}, 
+      #{approveMoney,jdbcType=DOUBLE}, #{inspect,jdbcType=INTEGER}, #{projectDomainId,jdbcType=INTEGER}, 
+      #{important,jdbcType=INTEGER}, #{projectGradeId,jdbcType=INTEGER}, #{endStatusId,jdbcType=INTEGER}, 
+      #{remark,jdbcType=VARCHAR}, #{leader,jdbcType=VARCHAR}, #{registrant,jdbcType=VARCHAR}, 
+      #{personList,jdbcType=VARCHAR}, #{attachment,jdbcType=VARCHAR}, #{auditStatusId,jdbcType=INTEGER}, 
+      #{auditPersonId1,jdbcType=VARCHAR}, #{auditPoinion1,jdbcType=VARCHAR}, #{auditPersonId2,jdbcType=VARCHAR}, 
+      #{auditPoinion2,jdbcType=VARCHAR}, #{insertTime,jdbcType=TIMESTAMP}, #{lastTime,jdbcType=TIMESTAMP}, 
+      #{score,jdbcType=DOUBLE})
+  </insert>
+  <insert id="insertSelective" parameterType="com.hebeu.keyan.po.EProject" >
+    insert into e_project
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="projectId != null" >
+        project_id,
+      </if>
+      <if test="subjectTypeId != null" >
+        subject_type_id,
+      </if>
+      <if test="subjectFirstId != null" >
+        subject_first_id,
+      </if>
+      <if test="projectName != null" >
+        project_name,
+      </if>
+      <if test="schoolNumber != null" >
+        school_number,
+      </if>
+      <if test="projectNumber != null" >
+        project_number,
+      </if>
+      <if test="projectSourceId != null" >
+        project_source_id,
+      </if>
+      <if test="projectType1Id != null" >
+        project_type1_id,
+      </if>
+      <if test="projectType2Id != null" >
+        project_type2_id,
+      </if>
+      <if test="approveDate != null" >
+        approve_date,
+      </if>
+      <if test="researchTypeId != null" >
+        research_type_id,
+      </if>
+      <if test="cooperationTypeId != null" >
+        cooperation_type_id,
+      </if>
+      <if test="economicsTargetId != null" >
+        economics_target_id,
+      </if>
+      <if test="organizationFormId != null" >
+        organization_form_id,
+      </if>
+      <if test="cooperationUnit != null" >
+        cooperation_unit,
+      </if>
+      <if test="economicsIndustry1Id != null" >
+        economics_industry1_id,
+      </if>
+      <if test="economicsIndustry2Id != null" >
+        economics_industry2_id,
+      </if>
+      <if test="economicsIndustry3Id != null" >
+        economics_industry3_id,
+      </if>
+      <if test="resultForm != null" >
+        result_form,
+      </if>
+      <if test="startDate != null" >
+        start_date,
+      </if>
+      <if test="expectEndDate != null" >
+        expect_end_date,
+      </if>
+      <if test="approveMoney != null" >
+        approve_money,
+      </if>
+      <if test="inspect != null" >
+        inspect,
+      </if>
+      <if test="projectDomainId != null" >
+        project_domain_id,
+      </if>
+      <if test="important != null" >
+        important,
+      </if>
+      <if test="projectGradeId != null" >
+        project_grade_id,
+      </if>
+      <if test="endStatusId != null" >
+        end_status_id,
+      </if>
+      <if test="remark != null" >
+        remark,
+      </if>
+      <if test="leader != null" >
+        leader,
+      </if>
+      <if test="registrant != null" >
+        registrant,
+      </if>
+      <if test="personList != null" >
+        person_list,
+      </if>
+      <if test="attachment != null" >
+        attachment,
+      </if>
+      <if test="auditStatusId != null" >
+        audit_status_id,
+      </if>
+      <if test="auditPersonId1 != null" >
+        audit_person_id1,
+      </if>
+      <if test="auditPoinion1 != null" >
+        audit_poinion1,
+      </if>
+      <if test="auditPersonId2 != null" >
+        audit_person_id2,
+      </if>
+      <if test="auditPoinion2 != null" >
+        audit_poinion2,
+      </if>
+      <if test="insertTime != null" >
+        insert_time,
+      </if>
+      <if test="lastTime != null" >
+        last_time,
+      </if>
+      <if test="score != null" >
+        score,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="projectId != null" >
+        #{projectId,jdbcType=VARCHAR},
+      </if>
+      <if test="subjectTypeId != null" >
+        #{subjectTypeId,jdbcType=INTEGER},
+      </if>
+      <if test="subjectFirstId != null" >
+        #{subjectFirstId,jdbcType=INTEGER},
+      </if>
+      <if test="projectName != null" >
+        #{projectName,jdbcType=VARCHAR},
+      </if>
+      <if test="schoolNumber != null" >
+        #{schoolNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="projectNumber != null" >
+        #{projectNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="projectSourceId != null" >
+        #{projectSourceId,jdbcType=INTEGER},
+      </if>
+      <if test="projectType1Id != null" >
+        #{projectType1Id,jdbcType=INTEGER},
+      </if>
+      <if test="projectType2Id != null" >
+        #{projectType2Id,jdbcType=INTEGER},
+      </if>
+      <if test="approveDate != null" >
+        #{approveDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="researchTypeId != null" >
+        #{researchTypeId,jdbcType=INTEGER},
+      </if>
+      <if test="cooperationTypeId != null" >
+        #{cooperationTypeId,jdbcType=INTEGER},
+      </if>
+      <if test="economicsTargetId != null" >
+        #{economicsTargetId,jdbcType=INTEGER},
+      </if>
+      <if test="organizationFormId != null" >
+        #{organizationFormId,jdbcType=INTEGER},
+      </if>
+      <if test="cooperationUnit != null" >
+        #{cooperationUnit,jdbcType=VARCHAR},
+      </if>
+      <if test="economicsIndustry1Id != null" >
+        #{economicsIndustry1Id,jdbcType=VARCHAR},
+      </if>
+      <if test="economicsIndustry2Id != null" >
+        #{economicsIndustry2Id,jdbcType=VARCHAR},
+      </if>
+      <if test="economicsIndustry3Id != null" >
+        #{economicsIndustry3Id,jdbcType=VARCHAR},
+      </if>
+      <if test="resultForm != null" >
+        #{resultForm,jdbcType=VARCHAR},
+      </if>
+      <if test="startDate != null" >
+        #{startDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="expectEndDate != null" >
+        #{expectEndDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="approveMoney != null" >
+        #{approveMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="inspect != null" >
+        #{inspect,jdbcType=INTEGER},
+      </if>
+      <if test="projectDomainId != null" >
+        #{projectDomainId,jdbcType=INTEGER},
+      </if>
+      <if test="important != null" >
+        #{important,jdbcType=INTEGER},
+      </if>
+      <if test="projectGradeId != null" >
+        #{projectGradeId,jdbcType=INTEGER},
+      </if>
+      <if test="endStatusId != null" >
+        #{endStatusId,jdbcType=INTEGER},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="leader != null" >
+        #{leader,jdbcType=VARCHAR},
+      </if>
+      <if test="registrant != null" >
+        #{registrant,jdbcType=VARCHAR},
+      </if>
+      <if test="personList != null" >
+        #{personList,jdbcType=VARCHAR},
+      </if>
+      <if test="attachment != null" >
+        #{attachment,jdbcType=VARCHAR},
+      </if>
+      <if test="auditStatusId != null" >
+        #{auditStatusId,jdbcType=INTEGER},
+      </if>
+      <if test="auditPersonId1 != null" >
+        #{auditPersonId1,jdbcType=VARCHAR},
+      </if>
+      <if test="auditPoinion1 != null" >
+        #{auditPoinion1,jdbcType=VARCHAR},
+      </if>
+      <if test="auditPersonId2 != null" >
+        #{auditPersonId2,jdbcType=VARCHAR},
+      </if>
+      <if test="auditPoinion2 != null" >
+        #{auditPoinion2,jdbcType=VARCHAR},
+      </if>
+      <if test="insertTime != null" >
+        #{insertTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastTime != null" >
+        #{lastTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="score != null" >
+        #{score,jdbcType=DOUBLE},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.hebeu.keyan.po.EProjectExample" resultType="java.lang.Integer" >
+    select count(*) from e_project
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update e_project
+    <set >
+      <if test="record.projectId != null" >
+        project_id = #{record.projectId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.subjectTypeId != null" >
+        subject_type_id = #{record.subjectTypeId,jdbcType=INTEGER},
+      </if>
+      <if test="record.subjectFirstId != null" >
+        subject_first_id = #{record.subjectFirstId,jdbcType=INTEGER},
+      </if>
+      <if test="record.projectName != null" >
+        project_name = #{record.projectName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.schoolNumber != null" >
+        school_number = #{record.schoolNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="record.projectNumber != null" >
+        project_number = #{record.projectNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="record.projectSourceId != null" >
+        project_source_id = #{record.projectSourceId,jdbcType=INTEGER},
+      </if>
+      <if test="record.projectType1Id != null" >
+        project_type1_id = #{record.projectType1Id,jdbcType=INTEGER},
+      </if>
+      <if test="record.projectType2Id != null" >
+        project_type2_id = #{record.projectType2Id,jdbcType=INTEGER},
+      </if>
+      <if test="record.approveDate != null" >
+        approve_date = #{record.approveDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.researchTypeId != null" >
+        research_type_id = #{record.researchTypeId,jdbcType=INTEGER},
+      </if>
+      <if test="record.cooperationTypeId != null" >
+        cooperation_type_id = #{record.cooperationTypeId,jdbcType=INTEGER},
+      </if>
+      <if test="record.economicsTargetId != null" >
+        economics_target_id = #{record.economicsTargetId,jdbcType=INTEGER},
+      </if>
+      <if test="record.organizationFormId != null" >
+        organization_form_id = #{record.organizationFormId,jdbcType=INTEGER},
+      </if>
+      <if test="record.cooperationUnit != null" >
+        cooperation_unit = #{record.cooperationUnit,jdbcType=VARCHAR},
+      </if>
+      <if test="record.economicsIndustry1Id != null" >
+        economics_industry1_id = #{record.economicsIndustry1Id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.economicsIndustry2Id != null" >
+        economics_industry2_id = #{record.economicsIndustry2Id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.economicsIndustry3Id != null" >
+        economics_industry3_id = #{record.economicsIndustry3Id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.resultForm != null" >
+        result_form = #{record.resultForm,jdbcType=VARCHAR},
+      </if>
+      <if test="record.startDate != null" >
+        start_date = #{record.startDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.expectEndDate != null" >
+        expect_end_date = #{record.expectEndDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.approveMoney != null" >
+        approve_money = #{record.approveMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="record.inspect != null" >
+        inspect = #{record.inspect,jdbcType=INTEGER},
+      </if>
+      <if test="record.projectDomainId != null" >
+        project_domain_id = #{record.projectDomainId,jdbcType=INTEGER},
+      </if>
+      <if test="record.important != null" >
+        important = #{record.important,jdbcType=INTEGER},
+      </if>
+      <if test="record.projectGradeId != null" >
+        project_grade_id = #{record.projectGradeId,jdbcType=INTEGER},
+      </if>
+      <if test="record.endStatusId != null" >
+        end_status_id = #{record.endStatusId,jdbcType=INTEGER},
+      </if>
+      <if test="record.remark != null" >
+        remark = #{record.remark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.leader != null" >
+        leader = #{record.leader,jdbcType=VARCHAR},
+      </if>
+      <if test="record.registrant != null" >
+        registrant = #{record.registrant,jdbcType=VARCHAR},
+      </if>
+      <if test="record.personList != null" >
+        person_list = #{record.personList,jdbcType=VARCHAR},
+      </if>
+      <if test="record.attachment != null" >
+        attachment = #{record.attachment,jdbcType=VARCHAR},
+      </if>
+      <if test="record.auditStatusId != null" >
+        audit_status_id = #{record.auditStatusId,jdbcType=INTEGER},
+      </if>
+      <if test="record.auditPersonId1 != null" >
+        audit_person_id1 = #{record.auditPersonId1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.auditPoinion1 != null" >
+        audit_poinion1 = #{record.auditPoinion1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.auditPersonId2 != null" >
+        audit_person_id2 = #{record.auditPersonId2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.auditPoinion2 != null" >
+        audit_poinion2 = #{record.auditPoinion2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.insertTime != null" >
+        insert_time = #{record.insertTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.lastTime != null" >
+        last_time = #{record.lastTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.score != null" >
+        score = #{record.score,jdbcType=DOUBLE},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update e_project
+    set project_id = #{record.projectId,jdbcType=VARCHAR},
+      subject_type_id = #{record.subjectTypeId,jdbcType=INTEGER},
+      subject_first_id = #{record.subjectFirstId,jdbcType=INTEGER},
+      project_name = #{record.projectName,jdbcType=VARCHAR},
+      school_number = #{record.schoolNumber,jdbcType=VARCHAR},
+      project_number = #{record.projectNumber,jdbcType=VARCHAR},
+      project_source_id = #{record.projectSourceId,jdbcType=INTEGER},
+      project_type1_id = #{record.projectType1Id,jdbcType=INTEGER},
+      project_type2_id = #{record.projectType2Id,jdbcType=INTEGER},
+      approve_date = #{record.approveDate,jdbcType=TIMESTAMP},
+      research_type_id = #{record.researchTypeId,jdbcType=INTEGER},
+      cooperation_type_id = #{record.cooperationTypeId,jdbcType=INTEGER},
+      economics_target_id = #{record.economicsTargetId,jdbcType=INTEGER},
+      organization_form_id = #{record.organizationFormId,jdbcType=INTEGER},
+      cooperation_unit = #{record.cooperationUnit,jdbcType=VARCHAR},
+      economics_industry1_id = #{record.economicsIndustry1Id,jdbcType=VARCHAR},
+      economics_industry2_id = #{record.economicsIndustry2Id,jdbcType=VARCHAR},
+      economics_industry3_id = #{record.economicsIndustry3Id,jdbcType=VARCHAR},
+      result_form = #{record.resultForm,jdbcType=VARCHAR},
+      start_date = #{record.startDate,jdbcType=TIMESTAMP},
+      expect_end_date = #{record.expectEndDate,jdbcType=TIMESTAMP},
+      approve_money = #{record.approveMoney,jdbcType=DOUBLE},
+      inspect = #{record.inspect,jdbcType=INTEGER},
+      project_domain_id = #{record.projectDomainId,jdbcType=INTEGER},
+      important = #{record.important,jdbcType=INTEGER},
+      project_grade_id = #{record.projectGradeId,jdbcType=INTEGER},
+      end_status_id = #{record.endStatusId,jdbcType=INTEGER},
+      remark = #{record.remark,jdbcType=VARCHAR},
+      leader = #{record.leader,jdbcType=VARCHAR},
+      registrant = #{record.registrant,jdbcType=VARCHAR},
+      person_list = #{record.personList,jdbcType=VARCHAR},
+      attachment = #{record.attachment,jdbcType=VARCHAR},
+      audit_status_id = #{record.auditStatusId,jdbcType=INTEGER},
+      audit_person_id1 = #{record.auditPersonId1,jdbcType=VARCHAR},
+      audit_poinion1 = #{record.auditPoinion1,jdbcType=VARCHAR},
+      audit_person_id2 = #{record.auditPersonId2,jdbcType=VARCHAR},
+      audit_poinion2 = #{record.auditPoinion2,jdbcType=VARCHAR},
+      insert_time = #{record.insertTime,jdbcType=TIMESTAMP},
+      last_time = #{record.lastTime,jdbcType=TIMESTAMP},
+      score = #{record.score,jdbcType=DOUBLE}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hebeu.keyan.po.EProject" >
+    update e_project
+    <set >
+      <if test="subjectTypeId != null" >
+        subject_type_id = #{subjectTypeId,jdbcType=INTEGER},
+      </if>
+      <if test="subjectFirstId != null" >
+        subject_first_id = #{subjectFirstId,jdbcType=INTEGER},
+      </if>
+      <if test="projectName != null" >
+        project_name = #{projectName,jdbcType=VARCHAR},
+      </if>
+      <if test="schoolNumber != null" >
+        school_number = #{schoolNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="projectNumber != null" >
+        project_number = #{projectNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="projectSourceId != null" >
+        project_source_id = #{projectSourceId,jdbcType=INTEGER},
+      </if>
+      <if test="projectType1Id != null" >
+        project_type1_id = #{projectType1Id,jdbcType=INTEGER},
+      </if>
+      <if test="projectType2Id != null" >
+        project_type2_id = #{projectType2Id,jdbcType=INTEGER},
+      </if>
+      <if test="approveDate != null" >
+        approve_date = #{approveDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="researchTypeId != null" >
+        research_type_id = #{researchTypeId,jdbcType=INTEGER},
+      </if>
+      <if test="cooperationTypeId != null" >
+        cooperation_type_id = #{cooperationTypeId,jdbcType=INTEGER},
+      </if>
+      <if test="economicsTargetId != null" >
+        economics_target_id = #{economicsTargetId,jdbcType=INTEGER},
+      </if>
+      <if test="organizationFormId != null" >
+        organization_form_id = #{organizationFormId,jdbcType=INTEGER},
+      </if>
+      <if test="cooperationUnit != null" >
+        cooperation_unit = #{cooperationUnit,jdbcType=VARCHAR},
+      </if>
+      <if test="economicsIndustry1Id != null" >
+        economics_industry1_id = #{economicsIndustry1Id,jdbcType=VARCHAR},
+      </if>
+      <if test="economicsIndustry2Id != null" >
+        economics_industry2_id = #{economicsIndustry2Id,jdbcType=VARCHAR},
+      </if>
+      <if test="economicsIndustry3Id != null" >
+        economics_industry3_id = #{economicsIndustry3Id,jdbcType=VARCHAR},
+      </if>
+      <if test="resultForm != null" >
+        result_form = #{resultForm,jdbcType=VARCHAR},
+      </if>
+      <if test="startDate != null" >
+        start_date = #{startDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="expectEndDate != null" >
+        expect_end_date = #{expectEndDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="approveMoney != null" >
+        approve_money = #{approveMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="inspect != null" >
+        inspect = #{inspect,jdbcType=INTEGER},
+      </if>
+      <if test="projectDomainId != null" >
+        project_domain_id = #{projectDomainId,jdbcType=INTEGER},
+      </if>
+      <if test="important != null" >
+        important = #{important,jdbcType=INTEGER},
+      </if>
+      <if test="projectGradeId != null" >
+        project_grade_id = #{projectGradeId,jdbcType=INTEGER},
+      </if>
+      <if test="endStatusId != null" >
+        end_status_id = #{endStatusId,jdbcType=INTEGER},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="leader != null" >
+        leader = #{leader,jdbcType=VARCHAR},
+      </if>
+      <if test="registrant != null" >
+        registrant = #{registrant,jdbcType=VARCHAR},
+      </if>
+      <if test="personList != null" >
+        person_list = #{personList,jdbcType=VARCHAR},
+      </if>
+      <if test="attachment != null" >
+        attachment = #{attachment,jdbcType=VARCHAR},
+      </if>
+      <if test="auditStatusId != null" >
+        audit_status_id = #{auditStatusId,jdbcType=INTEGER},
+      </if>
+      <if test="auditPersonId1 != null" >
+        audit_person_id1 = #{auditPersonId1,jdbcType=VARCHAR},
+      </if>
+      <if test="auditPoinion1 != null" >
+        audit_poinion1 = #{auditPoinion1,jdbcType=VARCHAR},
+      </if>
+      <if test="auditPersonId2 != null" >
+        audit_person_id2 = #{auditPersonId2,jdbcType=VARCHAR},
+      </if>
+      <if test="auditPoinion2 != null" >
+        audit_poinion2 = #{auditPoinion2,jdbcType=VARCHAR},
+      </if>
+      <if test="insertTime != null" >
+        insert_time = #{insertTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastTime != null" >
+        last_time = #{lastTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="score != null" >
+        score = #{score,jdbcType=DOUBLE},
+      </if>
+    </set>
+    where project_id = #{projectId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hebeu.keyan.po.EProject" >
+    update e_project
+    set subject_type_id = #{subjectTypeId,jdbcType=INTEGER},
+      subject_first_id = #{subjectFirstId,jdbcType=INTEGER},
+      project_name = #{projectName,jdbcType=VARCHAR},
+      school_number = #{schoolNumber,jdbcType=VARCHAR},
+      project_number = #{projectNumber,jdbcType=VARCHAR},
+      project_source_id = #{projectSourceId,jdbcType=INTEGER},
+      project_type1_id = #{projectType1Id,jdbcType=INTEGER},
+      project_type2_id = #{projectType2Id,jdbcType=INTEGER},
+      approve_date = #{approveDate,jdbcType=TIMESTAMP},
+      research_type_id = #{researchTypeId,jdbcType=INTEGER},
+      cooperation_type_id = #{cooperationTypeId,jdbcType=INTEGER},
+      economics_target_id = #{economicsTargetId,jdbcType=INTEGER},
+      organization_form_id = #{organizationFormId,jdbcType=INTEGER},
+      cooperation_unit = #{cooperationUnit,jdbcType=VARCHAR},
+      economics_industry1_id = #{economicsIndustry1Id,jdbcType=VARCHAR},
+      economics_industry2_id = #{economicsIndustry2Id,jdbcType=VARCHAR},
+      economics_industry3_id = #{economicsIndustry3Id,jdbcType=VARCHAR},
+      result_form = #{resultForm,jdbcType=VARCHAR},
+      start_date = #{startDate,jdbcType=TIMESTAMP},
+      expect_end_date = #{expectEndDate,jdbcType=TIMESTAMP},
+      approve_money = #{approveMoney,jdbcType=DOUBLE},
+      inspect = #{inspect,jdbcType=INTEGER},
+      project_domain_id = #{projectDomainId,jdbcType=INTEGER},
+      important = #{important,jdbcType=INTEGER},
+      project_grade_id = #{projectGradeId,jdbcType=INTEGER},
+      end_status_id = #{endStatusId,jdbcType=INTEGER},
+      remark = #{remark,jdbcType=VARCHAR},
+      leader = #{leader,jdbcType=VARCHAR},
+      registrant = #{registrant,jdbcType=VARCHAR},
+      person_list = #{personList,jdbcType=VARCHAR},
+      attachment = #{attachment,jdbcType=VARCHAR},
+      audit_status_id = #{auditStatusId,jdbcType=INTEGER},
+      audit_person_id1 = #{auditPersonId1,jdbcType=VARCHAR},
+      audit_poinion1 = #{auditPoinion1,jdbcType=VARCHAR},
+      audit_person_id2 = #{auditPersonId2,jdbcType=VARCHAR},
+      audit_poinion2 = #{auditPoinion2,jdbcType=VARCHAR},
+      insert_time = #{insertTime,jdbcType=TIMESTAMP},
+      last_time = #{lastTime,jdbcType=TIMESTAMP},
+      score = #{score,jdbcType=DOUBLE}
+    where project_id = #{projectId,jdbcType=VARCHAR}
+  </update>
+</mapper>

@@ -1,0 +1,591 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hebeu.keyan.dao.ERewardMapper" >
+  <resultMap id="BaseResultMap" type="com.hebeu.keyan.po.EReward" >
+    <id column="reward_id" property="rewardId" jdbcType="VARCHAR" />
+    <result column="subject_type_id" property="subjectTypeId" jdbcType="INTEGER" />
+    <result column="result_type_id" property="resultTypeId" jdbcType="INTEGER" />
+    <result column="school_number" property="schoolNumber" jdbcType="VARCHAR" />
+    <result column="result_name" property="resultName" jdbcType="VARCHAR" />
+    <result column="rew_type_id" property="rewTypeId" jdbcType="INTEGER" />
+    <result column="subject_first_id" property="subjectFirstId" jdbcType="INTEGER" />
+    <result column="rew_class_id" property="rewClassId" jdbcType="INTEGER" />
+    <result column="rew_level_id" property="rewLevelId" jdbcType="INTEGER" />
+    <result column="finish_way_id" property="finishWayId" jdbcType="INTEGER" />
+    <result column="rew_grade_id" property="rewGradeId" jdbcType="INTEGER" />
+    <result column="rew_certificate_num" property="rewCertificateNum" jdbcType="VARCHAR" />
+    <result column="rew_date" property="rewDate" jdbcType="TIMESTAMP" />
+    <result column="sign_id" property="signId" jdbcType="INTEGER" />
+    <result column="rew_unit" property="rewUnit" jdbcType="VARCHAR" />
+    <result column="bonus" property="bonus" jdbcType="DOUBLE" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+    <result column="leader" property="leader" jdbcType="VARCHAR" />
+    <result column="registrant" property="registrant" jdbcType="VARCHAR" />
+    <result column="person_list" property="personList" jdbcType="VARCHAR" />
+    <result column="attachment" property="attachment" jdbcType="VARCHAR" />
+    <result column="audit_status_id" property="auditStatusId" jdbcType="INTEGER" />
+    <result column="audit_person_id1" property="auditPersonId1" jdbcType="VARCHAR" />
+    <result column="audit_poinion1" property="auditPoinion1" jdbcType="VARCHAR" />
+    <result column="audit_person_id2" property="auditPersonId2" jdbcType="VARCHAR" />
+    <result column="audit_poinion2" property="auditPoinion2" jdbcType="VARCHAR" />
+    <result column="insert_time" property="insertTime" jdbcType="TIMESTAMP" />
+    <result column="last_time" property="lastTime" jdbcType="TIMESTAMP" />
+    <result column="score" property="score" jdbcType="DOUBLE" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    reward_id, subject_type_id, result_type_id, school_number, result_name, rew_type_id, 
+    subject_first_id, rew_class_id, rew_level_id, finish_way_id, rew_grade_id, rew_certificate_num, 
+    rew_date, sign_id, rew_unit, bonus, remark, leader, registrant, person_list, attachment, 
+    audit_status_id, audit_person_id1, audit_poinion1, audit_person_id2, audit_poinion2, 
+    insert_time, last_time, score
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.hebeu.keyan.po.ERewardExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from e_reward
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from e_reward
+    where reward_id = #{rewardId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from e_reward
+    where reward_id = #{rewardId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.hebeu.keyan.po.ERewardExample" >
+    delete from e_reward
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.hebeu.keyan.po.EReward" >
+    insert into e_reward (reward_id, subject_type_id, result_type_id, 
+      school_number, result_name, rew_type_id, 
+      subject_first_id, rew_class_id, rew_level_id, 
+      finish_way_id, rew_grade_id, rew_certificate_num, 
+      rew_date, sign_id, rew_unit, 
+      bonus, remark, leader, 
+      registrant, person_list, attachment, 
+      audit_status_id, audit_person_id1, audit_poinion1, 
+      audit_person_id2, audit_poinion2, insert_time, 
+      last_time, score)
+    values (#{rewardId,jdbcType=VARCHAR}, #{subjectTypeId,jdbcType=INTEGER}, #{resultTypeId,jdbcType=INTEGER}, 
+      #{schoolNumber,jdbcType=VARCHAR}, #{resultName,jdbcType=VARCHAR}, #{rewTypeId,jdbcType=INTEGER}, 
+      #{subjectFirstId,jdbcType=INTEGER}, #{rewClassId,jdbcType=INTEGER}, #{rewLevelId,jdbcType=INTEGER}, 
+      #{finishWayId,jdbcType=INTEGER}, #{rewGradeId,jdbcType=INTEGER}, #{rewCertificateNum,jdbcType=VARCHAR}, 
+      #{rewDate,jdbcType=TIMESTAMP}, #{signId,jdbcType=INTEGER}, #{rewUnit,jdbcType=VARCHAR}, 
+      #{bonus,jdbcType=DOUBLE}, #{remark,jdbcType=VARCHAR}, #{leader,jdbcType=VARCHAR}, 
+      #{registrant,jdbcType=VARCHAR}, #{personList,jdbcType=VARCHAR}, #{attachment,jdbcType=VARCHAR}, 
+      #{auditStatusId,jdbcType=INTEGER}, #{auditPersonId1,jdbcType=VARCHAR}, #{auditPoinion1,jdbcType=VARCHAR}, 
+      #{auditPersonId2,jdbcType=VARCHAR}, #{auditPoinion2,jdbcType=VARCHAR}, #{insertTime,jdbcType=TIMESTAMP}, 
+      #{lastTime,jdbcType=TIMESTAMP}, #{score,jdbcType=DOUBLE})
+  </insert>
+  <insert id="insertSelective" parameterType="com.hebeu.keyan.po.EReward" >
+    insert into e_reward
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="rewardId != null" >
+        reward_id,
+      </if>
+      <if test="subjectTypeId != null" >
+        subject_type_id,
+      </if>
+      <if test="resultTypeId != null" >
+        result_type_id,
+      </if>
+      <if test="schoolNumber != null" >
+        school_number,
+      </if>
+      <if test="resultName != null" >
+        result_name,
+      </if>
+      <if test="rewTypeId != null" >
+        rew_type_id,
+      </if>
+      <if test="subjectFirstId != null" >
+        subject_first_id,
+      </if>
+      <if test="rewClassId != null" >
+        rew_class_id,
+      </if>
+      <if test="rewLevelId != null" >
+        rew_level_id,
+      </if>
+      <if test="finishWayId != null" >
+        finish_way_id,
+      </if>
+      <if test="rewGradeId != null" >
+        rew_grade_id,
+      </if>
+      <if test="rewCertificateNum != null" >
+        rew_certificate_num,
+      </if>
+      <if test="rewDate != null" >
+        rew_date,
+      </if>
+      <if test="signId != null" >
+        sign_id,
+      </if>
+      <if test="rewUnit != null" >
+        rew_unit,
+      </if>
+      <if test="bonus != null" >
+        bonus,
+      </if>
+      <if test="remark != null" >
+        remark,
+      </if>
+      <if test="leader != null" >
+        leader,
+      </if>
+      <if test="registrant != null" >
+        registrant,
+      </if>
+      <if test="personList != null" >
+        person_list,
+      </if>
+      <if test="attachment != null" >
+        attachment,
+      </if>
+      <if test="auditStatusId != null" >
+        audit_status_id,
+      </if>
+      <if test="auditPersonId1 != null" >
+        audit_person_id1,
+      </if>
+      <if test="auditPoinion1 != null" >
+        audit_poinion1,
+      </if>
+      <if test="auditPersonId2 != null" >
+        audit_person_id2,
+      </if>
+      <if test="auditPoinion2 != null" >
+        audit_poinion2,
+      </if>
+      <if test="insertTime != null" >
+        insert_time,
+      </if>
+      <if test="lastTime != null" >
+        last_time,
+      </if>
+      <if test="score != null" >
+        score,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="rewardId != null" >
+        #{rewardId,jdbcType=VARCHAR},
+      </if>
+      <if test="subjectTypeId != null" >
+        #{subjectTypeId,jdbcType=INTEGER},
+      </if>
+      <if test="resultTypeId != null" >
+        #{resultTypeId,jdbcType=INTEGER},
+      </if>
+      <if test="schoolNumber != null" >
+        #{schoolNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="resultName != null" >
+        #{resultName,jdbcType=VARCHAR},
+      </if>
+      <if test="rewTypeId != null" >
+        #{rewTypeId,jdbcType=INTEGER},
+      </if>
+      <if test="subjectFirstId != null" >
+        #{subjectFirstId,jdbcType=INTEGER},
+      </if>
+      <if test="rewClassId != null" >
+        #{rewClassId,jdbcType=INTEGER},
+      </if>
+      <if test="rewLevelId != null" >
+        #{rewLevelId,jdbcType=INTEGER},
+      </if>
+      <if test="finishWayId != null" >
+        #{finishWayId,jdbcType=INTEGER},
+      </if>
+      <if test="rewGradeId != null" >
+        #{rewGradeId,jdbcType=INTEGER},
+      </if>
+      <if test="rewCertificateNum != null" >
+        #{rewCertificateNum,jdbcType=VARCHAR},
+      </if>
+      <if test="rewDate != null" >
+        #{rewDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="signId != null" >
+        #{signId,jdbcType=INTEGER},
+      </if>
+      <if test="rewUnit != null" >
+        #{rewUnit,jdbcType=VARCHAR},
+      </if>
+      <if test="bonus != null" >
+        #{bonus,jdbcType=DOUBLE},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="leader != null" >
+        #{leader,jdbcType=VARCHAR},
+      </if>
+      <if test="registrant != null" >
+        #{registrant,jdbcType=VARCHAR},
+      </if>
+      <if test="personList != null" >
+        #{personList,jdbcType=VARCHAR},
+      </if>
+      <if test="attachment != null" >
+        #{attachment,jdbcType=VARCHAR},
+      </if>
+      <if test="auditStatusId != null" >
+        #{auditStatusId,jdbcType=INTEGER},
+      </if>
+      <if test="auditPersonId1 != null" >
+        #{auditPersonId1,jdbcType=VARCHAR},
+      </if>
+      <if test="auditPoinion1 != null" >
+        #{auditPoinion1,jdbcType=VARCHAR},
+      </if>
+      <if test="auditPersonId2 != null" >
+        #{auditPersonId2,jdbcType=VARCHAR},
+      </if>
+      <if test="auditPoinion2 != null" >
+        #{auditPoinion2,jdbcType=VARCHAR},
+      </if>
+      <if test="insertTime != null" >
+        #{insertTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastTime != null" >
+        #{lastTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="score != null" >
+        #{score,jdbcType=DOUBLE},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.hebeu.keyan.po.ERewardExample" resultType="java.lang.Integer" >
+    select count(*) from e_reward
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update e_reward
+    <set >
+      <if test="record.rewardId != null" >
+        reward_id = #{record.rewardId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.subjectTypeId != null" >
+        subject_type_id = #{record.subjectTypeId,jdbcType=INTEGER},
+      </if>
+      <if test="record.resultTypeId != null" >
+        result_type_id = #{record.resultTypeId,jdbcType=INTEGER},
+      </if>
+      <if test="record.schoolNumber != null" >
+        school_number = #{record.schoolNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="record.resultName != null" >
+        result_name = #{record.resultName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.rewTypeId != null" >
+        rew_type_id = #{record.rewTypeId,jdbcType=INTEGER},
+      </if>
+      <if test="record.subjectFirstId != null" >
+        subject_first_id = #{record.subjectFirstId,jdbcType=INTEGER},
+      </if>
+      <if test="record.rewClassId != null" >
+        rew_class_id = #{record.rewClassId,jdbcType=INTEGER},
+      </if>
+      <if test="record.rewLevelId != null" >
+        rew_level_id = #{record.rewLevelId,jdbcType=INTEGER},
+      </if>
+      <if test="record.finishWayId != null" >
+        finish_way_id = #{record.finishWayId,jdbcType=INTEGER},
+      </if>
+      <if test="record.rewGradeId != null" >
+        rew_grade_id = #{record.rewGradeId,jdbcType=INTEGER},
+      </if>
+      <if test="record.rewCertificateNum != null" >
+        rew_certificate_num = #{record.rewCertificateNum,jdbcType=VARCHAR},
+      </if>
+      <if test="record.rewDate != null" >
+        rew_date = #{record.rewDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.signId != null" >
+        sign_id = #{record.signId,jdbcType=INTEGER},
+      </if>
+      <if test="record.rewUnit != null" >
+        rew_unit = #{record.rewUnit,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bonus != null" >
+        bonus = #{record.bonus,jdbcType=DOUBLE},
+      </if>
+      <if test="record.remark != null" >
+        remark = #{record.remark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.leader != null" >
+        leader = #{record.leader,jdbcType=VARCHAR},
+      </if>
+      <if test="record.registrant != null" >
+        registrant = #{record.registrant,jdbcType=VARCHAR},
+      </if>
+      <if test="record.personList != null" >
+        person_list = #{record.personList,jdbcType=VARCHAR},
+      </if>
+      <if test="record.attachment != null" >
+        attachment = #{record.attachment,jdbcType=VARCHAR},
+      </if>
+      <if test="record.auditStatusId != null" >
+        audit_status_id = #{record.auditStatusId,jdbcType=INTEGER},
+      </if>
+      <if test="record.auditPersonId1 != null" >
+        audit_person_id1 = #{record.auditPersonId1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.auditPoinion1 != null" >
+        audit_poinion1 = #{record.auditPoinion1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.auditPersonId2 != null" >
+        audit_person_id2 = #{record.auditPersonId2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.auditPoinion2 != null" >
+        audit_poinion2 = #{record.auditPoinion2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.insertTime != null" >
+        insert_time = #{record.insertTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.lastTime != null" >
+        last_time = #{record.lastTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.score != null" >
+        score = #{record.score,jdbcType=DOUBLE},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update e_reward
+    set reward_id = #{record.rewardId,jdbcType=VARCHAR},
+      subject_type_id = #{record.subjectTypeId,jdbcType=INTEGER},
+      result_type_id = #{record.resultTypeId,jdbcType=INTEGER},
+      school_number = #{record.schoolNumber,jdbcType=VARCHAR},
+      result_name = #{record.resultName,jdbcType=VARCHAR},
+      rew_type_id = #{record.rewTypeId,jdbcType=INTEGER},
+      subject_first_id = #{record.subjectFirstId,jdbcType=INTEGER},
+      rew_class_id = #{record.rewClassId,jdbcType=INTEGER},
+      rew_level_id = #{record.rewLevelId,jdbcType=INTEGER},
+      finish_way_id = #{record.finishWayId,jdbcType=INTEGER},
+      rew_grade_id = #{record.rewGradeId,jdbcType=INTEGER},
+      rew_certificate_num = #{record.rewCertificateNum,jdbcType=VARCHAR},
+      rew_date = #{record.rewDate,jdbcType=TIMESTAMP},
+      sign_id = #{record.signId,jdbcType=INTEGER},
+      rew_unit = #{record.rewUnit,jdbcType=VARCHAR},
+      bonus = #{record.bonus,jdbcType=DOUBLE},
+      remark = #{record.remark,jdbcType=VARCHAR},
+      leader = #{record.leader,jdbcType=VARCHAR},
+      registrant = #{record.registrant,jdbcType=VARCHAR},
+      person_list = #{record.personList,jdbcType=VARCHAR},
+      attachment = #{record.attachment,jdbcType=VARCHAR},
+      audit_status_id = #{record.auditStatusId,jdbcType=INTEGER},
+      audit_person_id1 = #{record.auditPersonId1,jdbcType=VARCHAR},
+      audit_poinion1 = #{record.auditPoinion1,jdbcType=VARCHAR},
+      audit_person_id2 = #{record.auditPersonId2,jdbcType=VARCHAR},
+      audit_poinion2 = #{record.auditPoinion2,jdbcType=VARCHAR},
+      insert_time = #{record.insertTime,jdbcType=TIMESTAMP},
+      last_time = #{record.lastTime,jdbcType=TIMESTAMP},
+      score = #{record.score,jdbcType=DOUBLE}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hebeu.keyan.po.EReward" >
+    update e_reward
+    <set >
+      <if test="subjectTypeId != null" >
+        subject_type_id = #{subjectTypeId,jdbcType=INTEGER},
+      </if>
+      <if test="resultTypeId != null" >
+        result_type_id = #{resultTypeId,jdbcType=INTEGER},
+      </if>
+      <if test="schoolNumber != null" >
+        school_number = #{schoolNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="resultName != null" >
+        result_name = #{resultName,jdbcType=VARCHAR},
+      </if>
+      <if test="rewTypeId != null" >
+        rew_type_id = #{rewTypeId,jdbcType=INTEGER},
+      </if>
+      <if test="subjectFirstId != null" >
+        subject_first_id = #{subjectFirstId,jdbcType=INTEGER},
+      </if>
+      <if test="rewClassId != null" >
+        rew_class_id = #{rewClassId,jdbcType=INTEGER},
+      </if>
+      <if test="rewLevelId != null" >
+        rew_level_id = #{rewLevelId,jdbcType=INTEGER},
+      </if>
+      <if test="finishWayId != null" >
+        finish_way_id = #{finishWayId,jdbcType=INTEGER},
+      </if>
+      <if test="rewGradeId != null" >
+        rew_grade_id = #{rewGradeId,jdbcType=INTEGER},
+      </if>
+      <if test="rewCertificateNum != null" >
+        rew_certificate_num = #{rewCertificateNum,jdbcType=VARCHAR},
+      </if>
+      <if test="rewDate != null" >
+        rew_date = #{rewDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="signId != null" >
+        sign_id = #{signId,jdbcType=INTEGER},
+      </if>
+      <if test="rewUnit != null" >
+        rew_unit = #{rewUnit,jdbcType=VARCHAR},
+      </if>
+      <if test="bonus != null" >
+        bonus = #{bonus,jdbcType=DOUBLE},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="leader != null" >
+        leader = #{leader,jdbcType=VARCHAR},
+      </if>
+      <if test="registrant != null" >
+        registrant = #{registrant,jdbcType=VARCHAR},
+      </if>
+      <if test="personList != null" >
+        person_list = #{personList,jdbcType=VARCHAR},
+      </if>
+      <if test="attachment != null" >
+        attachment = #{attachment,jdbcType=VARCHAR},
+      </if>
+      <if test="auditStatusId != null" >
+        audit_status_id = #{auditStatusId,jdbcType=INTEGER},
+      </if>
+      <if test="auditPersonId1 != null" >
+        audit_person_id1 = #{auditPersonId1,jdbcType=VARCHAR},
+      </if>
+      <if test="auditPoinion1 != null" >
+        audit_poinion1 = #{auditPoinion1,jdbcType=VARCHAR},
+      </if>
+      <if test="auditPersonId2 != null" >
+        audit_person_id2 = #{auditPersonId2,jdbcType=VARCHAR},
+      </if>
+      <if test="auditPoinion2 != null" >
+        audit_poinion2 = #{auditPoinion2,jdbcType=VARCHAR},
+      </if>
+      <if test="insertTime != null" >
+        insert_time = #{insertTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastTime != null" >
+        last_time = #{lastTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="score != null" >
+        score = #{score,jdbcType=DOUBLE},
+      </if>
+    </set>
+    where reward_id = #{rewardId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hebeu.keyan.po.EReward" >
+    update e_reward
+    set subject_type_id = #{subjectTypeId,jdbcType=INTEGER},
+      result_type_id = #{resultTypeId,jdbcType=INTEGER},
+      school_number = #{schoolNumber,jdbcType=VARCHAR},
+      result_name = #{resultName,jdbcType=VARCHAR},
+      rew_type_id = #{rewTypeId,jdbcType=INTEGER},
+      subject_first_id = #{subjectFirstId,jdbcType=INTEGER},
+      rew_class_id = #{rewClassId,jdbcType=INTEGER},
+      rew_level_id = #{rewLevelId,jdbcType=INTEGER},
+      finish_way_id = #{finishWayId,jdbcType=INTEGER},
+      rew_grade_id = #{rewGradeId,jdbcType=INTEGER},
+      rew_certificate_num = #{rewCertificateNum,jdbcType=VARCHAR},
+      rew_date = #{rewDate,jdbcType=TIMESTAMP},
+      sign_id = #{signId,jdbcType=INTEGER},
+      rew_unit = #{rewUnit,jdbcType=VARCHAR},
+      bonus = #{bonus,jdbcType=DOUBLE},
+      remark = #{remark,jdbcType=VARCHAR},
+      leader = #{leader,jdbcType=VARCHAR},
+      registrant = #{registrant,jdbcType=VARCHAR},
+      person_list = #{personList,jdbcType=VARCHAR},
+      attachment = #{attachment,jdbcType=VARCHAR},
+      audit_status_id = #{auditStatusId,jdbcType=INTEGER},
+      audit_person_id1 = #{auditPersonId1,jdbcType=VARCHAR},
+      audit_poinion1 = #{auditPoinion1,jdbcType=VARCHAR},
+      audit_person_id2 = #{auditPersonId2,jdbcType=VARCHAR},
+      audit_poinion2 = #{auditPoinion2,jdbcType=VARCHAR},
+      insert_time = #{insertTime,jdbcType=TIMESTAMP},
+      last_time = #{lastTime,jdbcType=TIMESTAMP},
+      score = #{score,jdbcType=DOUBLE}
+    where reward_id = #{rewardId,jdbcType=VARCHAR}
+  </update>
+</mapper>

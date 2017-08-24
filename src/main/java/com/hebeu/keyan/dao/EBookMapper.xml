@@ -1,0 +1,560 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hebeu.keyan.dao.EBookMapper" >
+  <resultMap id="BaseResultMap" type="com.hebeu.keyan.po.EBook" >
+    <id column="book_id" property="bookId" jdbcType="VARCHAR" />
+    <result column="book_name" property="bookName" jdbcType="VARCHAR" />
+    <result column="school_number" property="schoolNumber" jdbcType="VARCHAR" />
+    <result column="subject_type_id" property="subjectTypeId" jdbcType="INTEGER" />
+    <result column="subject_first_id" property="subjectFirstId" jdbcType="INTEGER" />
+    <result column="book_type_id" property="bookTypeId" jdbcType="INTEGER" />
+    <result column="isbn" property="isbn" jdbcType="VARCHAR" />
+    <result column="total_num" property="totalNum" jdbcType="VARCHAR" />
+    <result column="write_num" property="writeNum" jdbcType="VARCHAR" />
+    <result column="publish_unit" property="publishUnit" jdbcType="VARCHAR" />
+    <result column="publish_place" property="publishPlace" jdbcType="VARCHAR" />
+    <result column="publish_date" property="publishDate" jdbcType="TIMESTAMP" />
+    <result column="press_type_id" property="pressTypeId" jdbcType="INTEGER" />
+    <result column="bonus" property="bonus" jdbcType="DOUBLE" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+    <result column="leader" property="leader" jdbcType="VARCHAR" />
+    <result column="registrant" property="registrant" jdbcType="VARCHAR" />
+    <result column="person_list" property="personList" jdbcType="VARCHAR" />
+    <result column="attachment" property="attachment" jdbcType="VARCHAR" />
+    <result column="audit_status_id" property="auditStatusId" jdbcType="INTEGER" />
+    <result column="audit_person_id1" property="auditPersonId1" jdbcType="VARCHAR" />
+    <result column="audit_poinion1" property="auditPoinion1" jdbcType="VARCHAR" />
+    <result column="audit_person_id2" property="auditPersonId2" jdbcType="VARCHAR" />
+    <result column="audit_poinion2" property="auditPoinion2" jdbcType="VARCHAR" />
+    <result column="insert_time" property="insertTime" jdbcType="TIMESTAMP" />
+    <result column="last_time" property="lastTime" jdbcType="TIMESTAMP" />
+    <result column="score" property="score" jdbcType="DOUBLE" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    book_id, book_name, school_number, subject_type_id, subject_first_id, book_type_id, 
+    isbn, total_num, write_num, publish_unit, publish_place, publish_date, press_type_id, 
+    bonus, remark, leader, registrant, person_list, attachment, audit_status_id, audit_person_id1, 
+    audit_poinion1, audit_person_id2, audit_poinion2, insert_time, last_time, score
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.hebeu.keyan.po.EBookExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from e_book
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from e_book
+    where book_id = #{bookId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from e_book
+    where book_id = #{bookId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.hebeu.keyan.po.EBookExample" >
+    delete from e_book
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.hebeu.keyan.po.EBook" >
+    insert into e_book (book_id, book_name, school_number, 
+      subject_type_id, subject_first_id, book_type_id, 
+      isbn, total_num, write_num, 
+      publish_unit, publish_place, publish_date, 
+      press_type_id, bonus, remark, 
+      leader, registrant, person_list, 
+      attachment, audit_status_id, audit_person_id1, 
+      audit_poinion1, audit_person_id2, audit_poinion2, 
+      insert_time, last_time, score
+      )
+    values (#{bookId,jdbcType=VARCHAR}, #{bookName,jdbcType=VARCHAR}, #{schoolNumber,jdbcType=VARCHAR}, 
+      #{subjectTypeId,jdbcType=INTEGER}, #{subjectFirstId,jdbcType=INTEGER}, #{bookTypeId,jdbcType=INTEGER}, 
+      #{isbn,jdbcType=VARCHAR}, #{totalNum,jdbcType=VARCHAR}, #{writeNum,jdbcType=VARCHAR}, 
+      #{publishUnit,jdbcType=VARCHAR}, #{publishPlace,jdbcType=VARCHAR}, #{publishDate,jdbcType=TIMESTAMP}, 
+      #{pressTypeId,jdbcType=INTEGER}, #{bonus,jdbcType=DOUBLE}, #{remark,jdbcType=VARCHAR}, 
+      #{leader,jdbcType=VARCHAR}, #{registrant,jdbcType=VARCHAR}, #{personList,jdbcType=VARCHAR}, 
+      #{attachment,jdbcType=VARCHAR}, #{auditStatusId,jdbcType=INTEGER}, #{auditPersonId1,jdbcType=VARCHAR}, 
+      #{auditPoinion1,jdbcType=VARCHAR}, #{auditPersonId2,jdbcType=VARCHAR}, #{auditPoinion2,jdbcType=VARCHAR}, 
+      #{insertTime,jdbcType=TIMESTAMP}, #{lastTime,jdbcType=TIMESTAMP}, #{score,jdbcType=DOUBLE}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.hebeu.keyan.po.EBook" >
+    insert into e_book
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="bookId != null" >
+        book_id,
+      </if>
+      <if test="bookName != null" >
+        book_name,
+      </if>
+      <if test="schoolNumber != null" >
+        school_number,
+      </if>
+      <if test="subjectTypeId != null" >
+        subject_type_id,
+      </if>
+      <if test="subjectFirstId != null" >
+        subject_first_id,
+      </if>
+      <if test="bookTypeId != null" >
+        book_type_id,
+      </if>
+      <if test="isbn != null" >
+        isbn,
+      </if>
+      <if test="totalNum != null" >
+        total_num,
+      </if>
+      <if test="writeNum != null" >
+        write_num,
+      </if>
+      <if test="publishUnit != null" >
+        publish_unit,
+      </if>
+      <if test="publishPlace != null" >
+        publish_place,
+      </if>
+      <if test="publishDate != null" >
+        publish_date,
+      </if>
+      <if test="pressTypeId != null" >
+        press_type_id,
+      </if>
+      <if test="bonus != null" >
+        bonus,
+      </if>
+      <if test="remark != null" >
+        remark,
+      </if>
+      <if test="leader != null" >
+        leader,
+      </if>
+      <if test="registrant != null" >
+        registrant,
+      </if>
+      <if test="personList != null" >
+        person_list,
+      </if>
+      <if test="attachment != null" >
+        attachment,
+      </if>
+      <if test="auditStatusId != null" >
+        audit_status_id,
+      </if>
+      <if test="auditPersonId1 != null" >
+        audit_person_id1,
+      </if>
+      <if test="auditPoinion1 != null" >
+        audit_poinion1,
+      </if>
+      <if test="auditPersonId2 != null" >
+        audit_person_id2,
+      </if>
+      <if test="auditPoinion2 != null" >
+        audit_poinion2,
+      </if>
+      <if test="insertTime != null" >
+        insert_time,
+      </if>
+      <if test="lastTime != null" >
+        last_time,
+      </if>
+      <if test="score != null" >
+        score,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="bookId != null" >
+        #{bookId,jdbcType=VARCHAR},
+      </if>
+      <if test="bookName != null" >
+        #{bookName,jdbcType=VARCHAR},
+      </if>
+      <if test="schoolNumber != null" >
+        #{schoolNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="subjectTypeId != null" >
+        #{subjectTypeId,jdbcType=INTEGER},
+      </if>
+      <if test="subjectFirstId != null" >
+        #{subjectFirstId,jdbcType=INTEGER},
+      </if>
+      <if test="bookTypeId != null" >
+        #{bookTypeId,jdbcType=INTEGER},
+      </if>
+      <if test="isbn != null" >
+        #{isbn,jdbcType=VARCHAR},
+      </if>
+      <if test="totalNum != null" >
+        #{totalNum,jdbcType=VARCHAR},
+      </if>
+      <if test="writeNum != null" >
+        #{writeNum,jdbcType=VARCHAR},
+      </if>
+      <if test="publishUnit != null" >
+        #{publishUnit,jdbcType=VARCHAR},
+      </if>
+      <if test="publishPlace != null" >
+        #{publishPlace,jdbcType=VARCHAR},
+      </if>
+      <if test="publishDate != null" >
+        #{publishDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="pressTypeId != null" >
+        #{pressTypeId,jdbcType=INTEGER},
+      </if>
+      <if test="bonus != null" >
+        #{bonus,jdbcType=DOUBLE},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="leader != null" >
+        #{leader,jdbcType=VARCHAR},
+      </if>
+      <if test="registrant != null" >
+        #{registrant,jdbcType=VARCHAR},
+      </if>
+      <if test="personList != null" >
+        #{personList,jdbcType=VARCHAR},
+      </if>
+      <if test="attachment != null" >
+        #{attachment,jdbcType=VARCHAR},
+      </if>
+      <if test="auditStatusId != null" >
+        #{auditStatusId,jdbcType=INTEGER},
+      </if>
+      <if test="auditPersonId1 != null" >
+        #{auditPersonId1,jdbcType=VARCHAR},
+      </if>
+      <if test="auditPoinion1 != null" >
+        #{auditPoinion1,jdbcType=VARCHAR},
+      </if>
+      <if test="auditPersonId2 != null" >
+        #{auditPersonId2,jdbcType=VARCHAR},
+      </if>
+      <if test="auditPoinion2 != null" >
+        #{auditPoinion2,jdbcType=VARCHAR},
+      </if>
+      <if test="insertTime != null" >
+        #{insertTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastTime != null" >
+        #{lastTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="score != null" >
+        #{score,jdbcType=DOUBLE},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.hebeu.keyan.po.EBookExample" resultType="java.lang.Integer" >
+    select count(*) from e_book
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update e_book
+    <set >
+      <if test="record.bookId != null" >
+        book_id = #{record.bookId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bookName != null" >
+        book_name = #{record.bookName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.schoolNumber != null" >
+        school_number = #{record.schoolNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="record.subjectTypeId != null" >
+        subject_type_id = #{record.subjectTypeId,jdbcType=INTEGER},
+      </if>
+      <if test="record.subjectFirstId != null" >
+        subject_first_id = #{record.subjectFirstId,jdbcType=INTEGER},
+      </if>
+      <if test="record.bookTypeId != null" >
+        book_type_id = #{record.bookTypeId,jdbcType=INTEGER},
+      </if>
+      <if test="record.isbn != null" >
+        isbn = #{record.isbn,jdbcType=VARCHAR},
+      </if>
+      <if test="record.totalNum != null" >
+        total_num = #{record.totalNum,jdbcType=VARCHAR},
+      </if>
+      <if test="record.writeNum != null" >
+        write_num = #{record.writeNum,jdbcType=VARCHAR},
+      </if>
+      <if test="record.publishUnit != null" >
+        publish_unit = #{record.publishUnit,jdbcType=VARCHAR},
+      </if>
+      <if test="record.publishPlace != null" >
+        publish_place = #{record.publishPlace,jdbcType=VARCHAR},
+      </if>
+      <if test="record.publishDate != null" >
+        publish_date = #{record.publishDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.pressTypeId != null" >
+        press_type_id = #{record.pressTypeId,jdbcType=INTEGER},
+      </if>
+      <if test="record.bonus != null" >
+        bonus = #{record.bonus,jdbcType=DOUBLE},
+      </if>
+      <if test="record.remark != null" >
+        remark = #{record.remark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.leader != null" >
+        leader = #{record.leader,jdbcType=VARCHAR},
+      </if>
+      <if test="record.registrant != null" >
+        registrant = #{record.registrant,jdbcType=VARCHAR},
+      </if>
+      <if test="record.personList != null" >
+        person_list = #{record.personList,jdbcType=VARCHAR},
+      </if>
+      <if test="record.attachment != null" >
+        attachment = #{record.attachment,jdbcType=VARCHAR},
+      </if>
+      <if test="record.auditStatusId != null" >
+        audit_status_id = #{record.auditStatusId,jdbcType=INTEGER},
+      </if>
+      <if test="record.auditPersonId1 != null" >
+        audit_person_id1 = #{record.auditPersonId1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.auditPoinion1 != null" >
+        audit_poinion1 = #{record.auditPoinion1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.auditPersonId2 != null" >
+        audit_person_id2 = #{record.auditPersonId2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.auditPoinion2 != null" >
+        audit_poinion2 = #{record.auditPoinion2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.insertTime != null" >
+        insert_time = #{record.insertTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.lastTime != null" >
+        last_time = #{record.lastTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.score != null" >
+        score = #{record.score,jdbcType=DOUBLE},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update e_book
+    set book_id = #{record.bookId,jdbcType=VARCHAR},
+      book_name = #{record.bookName,jdbcType=VARCHAR},
+      school_number = #{record.schoolNumber,jdbcType=VARCHAR},
+      subject_type_id = #{record.subjectTypeId,jdbcType=INTEGER},
+      subject_first_id = #{record.subjectFirstId,jdbcType=INTEGER},
+      book_type_id = #{record.bookTypeId,jdbcType=INTEGER},
+      isbn = #{record.isbn,jdbcType=VARCHAR},
+      total_num = #{record.totalNum,jdbcType=VARCHAR},
+      write_num = #{record.writeNum,jdbcType=VARCHAR},
+      publish_unit = #{record.publishUnit,jdbcType=VARCHAR},
+      publish_place = #{record.publishPlace,jdbcType=VARCHAR},
+      publish_date = #{record.publishDate,jdbcType=TIMESTAMP},
+      press_type_id = #{record.pressTypeId,jdbcType=INTEGER},
+      bonus = #{record.bonus,jdbcType=DOUBLE},
+      remark = #{record.remark,jdbcType=VARCHAR},
+      leader = #{record.leader,jdbcType=VARCHAR},
+      registrant = #{record.registrant,jdbcType=VARCHAR},
+      person_list = #{record.personList,jdbcType=VARCHAR},
+      attachment = #{record.attachment,jdbcType=VARCHAR},
+      audit_status_id = #{record.auditStatusId,jdbcType=INTEGER},
+      audit_person_id1 = #{record.auditPersonId1,jdbcType=VARCHAR},
+      audit_poinion1 = #{record.auditPoinion1,jdbcType=VARCHAR},
+      audit_person_id2 = #{record.auditPersonId2,jdbcType=VARCHAR},
+      audit_poinion2 = #{record.auditPoinion2,jdbcType=VARCHAR},
+      insert_time = #{record.insertTime,jdbcType=TIMESTAMP},
+      last_time = #{record.lastTime,jdbcType=TIMESTAMP},
+      score = #{record.score,jdbcType=DOUBLE}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hebeu.keyan.po.EBook" >
+    update e_book
+    <set >
+      <if test="bookName != null" >
+        book_name = #{bookName,jdbcType=VARCHAR},
+      </if>
+      <if test="schoolNumber != null" >
+        school_number = #{schoolNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="subjectTypeId != null" >
+        subject_type_id = #{subjectTypeId,jdbcType=INTEGER},
+      </if>
+      <if test="subjectFirstId != null" >
+        subject_first_id = #{subjectFirstId,jdbcType=INTEGER},
+      </if>
+      <if test="bookTypeId != null" >
+        book_type_id = #{bookTypeId,jdbcType=INTEGER},
+      </if>
+      <if test="isbn != null" >
+        isbn = #{isbn,jdbcType=VARCHAR},
+      </if>
+      <if test="totalNum != null" >
+        total_num = #{totalNum,jdbcType=VARCHAR},
+      </if>
+      <if test="writeNum != null" >
+        write_num = #{writeNum,jdbcType=VARCHAR},
+      </if>
+      <if test="publishUnit != null" >
+        publish_unit = #{publishUnit,jdbcType=VARCHAR},
+      </if>
+      <if test="publishPlace != null" >
+        publish_place = #{publishPlace,jdbcType=VARCHAR},
+      </if>
+      <if test="publishDate != null" >
+        publish_date = #{publishDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="pressTypeId != null" >
+        press_type_id = #{pressTypeId,jdbcType=INTEGER},
+      </if>
+      <if test="bonus != null" >
+        bonus = #{bonus,jdbcType=DOUBLE},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="leader != null" >
+        leader = #{leader,jdbcType=VARCHAR},
+      </if>
+      <if test="registrant != null" >
+        registrant = #{registrant,jdbcType=VARCHAR},
+      </if>
+      <if test="personList != null" >
+        person_list = #{personList,jdbcType=VARCHAR},
+      </if>
+      <if test="attachment != null" >
+        attachment = #{attachment,jdbcType=VARCHAR},
+      </if>
+      <if test="auditStatusId != null" >
+        audit_status_id = #{auditStatusId,jdbcType=INTEGER},
+      </if>
+      <if test="auditPersonId1 != null" >
+        audit_person_id1 = #{auditPersonId1,jdbcType=VARCHAR},
+      </if>
+      <if test="auditPoinion1 != null" >
+        audit_poinion1 = #{auditPoinion1,jdbcType=VARCHAR},
+      </if>
+      <if test="auditPersonId2 != null" >
+        audit_person_id2 = #{auditPersonId2,jdbcType=VARCHAR},
+      </if>
+      <if test="auditPoinion2 != null" >
+        audit_poinion2 = #{auditPoinion2,jdbcType=VARCHAR},
+      </if>
+      <if test="insertTime != null" >
+        insert_time = #{insertTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastTime != null" >
+        last_time = #{lastTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="score != null" >
+        score = #{score,jdbcType=DOUBLE},
+      </if>
+    </set>
+    where book_id = #{bookId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hebeu.keyan.po.EBook" >
+    update e_book
+    set book_name = #{bookName,jdbcType=VARCHAR},
+      school_number = #{schoolNumber,jdbcType=VARCHAR},
+      subject_type_id = #{subjectTypeId,jdbcType=INTEGER},
+      subject_first_id = #{subjectFirstId,jdbcType=INTEGER},
+      book_type_id = #{bookTypeId,jdbcType=INTEGER},
+      isbn = #{isbn,jdbcType=VARCHAR},
+      total_num = #{totalNum,jdbcType=VARCHAR},
+      write_num = #{writeNum,jdbcType=VARCHAR},
+      publish_unit = #{publishUnit,jdbcType=VARCHAR},
+      publish_place = #{publishPlace,jdbcType=VARCHAR},
+      publish_date = #{publishDate,jdbcType=TIMESTAMP},
+      press_type_id = #{pressTypeId,jdbcType=INTEGER},
+      bonus = #{bonus,jdbcType=DOUBLE},
+      remark = #{remark,jdbcType=VARCHAR},
+      leader = #{leader,jdbcType=VARCHAR},
+      registrant = #{registrant,jdbcType=VARCHAR},
+      person_list = #{personList,jdbcType=VARCHAR},
+      attachment = #{attachment,jdbcType=VARCHAR},
+      audit_status_id = #{auditStatusId,jdbcType=INTEGER},
+      audit_person_id1 = #{auditPersonId1,jdbcType=VARCHAR},
+      audit_poinion1 = #{auditPoinion1,jdbcType=VARCHAR},
+      audit_person_id2 = #{auditPersonId2,jdbcType=VARCHAR},
+      audit_poinion2 = #{auditPoinion2,jdbcType=VARCHAR},
+      insert_time = #{insertTime,jdbcType=TIMESTAMP},
+      last_time = #{lastTime,jdbcType=TIMESTAMP},
+      score = #{score,jdbcType=DOUBLE}
+    where book_id = #{bookId,jdbcType=VARCHAR}
+  </update>
+</mapper>

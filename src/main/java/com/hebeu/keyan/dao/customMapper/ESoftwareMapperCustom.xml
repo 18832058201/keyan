@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hebeu.keyan.dao.customMapper.ESoftwareMapperCustom">
+    <select id="selectSoftwareByWorkNum" resultType="com.hebeu.keyan.po.customPO.ESoftwareCustom">
+        SELECT v.*,r.* FROM view_software v LEFT JOIN r_person_project_result r ON v.software_id = r.id WHERE work_num = #{workNum}
+    </select>
+    <select id="selectPersonListBySoftwareId" resultType="com.hebeu.keyan.vo.PersonListVO">
+        SELECT r.* FROM r_person_project_result  r
+        WHERE r.id = #{softwareId}
+    </select>
+
+    <select id="selectSoftwareResultInfoById" resultType="com.hebeu.keyan.po.customPO.ESoftwareCustom">
+        SELECT * FROM view_software b WHERE b.software_id = #{softwareId}
+    </select>
+</mapper>

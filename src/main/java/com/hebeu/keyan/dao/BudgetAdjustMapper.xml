@@ -1,0 +1,513 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hebeu.keyan.dao.BudgetAdjustMapper" >
+  <resultMap id="BaseResultMap" type="com.hebeu.keyan.po.BudgetAdjust" >
+    <id column="budget_id" property="budgetId" jdbcType="INTEGER" />
+    <result column="project_id" property="projectId" jdbcType="VARCHAR" />
+    <result column="publish_total" property="publishTotal" jdbcType="DOUBLE" />
+    <result column="materials_total" property="materialsTotal" jdbcType="DOUBLE" />
+    <result column="test_total" property="testTotal" jdbcType="DOUBLE" />
+    <result column="fuel_total" property="fuelTotal" jdbcType="DOUBLE" />
+    <result column="travel_total" property="travelTotal" jdbcType="DOUBLE" />
+    <result column="meet_total" property="meetTotal" jdbcType="DOUBLE" />
+    <result column="international_total" property="internationalTotal" jdbcType="DOUBLE" />
+    <result column="facility_total" property="facilityTotal" jdbcType="DOUBLE" />
+    <result column="labour_total" property="labourTotal" jdbcType="DOUBLE" />
+    <result column="expert_total" property="expertTotal" jdbcType="DOUBLE" />
+    <result column="datum_total" property="datumTotal" jdbcType="DOUBLE" />
+    <result column="print_total" property="printTotal" jdbcType="DOUBLE" />
+    <result column="other_total" property="otherTotal" jdbcType="DOUBLE" />
+    <result column="manage_total" property="manageTotal" jdbcType="DOUBLE" />
+    <result column="post_total" property="postTotal" jdbcType="DOUBLE" />
+    <result column="audit_status_id" property="auditStatusId" jdbcType="INTEGER" />
+    <result column="audit_person_id1" property="auditPersonId1" jdbcType="VARCHAR" />
+    <result column="audit_poinion1" property="auditPoinion1" jdbcType="VARCHAR" />
+    <result column="audit_person_id2" property="auditPersonId2" jdbcType="VARCHAR" />
+    <result column="audit_poinion2" property="auditPoinion2" jdbcType="VARCHAR" />
+    <result column="insert_time" property="insertTime" jdbcType="TIMESTAMP" />
+    <result column="last_time" property="lastTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    budget_id, project_id, publish_total, materials_total, test_total, fuel_total, travel_total, 
+    meet_total, international_total, facility_total, labour_total, expert_total, datum_total, 
+    print_total, other_total, manage_total, post_total, audit_status_id, audit_person_id1, 
+    audit_poinion1, audit_person_id2, audit_poinion2, insert_time, last_time
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.hebeu.keyan.po.BudgetAdjustExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from budget_adjust
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from budget_adjust
+    where budget_id = #{budgetId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from budget_adjust
+    where budget_id = #{budgetId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.hebeu.keyan.po.BudgetAdjustExample" >
+    delete from budget_adjust
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.hebeu.keyan.po.BudgetAdjust" >
+    insert into budget_adjust (budget_id, project_id, publish_total, 
+      materials_total, test_total, fuel_total, 
+      travel_total, meet_total, international_total, 
+      facility_total, labour_total, expert_total, 
+      datum_total, print_total, other_total, 
+      manage_total, post_total, audit_status_id, 
+      audit_person_id1, audit_poinion1, audit_person_id2, 
+      audit_poinion2, insert_time, last_time
+      )
+    values (#{budgetId,jdbcType=INTEGER}, #{projectId,jdbcType=VARCHAR}, #{publishTotal,jdbcType=DOUBLE}, 
+      #{materialsTotal,jdbcType=DOUBLE}, #{testTotal,jdbcType=DOUBLE}, #{fuelTotal,jdbcType=DOUBLE}, 
+      #{travelTotal,jdbcType=DOUBLE}, #{meetTotal,jdbcType=DOUBLE}, #{internationalTotal,jdbcType=DOUBLE}, 
+      #{facilityTotal,jdbcType=DOUBLE}, #{labourTotal,jdbcType=DOUBLE}, #{expertTotal,jdbcType=DOUBLE}, 
+      #{datumTotal,jdbcType=DOUBLE}, #{printTotal,jdbcType=DOUBLE}, #{otherTotal,jdbcType=DOUBLE}, 
+      #{manageTotal,jdbcType=DOUBLE}, #{postTotal,jdbcType=DOUBLE}, #{auditStatusId,jdbcType=INTEGER}, 
+      #{auditPersonId1,jdbcType=VARCHAR}, #{auditPoinion1,jdbcType=VARCHAR}, #{auditPersonId2,jdbcType=VARCHAR}, 
+      #{auditPoinion2,jdbcType=VARCHAR}, #{insertTime,jdbcType=TIMESTAMP}, #{lastTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.hebeu.keyan.po.BudgetAdjust" >
+    insert into budget_adjust
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="budgetId != null" >
+        budget_id,
+      </if>
+      <if test="projectId != null" >
+        project_id,
+      </if>
+      <if test="publishTotal != null" >
+        publish_total,
+      </if>
+      <if test="materialsTotal != null" >
+        materials_total,
+      </if>
+      <if test="testTotal != null" >
+        test_total,
+      </if>
+      <if test="fuelTotal != null" >
+        fuel_total,
+      </if>
+      <if test="travelTotal != null" >
+        travel_total,
+      </if>
+      <if test="meetTotal != null" >
+        meet_total,
+      </if>
+      <if test="internationalTotal != null" >
+        international_total,
+      </if>
+      <if test="facilityTotal != null" >
+        facility_total,
+      </if>
+      <if test="labourTotal != null" >
+        labour_total,
+      </if>
+      <if test="expertTotal != null" >
+        expert_total,
+      </if>
+      <if test="datumTotal != null" >
+        datum_total,
+      </if>
+      <if test="printTotal != null" >
+        print_total,
+      </if>
+      <if test="otherTotal != null" >
+        other_total,
+      </if>
+      <if test="manageTotal != null" >
+        manage_total,
+      </if>
+      <if test="postTotal != null" >
+        post_total,
+      </if>
+      <if test="auditStatusId != null" >
+        audit_status_id,
+      </if>
+      <if test="auditPersonId1 != null" >
+        audit_person_id1,
+      </if>
+      <if test="auditPoinion1 != null" >
+        audit_poinion1,
+      </if>
+      <if test="auditPersonId2 != null" >
+        audit_person_id2,
+      </if>
+      <if test="auditPoinion2 != null" >
+        audit_poinion2,
+      </if>
+      <if test="insertTime != null" >
+        insert_time,
+      </if>
+      <if test="lastTime != null" >
+        last_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="budgetId != null" >
+        #{budgetId,jdbcType=INTEGER},
+      </if>
+      <if test="projectId != null" >
+        #{projectId,jdbcType=VARCHAR},
+      </if>
+      <if test="publishTotal != null" >
+        #{publishTotal,jdbcType=DOUBLE},
+      </if>
+      <if test="materialsTotal != null" >
+        #{materialsTotal,jdbcType=DOUBLE},
+      </if>
+      <if test="testTotal != null" >
+        #{testTotal,jdbcType=DOUBLE},
+      </if>
+      <if test="fuelTotal != null" >
+        #{fuelTotal,jdbcType=DOUBLE},
+      </if>
+      <if test="travelTotal != null" >
+        #{travelTotal,jdbcType=DOUBLE},
+      </if>
+      <if test="meetTotal != null" >
+        #{meetTotal,jdbcType=DOUBLE},
+      </if>
+      <if test="internationalTotal != null" >
+        #{internationalTotal,jdbcType=DOUBLE},
+      </if>
+      <if test="facilityTotal != null" >
+        #{facilityTotal,jdbcType=DOUBLE},
+      </if>
+      <if test="labourTotal != null" >
+        #{labourTotal,jdbcType=DOUBLE},
+      </if>
+      <if test="expertTotal != null" >
+        #{expertTotal,jdbcType=DOUBLE},
+      </if>
+      <if test="datumTotal != null" >
+        #{datumTotal,jdbcType=DOUBLE},
+      </if>
+      <if test="printTotal != null" >
+        #{printTotal,jdbcType=DOUBLE},
+      </if>
+      <if test="otherTotal != null" >
+        #{otherTotal,jdbcType=DOUBLE},
+      </if>
+      <if test="manageTotal != null" >
+        #{manageTotal,jdbcType=DOUBLE},
+      </if>
+      <if test="postTotal != null" >
+        #{postTotal,jdbcType=DOUBLE},
+      </if>
+      <if test="auditStatusId != null" >
+        #{auditStatusId,jdbcType=INTEGER},
+      </if>
+      <if test="auditPersonId1 != null" >
+        #{auditPersonId1,jdbcType=VARCHAR},
+      </if>
+      <if test="auditPoinion1 != null" >
+        #{auditPoinion1,jdbcType=VARCHAR},
+      </if>
+      <if test="auditPersonId2 != null" >
+        #{auditPersonId2,jdbcType=VARCHAR},
+      </if>
+      <if test="auditPoinion2 != null" >
+        #{auditPoinion2,jdbcType=VARCHAR},
+      </if>
+      <if test="insertTime != null" >
+        #{insertTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastTime != null" >
+        #{lastTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.hebeu.keyan.po.BudgetAdjustExample" resultType="java.lang.Integer" >
+    select count(*) from budget_adjust
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update budget_adjust
+    <set >
+      <if test="record.budgetId != null" >
+        budget_id = #{record.budgetId,jdbcType=INTEGER},
+      </if>
+      <if test="record.projectId != null" >
+        project_id = #{record.projectId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.publishTotal != null" >
+        publish_total = #{record.publishTotal,jdbcType=DOUBLE},
+      </if>
+      <if test="record.materialsTotal != null" >
+        materials_total = #{record.materialsTotal,jdbcType=DOUBLE},
+      </if>
+      <if test="record.testTotal != null" >
+        test_total = #{record.testTotal,jdbcType=DOUBLE},
+      </if>
+      <if test="record.fuelTotal != null" >
+        fuel_total = #{record.fuelTotal,jdbcType=DOUBLE},
+      </if>
+      <if test="record.travelTotal != null" >
+        travel_total = #{record.travelTotal,jdbcType=DOUBLE},
+      </if>
+      <if test="record.meetTotal != null" >
+        meet_total = #{record.meetTotal,jdbcType=DOUBLE},
+      </if>
+      <if test="record.internationalTotal != null" >
+        international_total = #{record.internationalTotal,jdbcType=DOUBLE},
+      </if>
+      <if test="record.facilityTotal != null" >
+        facility_total = #{record.facilityTotal,jdbcType=DOUBLE},
+      </if>
+      <if test="record.labourTotal != null" >
+        labour_total = #{record.labourTotal,jdbcType=DOUBLE},
+      </if>
+      <if test="record.expertTotal != null" >
+        expert_total = #{record.expertTotal,jdbcType=DOUBLE},
+      </if>
+      <if test="record.datumTotal != null" >
+        datum_total = #{record.datumTotal,jdbcType=DOUBLE},
+      </if>
+      <if test="record.printTotal != null" >
+        print_total = #{record.printTotal,jdbcType=DOUBLE},
+      </if>
+      <if test="record.otherTotal != null" >
+        other_total = #{record.otherTotal,jdbcType=DOUBLE},
+      </if>
+      <if test="record.manageTotal != null" >
+        manage_total = #{record.manageTotal,jdbcType=DOUBLE},
+      </if>
+      <if test="record.postTotal != null" >
+        post_total = #{record.postTotal,jdbcType=DOUBLE},
+      </if>
+      <if test="record.auditStatusId != null" >
+        audit_status_id = #{record.auditStatusId,jdbcType=INTEGER},
+      </if>
+      <if test="record.auditPersonId1 != null" >
+        audit_person_id1 = #{record.auditPersonId1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.auditPoinion1 != null" >
+        audit_poinion1 = #{record.auditPoinion1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.auditPersonId2 != null" >
+        audit_person_id2 = #{record.auditPersonId2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.auditPoinion2 != null" >
+        audit_poinion2 = #{record.auditPoinion2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.insertTime != null" >
+        insert_time = #{record.insertTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.lastTime != null" >
+        last_time = #{record.lastTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update budget_adjust
+    set budget_id = #{record.budgetId,jdbcType=INTEGER},
+      project_id = #{record.projectId,jdbcType=VARCHAR},
+      publish_total = #{record.publishTotal,jdbcType=DOUBLE},
+      materials_total = #{record.materialsTotal,jdbcType=DOUBLE},
+      test_total = #{record.testTotal,jdbcType=DOUBLE},
+      fuel_total = #{record.fuelTotal,jdbcType=DOUBLE},
+      travel_total = #{record.travelTotal,jdbcType=DOUBLE},
+      meet_total = #{record.meetTotal,jdbcType=DOUBLE},
+      international_total = #{record.internationalTotal,jdbcType=DOUBLE},
+      facility_total = #{record.facilityTotal,jdbcType=DOUBLE},
+      labour_total = #{record.labourTotal,jdbcType=DOUBLE},
+      expert_total = #{record.expertTotal,jdbcType=DOUBLE},
+      datum_total = #{record.datumTotal,jdbcType=DOUBLE},
+      print_total = #{record.printTotal,jdbcType=DOUBLE},
+      other_total = #{record.otherTotal,jdbcType=DOUBLE},
+      manage_total = #{record.manageTotal,jdbcType=DOUBLE},
+      post_total = #{record.postTotal,jdbcType=DOUBLE},
+      audit_status_id = #{record.auditStatusId,jdbcType=INTEGER},
+      audit_person_id1 = #{record.auditPersonId1,jdbcType=VARCHAR},
+      audit_poinion1 = #{record.auditPoinion1,jdbcType=VARCHAR},
+      audit_person_id2 = #{record.auditPersonId2,jdbcType=VARCHAR},
+      audit_poinion2 = #{record.auditPoinion2,jdbcType=VARCHAR},
+      insert_time = #{record.insertTime,jdbcType=TIMESTAMP},
+      last_time = #{record.lastTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hebeu.keyan.po.BudgetAdjust" >
+    update budget_adjust
+    <set >
+      <if test="projectId != null" >
+        project_id = #{projectId,jdbcType=VARCHAR},
+      </if>
+      <if test="publishTotal != null" >
+        publish_total = #{publishTotal,jdbcType=DOUBLE},
+      </if>
+      <if test="materialsTotal != null" >
+        materials_total = #{materialsTotal,jdbcType=DOUBLE},
+      </if>
+      <if test="testTotal != null" >
+        test_total = #{testTotal,jdbcType=DOUBLE},
+      </if>
+      <if test="fuelTotal != null" >
+        fuel_total = #{fuelTotal,jdbcType=DOUBLE},
+      </if>
+      <if test="travelTotal != null" >
+        travel_total = #{travelTotal,jdbcType=DOUBLE},
+      </if>
+      <if test="meetTotal != null" >
+        meet_total = #{meetTotal,jdbcType=DOUBLE},
+      </if>
+      <if test="internationalTotal != null" >
+        international_total = #{internationalTotal,jdbcType=DOUBLE},
+      </if>
+      <if test="facilityTotal != null" >
+        facility_total = #{facilityTotal,jdbcType=DOUBLE},
+      </if>
+      <if test="labourTotal != null" >
+        labour_total = #{labourTotal,jdbcType=DOUBLE},
+      </if>
+      <if test="expertTotal != null" >
+        expert_total = #{expertTotal,jdbcType=DOUBLE},
+      </if>
+      <if test="datumTotal != null" >
+        datum_total = #{datumTotal,jdbcType=DOUBLE},
+      </if>
+      <if test="printTotal != null" >
+        print_total = #{printTotal,jdbcType=DOUBLE},
+      </if>
+      <if test="otherTotal != null" >
+        other_total = #{otherTotal,jdbcType=DOUBLE},
+      </if>
+      <if test="manageTotal != null" >
+        manage_total = #{manageTotal,jdbcType=DOUBLE},
+      </if>
+      <if test="postTotal != null" >
+        post_total = #{postTotal,jdbcType=DOUBLE},
+      </if>
+      <if test="auditStatusId != null" >
+        audit_status_id = #{auditStatusId,jdbcType=INTEGER},
+      </if>
+      <if test="auditPersonId1 != null" >
+        audit_person_id1 = #{auditPersonId1,jdbcType=VARCHAR},
+      </if>
+      <if test="auditPoinion1 != null" >
+        audit_poinion1 = #{auditPoinion1,jdbcType=VARCHAR},
+      </if>
+      <if test="auditPersonId2 != null" >
+        audit_person_id2 = #{auditPersonId2,jdbcType=VARCHAR},
+      </if>
+      <if test="auditPoinion2 != null" >
+        audit_poinion2 = #{auditPoinion2,jdbcType=VARCHAR},
+      </if>
+      <if test="insertTime != null" >
+        insert_time = #{insertTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastTime != null" >
+        last_time = #{lastTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where budget_id = #{budgetId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hebeu.keyan.po.BudgetAdjust" >
+    update budget_adjust
+    set project_id = #{projectId,jdbcType=VARCHAR},
+      publish_total = #{publishTotal,jdbcType=DOUBLE},
+      materials_total = #{materialsTotal,jdbcType=DOUBLE},
+      test_total = #{testTotal,jdbcType=DOUBLE},
+      fuel_total = #{fuelTotal,jdbcType=DOUBLE},
+      travel_total = #{travelTotal,jdbcType=DOUBLE},
+      meet_total = #{meetTotal,jdbcType=DOUBLE},
+      international_total = #{internationalTotal,jdbcType=DOUBLE},
+      facility_total = #{facilityTotal,jdbcType=DOUBLE},
+      labour_total = #{labourTotal,jdbcType=DOUBLE},
+      expert_total = #{expertTotal,jdbcType=DOUBLE},
+      datum_total = #{datumTotal,jdbcType=DOUBLE},
+      print_total = #{printTotal,jdbcType=DOUBLE},
+      other_total = #{otherTotal,jdbcType=DOUBLE},
+      manage_total = #{manageTotal,jdbcType=DOUBLE},
+      post_total = #{postTotal,jdbcType=DOUBLE},
+      audit_status_id = #{auditStatusId,jdbcType=INTEGER},
+      audit_person_id1 = #{auditPersonId1,jdbcType=VARCHAR},
+      audit_poinion1 = #{auditPoinion1,jdbcType=VARCHAR},
+      audit_person_id2 = #{auditPersonId2,jdbcType=VARCHAR},
+      audit_poinion2 = #{auditPoinion2,jdbcType=VARCHAR},
+      insert_time = #{insertTime,jdbcType=TIMESTAMP},
+      last_time = #{lastTime,jdbcType=TIMESTAMP}
+    where budget_id = #{budgetId,jdbcType=INTEGER}
+  </update>
+</mapper>

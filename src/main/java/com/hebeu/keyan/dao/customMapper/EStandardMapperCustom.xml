@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hebeu.keyan.dao.customMapper.EStandardMapperCustom">
+
+    <!--根据工号查询标准管理-->
+    <select id="selectStandardByWorkNum" resultType="com.hebeu.keyan.po.customPO.EStandardCustom">
+        SELECT v.*,r.*,c.college_name
+        FROM view_standard v
+        LEFT JOIN r_person_project_result r
+        ON v.standard_id = r.id
+        LEFT JOIN e_college c
+        ON r.college_id = c.college_id
+        WHERE work_num = #{workNum}
+    </select>
+
+    <!--根据标管理的编号查询标准管理-->
+    <select id="selectStandardResultInfoById" resultType="com.hebeu.keyan.po.customPO.EStandardCustom">
+        SELECT *
+        FROM view_standard s
+        WHERE s.standard_id = #{standardId}
+    </select>
+
+    <!--查询指定标准管理编号的人员-->
+    <select id="selectPersonListByStandId" resultType="com.hebeu.keyan.vo.PersonListVO">
+        SELECT r.*
+        FROM r_person_project_result r
+        WHERE r.id = #{standardId}
+    </select>
+</mapper>

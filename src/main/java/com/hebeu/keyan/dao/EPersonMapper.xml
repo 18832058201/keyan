@@ -1,0 +1,829 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hebeu.keyan.dao.EPersonMapper" >
+  <resultMap id="BaseResultMap" type="com.hebeu.keyan.po.EPerson" >
+    <id column="work_num" property="workNum" jdbcType="VARCHAR" />
+    <result column="work_name" property="workName" jdbcType="VARCHAR" />
+    <result column="sex" property="sex" jdbcType="VARCHAR" />
+    <result column="birthday" property="birthday" jdbcType="TIMESTAMP" />
+    <result column="photo" property="photo" jdbcType="VARCHAR" />
+    <result column="subject_type_id" property="subjectTypeId" jdbcType="INTEGER" />
+    <result column="title_type_id" property="titleTypeId" jdbcType="INTEGER" />
+    <result column="title_level_id" property="titleLevelId" jdbcType="INTEGER" />
+    <result column="education_id" property="educationId" jdbcType="INTEGER" />
+    <result column="degree_id" property="degreeId" jdbcType="INTEGER" />
+    <result column="subject_first_id" property="subjectFirstId" jdbcType="INTEGER" />
+    <result column="subject_second_id" property="subjectSecondId" jdbcType="INTEGER" />
+    <result column="subject_third_id" property="subjectThirdId" jdbcType="INTEGER" />
+    <result column="college_id1" property="collegeId1" jdbcType="INTEGER" />
+    <result column="department_id1" property="departmentId1" jdbcType="INTEGER" />
+    <result column="college_id2" property="collegeId2" jdbcType="INTEGER" />
+    <result column="department_id2" property="departmentId2" jdbcType="INTEGER" />
+    <result column="college_id3" property="collegeId3" jdbcType="INTEGER" />
+    <result column="job_status_id" property="jobStatusId" jdbcType="INTEGER" />
+    <result column="duty_id" property="dutyId" jdbcType="INTEGER" />
+    <result column="id_card" property="idCard" jdbcType="VARCHAR" />
+    <result column="email" property="email" jdbcType="VARCHAR" />
+    <result column="research_area" property="researchArea" jdbcType="VARCHAR" />
+    <result column="post_type_id" property="postTypeId" jdbcType="INTEGER" />
+    <result column="post_level_id" property="postLevelId" jdbcType="INTEGER" />
+    <result column="administrative_duties" property="administrativeDuties" jdbcType="VARCHAR" />
+    <result column="time_of_job" property="timeOfJob" jdbcType="TIMESTAMP" />
+    <result column="country_id" property="countryId" jdbcType="INTEGER" />
+    <result column="nation_id" property="nationId" jdbcType="INTEGER" />
+    <result column="postcode" property="postcode" jdbcType="VARCHAR" />
+    <result column="phone" property="phone" jdbcType="VARCHAR" />
+    <result column="office_tel" property="officeTel" jdbcType="VARCHAR" />
+    <result column="office_fax" property="officeFax" jdbcType="VARCHAR" />
+    <result column="tutor_type_id" property="tutorTypeId" jdbcType="INTEGER" />
+    <result column="foreign_language_id1" property="foreignLanguageId1" jdbcType="INTEGER" />
+    <result column="language_level_id1" property="languageLevelId1" jdbcType="INTEGER" />
+    <result column="foreign_language_id2" property="foreignLanguageId2" jdbcType="INTEGER" />
+    <result column="language_level_id2" property="languageLevelId2" jdbcType="INTEGER" />
+    <result column="learning_situation" property="learningSituation" jdbcType="VARCHAR" />
+    <result column="part_time_academic" property="partTimeAcademic" jdbcType="VARCHAR" />
+    <result column="academic_speciality" property="academicSpeciality" jdbcType="VARCHAR" />
+    <result column="honorary_title" property="honoraryTitle" jdbcType="VARCHAR" />
+    <result column="platform_id" property="platformId" jdbcType="INTEGER" />
+    <result column="information_status" property="informationStatus" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    work_num, work_name, sex, birthday, photo, subject_type_id, title_type_id, title_level_id, 
+    education_id, degree_id, subject_first_id, subject_second_id, subject_third_id, college_id1, 
+    department_id1, college_id2, department_id2, college_id3, job_status_id, duty_id, 
+    id_card, email, research_area, post_type_id, post_level_id, administrative_duties, 
+    time_of_job, country_id, nation_id, postcode, phone, office_tel, office_fax, tutor_type_id, 
+    foreign_language_id1, language_level_id1, foreign_language_id2, language_level_id2, 
+    learning_situation, part_time_academic, academic_speciality, honorary_title, platform_id, 
+    information_status
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.hebeu.keyan.po.EPersonExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from e_person
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from e_person
+    where work_num = #{workNum,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from e_person
+    where work_num = #{workNum,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.hebeu.keyan.po.EPersonExample" >
+    delete from e_person
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.hebeu.keyan.po.EPerson" >
+    insert into e_person (work_num, work_name, sex, 
+      birthday, photo, subject_type_id, 
+      title_type_id, title_level_id, education_id, 
+      degree_id, subject_first_id, subject_second_id, 
+      subject_third_id, college_id1, department_id1, 
+      college_id2, department_id2, college_id3, 
+      job_status_id, duty_id, id_card, 
+      email, research_area, post_type_id, 
+      post_level_id, administrative_duties, time_of_job, 
+      country_id, nation_id, postcode, 
+      phone, office_tel, office_fax, 
+      tutor_type_id, foreign_language_id1, language_level_id1, 
+      foreign_language_id2, language_level_id2, learning_situation, 
+      part_time_academic, academic_speciality, honorary_title, 
+      platform_id, information_status)
+    values (#{workNum,jdbcType=VARCHAR}, #{workName,jdbcType=VARCHAR}, #{sex,jdbcType=VARCHAR}, 
+      #{birthday,jdbcType=TIMESTAMP}, #{photo,jdbcType=VARCHAR}, #{subjectTypeId,jdbcType=INTEGER}, 
+      #{titleTypeId,jdbcType=INTEGER}, #{titleLevelId,jdbcType=INTEGER}, #{educationId,jdbcType=INTEGER}, 
+      #{degreeId,jdbcType=INTEGER}, #{subjectFirstId,jdbcType=INTEGER}, #{subjectSecondId,jdbcType=INTEGER}, 
+      #{subjectThirdId,jdbcType=INTEGER}, #{collegeId1,jdbcType=INTEGER}, #{departmentId1,jdbcType=INTEGER}, 
+      #{collegeId2,jdbcType=INTEGER}, #{departmentId2,jdbcType=INTEGER}, #{collegeId3,jdbcType=INTEGER}, 
+      #{jobStatusId,jdbcType=INTEGER}, #{dutyId,jdbcType=INTEGER}, #{idCard,jdbcType=VARCHAR}, 
+      #{email,jdbcType=VARCHAR}, #{researchArea,jdbcType=VARCHAR}, #{postTypeId,jdbcType=INTEGER}, 
+      #{postLevelId,jdbcType=INTEGER}, #{administrativeDuties,jdbcType=VARCHAR}, #{timeOfJob,jdbcType=TIMESTAMP}, 
+      #{countryId,jdbcType=INTEGER}, #{nationId,jdbcType=INTEGER}, #{postcode,jdbcType=VARCHAR}, 
+      #{phone,jdbcType=VARCHAR}, #{officeTel,jdbcType=VARCHAR}, #{officeFax,jdbcType=VARCHAR}, 
+      #{tutorTypeId,jdbcType=INTEGER}, #{foreignLanguageId1,jdbcType=INTEGER}, #{languageLevelId1,jdbcType=INTEGER}, 
+      #{foreignLanguageId2,jdbcType=INTEGER}, #{languageLevelId2,jdbcType=INTEGER}, #{learningSituation,jdbcType=VARCHAR}, 
+      #{partTimeAcademic,jdbcType=VARCHAR}, #{academicSpeciality,jdbcType=VARCHAR}, #{honoraryTitle,jdbcType=VARCHAR}, 
+      #{platformId,jdbcType=INTEGER}, #{informationStatus,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.hebeu.keyan.po.EPerson" >
+    insert into e_person
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="workNum != null" >
+        work_num,
+      </if>
+      <if test="workName != null" >
+        work_name,
+      </if>
+      <if test="sex != null" >
+        sex,
+      </if>
+      <if test="birthday != null" >
+        birthday,
+      </if>
+      <if test="photo != null" >
+        photo,
+      </if>
+      <if test="subjectTypeId != null" >
+        subject_type_id,
+      </if>
+      <if test="titleTypeId != null" >
+        title_type_id,
+      </if>
+      <if test="titleLevelId != null" >
+        title_level_id,
+      </if>
+      <if test="educationId != null" >
+        education_id,
+      </if>
+      <if test="degreeId != null" >
+        degree_id,
+      </if>
+      <if test="subjectFirstId != null" >
+        subject_first_id,
+      </if>
+      <if test="subjectSecondId != null" >
+        subject_second_id,
+      </if>
+      <if test="subjectThirdId != null" >
+        subject_third_id,
+      </if>
+      <if test="collegeId1 != null" >
+        college_id1,
+      </if>
+      <if test="departmentId1 != null" >
+        department_id1,
+      </if>
+      <if test="collegeId2 != null" >
+        college_id2,
+      </if>
+      <if test="departmentId2 != null" >
+        department_id2,
+      </if>
+      <if test="collegeId3 != null" >
+        college_id3,
+      </if>
+      <if test="jobStatusId != null" >
+        job_status_id,
+      </if>
+      <if test="dutyId != null" >
+        duty_id,
+      </if>
+      <if test="idCard != null" >
+        id_card,
+      </if>
+      <if test="email != null" >
+        email,
+      </if>
+      <if test="researchArea != null" >
+        research_area,
+      </if>
+      <if test="postTypeId != null" >
+        post_type_id,
+      </if>
+      <if test="postLevelId != null" >
+        post_level_id,
+      </if>
+      <if test="administrativeDuties != null" >
+        administrative_duties,
+      </if>
+      <if test="timeOfJob != null" >
+        time_of_job,
+      </if>
+      <if test="countryId != null" >
+        country_id,
+      </if>
+      <if test="nationId != null" >
+        nation_id,
+      </if>
+      <if test="postcode != null" >
+        postcode,
+      </if>
+      <if test="phone != null" >
+        phone,
+      </if>
+      <if test="officeTel != null" >
+        office_tel,
+      </if>
+      <if test="officeFax != null" >
+        office_fax,
+      </if>
+      <if test="tutorTypeId != null" >
+        tutor_type_id,
+      </if>
+      <if test="foreignLanguageId1 != null" >
+        foreign_language_id1,
+      </if>
+      <if test="languageLevelId1 != null" >
+        language_level_id1,
+      </if>
+      <if test="foreignLanguageId2 != null" >
+        foreign_language_id2,
+      </if>
+      <if test="languageLevelId2 != null" >
+        language_level_id2,
+      </if>
+      <if test="learningSituation != null" >
+        learning_situation,
+      </if>
+      <if test="partTimeAcademic != null" >
+        part_time_academic,
+      </if>
+      <if test="academicSpeciality != null" >
+        academic_speciality,
+      </if>
+      <if test="honoraryTitle != null" >
+        honorary_title,
+      </if>
+      <if test="platformId != null" >
+        platform_id,
+      </if>
+      <if test="informationStatus != null" >
+        information_status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="workNum != null" >
+        #{workNum,jdbcType=VARCHAR},
+      </if>
+      <if test="workName != null" >
+        #{workName,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null" >
+        #{sex,jdbcType=VARCHAR},
+      </if>
+      <if test="birthday != null" >
+        #{birthday,jdbcType=TIMESTAMP},
+      </if>
+      <if test="photo != null" >
+        #{photo,jdbcType=VARCHAR},
+      </if>
+      <if test="subjectTypeId != null" >
+        #{subjectTypeId,jdbcType=INTEGER},
+      </if>
+      <if test="titleTypeId != null" >
+        #{titleTypeId,jdbcType=INTEGER},
+      </if>
+      <if test="titleLevelId != null" >
+        #{titleLevelId,jdbcType=INTEGER},
+      </if>
+      <if test="educationId != null" >
+        #{educationId,jdbcType=INTEGER},
+      </if>
+      <if test="degreeId != null" >
+        #{degreeId,jdbcType=INTEGER},
+      </if>
+      <if test="subjectFirstId != null" >
+        #{subjectFirstId,jdbcType=INTEGER},
+      </if>
+      <if test="subjectSecondId != null" >
+        #{subjectSecondId,jdbcType=INTEGER},
+      </if>
+      <if test="subjectThirdId != null" >
+        #{subjectThirdId,jdbcType=INTEGER},
+      </if>
+      <if test="collegeId1 != null" >
+        #{collegeId1,jdbcType=INTEGER},
+      </if>
+      <if test="departmentId1 != null" >
+        #{departmentId1,jdbcType=INTEGER},
+      </if>
+      <if test="collegeId2 != null" >
+        #{collegeId2,jdbcType=INTEGER},
+      </if>
+      <if test="departmentId2 != null" >
+        #{departmentId2,jdbcType=INTEGER},
+      </if>
+      <if test="collegeId3 != null" >
+        #{collegeId3,jdbcType=INTEGER},
+      </if>
+      <if test="jobStatusId != null" >
+        #{jobStatusId,jdbcType=INTEGER},
+      </if>
+      <if test="dutyId != null" >
+        #{dutyId,jdbcType=INTEGER},
+      </if>
+      <if test="idCard != null" >
+        #{idCard,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="researchArea != null" >
+        #{researchArea,jdbcType=VARCHAR},
+      </if>
+      <if test="postTypeId != null" >
+        #{postTypeId,jdbcType=INTEGER},
+      </if>
+      <if test="postLevelId != null" >
+        #{postLevelId,jdbcType=INTEGER},
+      </if>
+      <if test="administrativeDuties != null" >
+        #{administrativeDuties,jdbcType=VARCHAR},
+      </if>
+      <if test="timeOfJob != null" >
+        #{timeOfJob,jdbcType=TIMESTAMP},
+      </if>
+      <if test="countryId != null" >
+        #{countryId,jdbcType=INTEGER},
+      </if>
+      <if test="nationId != null" >
+        #{nationId,jdbcType=INTEGER},
+      </if>
+      <if test="postcode != null" >
+        #{postcode,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null" >
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="officeTel != null" >
+        #{officeTel,jdbcType=VARCHAR},
+      </if>
+      <if test="officeFax != null" >
+        #{officeFax,jdbcType=VARCHAR},
+      </if>
+      <if test="tutorTypeId != null" >
+        #{tutorTypeId,jdbcType=INTEGER},
+      </if>
+      <if test="foreignLanguageId1 != null" >
+        #{foreignLanguageId1,jdbcType=INTEGER},
+      </if>
+      <if test="languageLevelId1 != null" >
+        #{languageLevelId1,jdbcType=INTEGER},
+      </if>
+      <if test="foreignLanguageId2 != null" >
+        #{foreignLanguageId2,jdbcType=INTEGER},
+      </if>
+      <if test="languageLevelId2 != null" >
+        #{languageLevelId2,jdbcType=INTEGER},
+      </if>
+      <if test="learningSituation != null" >
+        #{learningSituation,jdbcType=VARCHAR},
+      </if>
+      <if test="partTimeAcademic != null" >
+        #{partTimeAcademic,jdbcType=VARCHAR},
+      </if>
+      <if test="academicSpeciality != null" >
+        #{academicSpeciality,jdbcType=VARCHAR},
+      </if>
+      <if test="honoraryTitle != null" >
+        #{honoraryTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="platformId != null" >
+        #{platformId,jdbcType=INTEGER},
+      </if>
+      <if test="informationStatus != null" >
+        #{informationStatus,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.hebeu.keyan.po.EPersonExample" resultType="java.lang.Integer" >
+    select count(*) from e_person
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update e_person
+    <set >
+      <if test="record.workNum != null" >
+        work_num = #{record.workNum,jdbcType=VARCHAR},
+      </if>
+      <if test="record.workName != null" >
+        work_name = #{record.workName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sex != null" >
+        sex = #{record.sex,jdbcType=VARCHAR},
+      </if>
+      <if test="record.birthday != null" >
+        birthday = #{record.birthday,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.photo != null" >
+        photo = #{record.photo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.subjectTypeId != null" >
+        subject_type_id = #{record.subjectTypeId,jdbcType=INTEGER},
+      </if>
+      <if test="record.titleTypeId != null" >
+        title_type_id = #{record.titleTypeId,jdbcType=INTEGER},
+      </if>
+      <if test="record.titleLevelId != null" >
+        title_level_id = #{record.titleLevelId,jdbcType=INTEGER},
+      </if>
+      <if test="record.educationId != null" >
+        education_id = #{record.educationId,jdbcType=INTEGER},
+      </if>
+      <if test="record.degreeId != null" >
+        degree_id = #{record.degreeId,jdbcType=INTEGER},
+      </if>
+      <if test="record.subjectFirstId != null" >
+        subject_first_id = #{record.subjectFirstId,jdbcType=INTEGER},
+      </if>
+      <if test="record.subjectSecondId != null" >
+        subject_second_id = #{record.subjectSecondId,jdbcType=INTEGER},
+      </if>
+      <if test="record.subjectThirdId != null" >
+        subject_third_id = #{record.subjectThirdId,jdbcType=INTEGER},
+      </if>
+      <if test="record.collegeId1 != null" >
+        college_id1 = #{record.collegeId1,jdbcType=INTEGER},
+      </if>
+      <if test="record.departmentId1 != null" >
+        department_id1 = #{record.departmentId1,jdbcType=INTEGER},
+      </if>
+      <if test="record.collegeId2 != null" >
+        college_id2 = #{record.collegeId2,jdbcType=INTEGER},
+      </if>
+      <if test="record.departmentId2 != null" >
+        department_id2 = #{record.departmentId2,jdbcType=INTEGER},
+      </if>
+      <if test="record.collegeId3 != null" >
+        college_id3 = #{record.collegeId3,jdbcType=INTEGER},
+      </if>
+      <if test="record.jobStatusId != null" >
+        job_status_id = #{record.jobStatusId,jdbcType=INTEGER},
+      </if>
+      <if test="record.dutyId != null" >
+        duty_id = #{record.dutyId,jdbcType=INTEGER},
+      </if>
+      <if test="record.idCard != null" >
+        id_card = #{record.idCard,jdbcType=VARCHAR},
+      </if>
+      <if test="record.email != null" >
+        email = #{record.email,jdbcType=VARCHAR},
+      </if>
+      <if test="record.researchArea != null" >
+        research_area = #{record.researchArea,jdbcType=VARCHAR},
+      </if>
+      <if test="record.postTypeId != null" >
+        post_type_id = #{record.postTypeId,jdbcType=INTEGER},
+      </if>
+      <if test="record.postLevelId != null" >
+        post_level_id = #{record.postLevelId,jdbcType=INTEGER},
+      </if>
+      <if test="record.administrativeDuties != null" >
+        administrative_duties = #{record.administrativeDuties,jdbcType=VARCHAR},
+      </if>
+      <if test="record.timeOfJob != null" >
+        time_of_job = #{record.timeOfJob,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.countryId != null" >
+        country_id = #{record.countryId,jdbcType=INTEGER},
+      </if>
+      <if test="record.nationId != null" >
+        nation_id = #{record.nationId,jdbcType=INTEGER},
+      </if>
+      <if test="record.postcode != null" >
+        postcode = #{record.postcode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.phone != null" >
+        phone = #{record.phone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.officeTel != null" >
+        office_tel = #{record.officeTel,jdbcType=VARCHAR},
+      </if>
+      <if test="record.officeFax != null" >
+        office_fax = #{record.officeFax,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tutorTypeId != null" >
+        tutor_type_id = #{record.tutorTypeId,jdbcType=INTEGER},
+      </if>
+      <if test="record.foreignLanguageId1 != null" >
+        foreign_language_id1 = #{record.foreignLanguageId1,jdbcType=INTEGER},
+      </if>
+      <if test="record.languageLevelId1 != null" >
+        language_level_id1 = #{record.languageLevelId1,jdbcType=INTEGER},
+      </if>
+      <if test="record.foreignLanguageId2 != null" >
+        foreign_language_id2 = #{record.foreignLanguageId2,jdbcType=INTEGER},
+      </if>
+      <if test="record.languageLevelId2 != null" >
+        language_level_id2 = #{record.languageLevelId2,jdbcType=INTEGER},
+      </if>
+      <if test="record.learningSituation != null" >
+        learning_situation = #{record.learningSituation,jdbcType=VARCHAR},
+      </if>
+      <if test="record.partTimeAcademic != null" >
+        part_time_academic = #{record.partTimeAcademic,jdbcType=VARCHAR},
+      </if>
+      <if test="record.academicSpeciality != null" >
+        academic_speciality = #{record.academicSpeciality,jdbcType=VARCHAR},
+      </if>
+      <if test="record.honoraryTitle != null" >
+        honorary_title = #{record.honoraryTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="record.platformId != null" >
+        platform_id = #{record.platformId,jdbcType=INTEGER},
+      </if>
+      <if test="record.informationStatus != null" >
+        information_status = #{record.informationStatus,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update e_person
+    set work_num = #{record.workNum,jdbcType=VARCHAR},
+      work_name = #{record.workName,jdbcType=VARCHAR},
+      sex = #{record.sex,jdbcType=VARCHAR},
+      birthday = #{record.birthday,jdbcType=TIMESTAMP},
+      photo = #{record.photo,jdbcType=VARCHAR},
+      subject_type_id = #{record.subjectTypeId,jdbcType=INTEGER},
+      title_type_id = #{record.titleTypeId,jdbcType=INTEGER},
+      title_level_id = #{record.titleLevelId,jdbcType=INTEGER},
+      education_id = #{record.educationId,jdbcType=INTEGER},
+      degree_id = #{record.degreeId,jdbcType=INTEGER},
+      subject_first_id = #{record.subjectFirstId,jdbcType=INTEGER},
+      subject_second_id = #{record.subjectSecondId,jdbcType=INTEGER},
+      subject_third_id = #{record.subjectThirdId,jdbcType=INTEGER},
+      college_id1 = #{record.collegeId1,jdbcType=INTEGER},
+      department_id1 = #{record.departmentId1,jdbcType=INTEGER},
+      college_id2 = #{record.collegeId2,jdbcType=INTEGER},
+      department_id2 = #{record.departmentId2,jdbcType=INTEGER},
+      college_id3 = #{record.collegeId3,jdbcType=INTEGER},
+      job_status_id = #{record.jobStatusId,jdbcType=INTEGER},
+      duty_id = #{record.dutyId,jdbcType=INTEGER},
+      id_card = #{record.idCard,jdbcType=VARCHAR},
+      email = #{record.email,jdbcType=VARCHAR},
+      research_area = #{record.researchArea,jdbcType=VARCHAR},
+      post_type_id = #{record.postTypeId,jdbcType=INTEGER},
+      post_level_id = #{record.postLevelId,jdbcType=INTEGER},
+      administrative_duties = #{record.administrativeDuties,jdbcType=VARCHAR},
+      time_of_job = #{record.timeOfJob,jdbcType=TIMESTAMP},
+      country_id = #{record.countryId,jdbcType=INTEGER},
+      nation_id = #{record.nationId,jdbcType=INTEGER},
+      postcode = #{record.postcode,jdbcType=VARCHAR},
+      phone = #{record.phone,jdbcType=VARCHAR},
+      office_tel = #{record.officeTel,jdbcType=VARCHAR},
+      office_fax = #{record.officeFax,jdbcType=VARCHAR},
+      tutor_type_id = #{record.tutorTypeId,jdbcType=INTEGER},
+      foreign_language_id1 = #{record.foreignLanguageId1,jdbcType=INTEGER},
+      language_level_id1 = #{record.languageLevelId1,jdbcType=INTEGER},
+      foreign_language_id2 = #{record.foreignLanguageId2,jdbcType=INTEGER},
+      language_level_id2 = #{record.languageLevelId2,jdbcType=INTEGER},
+      learning_situation = #{record.learningSituation,jdbcType=VARCHAR},
+      part_time_academic = #{record.partTimeAcademic,jdbcType=VARCHAR},
+      academic_speciality = #{record.academicSpeciality,jdbcType=VARCHAR},
+      honorary_title = #{record.honoraryTitle,jdbcType=VARCHAR},
+      platform_id = #{record.platformId,jdbcType=INTEGER},
+      information_status = #{record.informationStatus,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hebeu.keyan.po.EPerson" >
+    update e_person
+    <set >
+      <if test="workName != null" >
+        work_name = #{workName,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null" >
+        sex = #{sex,jdbcType=VARCHAR},
+      </if>
+      <if test="birthday != null" >
+        birthday = #{birthday,jdbcType=TIMESTAMP},
+      </if>
+      <if test="photo != null" >
+        photo = #{photo,jdbcType=VARCHAR},
+      </if>
+      <if test="subjectTypeId != null" >
+        subject_type_id = #{subjectTypeId,jdbcType=INTEGER},
+      </if>
+      <if test="titleTypeId != null" >
+        title_type_id = #{titleTypeId,jdbcType=INTEGER},
+      </if>
+      <if test="titleLevelId != null" >
+        title_level_id = #{titleLevelId,jdbcType=INTEGER},
+      </if>
+      <if test="educationId != null" >
+        education_id = #{educationId,jdbcType=INTEGER},
+      </if>
+      <if test="degreeId != null" >
+        degree_id = #{degreeId,jdbcType=INTEGER},
+      </if>
+      <if test="subjectFirstId != null" >
+        subject_first_id = #{subjectFirstId,jdbcType=INTEGER},
+      </if>
+      <if test="subjectSecondId != null" >
+        subject_second_id = #{subjectSecondId,jdbcType=INTEGER},
+      </if>
+      <if test="subjectThirdId != null" >
+        subject_third_id = #{subjectThirdId,jdbcType=INTEGER},
+      </if>
+      <if test="collegeId1 != null" >
+        college_id1 = #{collegeId1,jdbcType=INTEGER},
+      </if>
+      <if test="departmentId1 != null" >
+        department_id1 = #{departmentId1,jdbcType=INTEGER},
+      </if>
+      <if test="collegeId2 != null" >
+        college_id2 = #{collegeId2,jdbcType=INTEGER},
+      </if>
+      <if test="departmentId2 != null" >
+        department_id2 = #{departmentId2,jdbcType=INTEGER},
+      </if>
+      <if test="collegeId3 != null" >
+        college_id3 = #{collegeId3,jdbcType=INTEGER},
+      </if>
+      <if test="jobStatusId != null" >
+        job_status_id = #{jobStatusId,jdbcType=INTEGER},
+      </if>
+      <if test="dutyId != null" >
+        duty_id = #{dutyId,jdbcType=INTEGER},
+      </if>
+      <if test="idCard != null" >
+        id_card = #{idCard,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        email = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="researchArea != null" >
+        research_area = #{researchArea,jdbcType=VARCHAR},
+      </if>
+      <if test="postTypeId != null" >
+        post_type_id = #{postTypeId,jdbcType=INTEGER},
+      </if>
+      <if test="postLevelId != null" >
+        post_level_id = #{postLevelId,jdbcType=INTEGER},
+      </if>
+      <if test="administrativeDuties != null" >
+        administrative_duties = #{administrativeDuties,jdbcType=VARCHAR},
+      </if>
+      <if test="timeOfJob != null" >
+        time_of_job = #{timeOfJob,jdbcType=TIMESTAMP},
+      </if>
+      <if test="countryId != null" >
+        country_id = #{countryId,jdbcType=INTEGER},
+      </if>
+      <if test="nationId != null" >
+        nation_id = #{nationId,jdbcType=INTEGER},
+      </if>
+      <if test="postcode != null" >
+        postcode = #{postcode,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null" >
+        phone = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="officeTel != null" >
+        office_tel = #{officeTel,jdbcType=VARCHAR},
+      </if>
+      <if test="officeFax != null" >
+        office_fax = #{officeFax,jdbcType=VARCHAR},
+      </if>
+      <if test="tutorTypeId != null" >
+        tutor_type_id = #{tutorTypeId,jdbcType=INTEGER},
+      </if>
+      <if test="foreignLanguageId1 != null" >
+        foreign_language_id1 = #{foreignLanguageId1,jdbcType=INTEGER},
+      </if>
+      <if test="languageLevelId1 != null" >
+        language_level_id1 = #{languageLevelId1,jdbcType=INTEGER},
+      </if>
+      <if test="foreignLanguageId2 != null" >
+        foreign_language_id2 = #{foreignLanguageId2,jdbcType=INTEGER},
+      </if>
+      <if test="languageLevelId2 != null" >
+        language_level_id2 = #{languageLevelId2,jdbcType=INTEGER},
+      </if>
+      <if test="learningSituation != null" >
+        learning_situation = #{learningSituation,jdbcType=VARCHAR},
+      </if>
+      <if test="partTimeAcademic != null" >
+        part_time_academic = #{partTimeAcademic,jdbcType=VARCHAR},
+      </if>
+      <if test="academicSpeciality != null" >
+        academic_speciality = #{academicSpeciality,jdbcType=VARCHAR},
+      </if>
+      <if test="honoraryTitle != null" >
+        honorary_title = #{honoraryTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="platformId != null" >
+        platform_id = #{platformId,jdbcType=INTEGER},
+      </if>
+      <if test="informationStatus != null" >
+        information_status = #{informationStatus,jdbcType=INTEGER},
+      </if>
+    </set>
+    where work_num = #{workNum,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hebeu.keyan.po.EPerson" >
+    update e_person
+    set work_name = #{workName,jdbcType=VARCHAR},
+      sex = #{sex,jdbcType=VARCHAR},
+      birthday = #{birthday,jdbcType=TIMESTAMP},
+      photo = #{photo,jdbcType=VARCHAR},
+      subject_type_id = #{subjectTypeId,jdbcType=INTEGER},
+      title_type_id = #{titleTypeId,jdbcType=INTEGER},
+      title_level_id = #{titleLevelId,jdbcType=INTEGER},
+      education_id = #{educationId,jdbcType=INTEGER},
+      degree_id = #{degreeId,jdbcType=INTEGER},
+      subject_first_id = #{subjectFirstId,jdbcType=INTEGER},
+      subject_second_id = #{subjectSecondId,jdbcType=INTEGER},
+      subject_third_id = #{subjectThirdId,jdbcType=INTEGER},
+      college_id1 = #{collegeId1,jdbcType=INTEGER},
+      department_id1 = #{departmentId1,jdbcType=INTEGER},
+      college_id2 = #{collegeId2,jdbcType=INTEGER},
+      department_id2 = #{departmentId2,jdbcType=INTEGER},
+      college_id3 = #{collegeId3,jdbcType=INTEGER},
+      job_status_id = #{jobStatusId,jdbcType=INTEGER},
+      duty_id = #{dutyId,jdbcType=INTEGER},
+      id_card = #{idCard,jdbcType=VARCHAR},
+      email = #{email,jdbcType=VARCHAR},
+      research_area = #{researchArea,jdbcType=VARCHAR},
+      post_type_id = #{postTypeId,jdbcType=INTEGER},
+      post_level_id = #{postLevelId,jdbcType=INTEGER},
+      administrative_duties = #{administrativeDuties,jdbcType=VARCHAR},
+      time_of_job = #{timeOfJob,jdbcType=TIMESTAMP},
+      country_id = #{countryId,jdbcType=INTEGER},
+      nation_id = #{nationId,jdbcType=INTEGER},
+      postcode = #{postcode,jdbcType=VARCHAR},
+      phone = #{phone,jdbcType=VARCHAR},
+      office_tel = #{officeTel,jdbcType=VARCHAR},
+      office_fax = #{officeFax,jdbcType=VARCHAR},
+      tutor_type_id = #{tutorTypeId,jdbcType=INTEGER},
+      foreign_language_id1 = #{foreignLanguageId1,jdbcType=INTEGER},
+      language_level_id1 = #{languageLevelId1,jdbcType=INTEGER},
+      foreign_language_id2 = #{foreignLanguageId2,jdbcType=INTEGER},
+      language_level_id2 = #{languageLevelId2,jdbcType=INTEGER},
+      learning_situation = #{learningSituation,jdbcType=VARCHAR},
+      part_time_academic = #{partTimeAcademic,jdbcType=VARCHAR},
+      academic_speciality = #{academicSpeciality,jdbcType=VARCHAR},
+      honorary_title = #{honoraryTitle,jdbcType=VARCHAR},
+      platform_id = #{platformId,jdbcType=INTEGER},
+      information_status = #{informationStatus,jdbcType=INTEGER}
+    where work_num = #{workNum,jdbcType=VARCHAR}
+  </update>
+</mapper>

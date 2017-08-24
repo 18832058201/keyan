@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hebeu.keyan.dao.customMapper.SysPermissionMapperCustom">
+
+    <!--查询所有的人员-->
+    <select id="selectPersonList" resultType="com.hebeu.keyan.po.customPO.UserInfoCustom">
+         SELECT v.work_name,v.work_num,v.college2_name FROM view_e_person v ORDER BY CONVERT (v.work_name USING gbk) ASC
+    </select>
+
+    <!--通过用户工号查询用户权限-->
+    <select id="findSysPermissionByUserId" resultType="com.hebeu.keyan.po.SysPermission" parameterType="java.lang.String">
+        SELECT sys_permission.* FROM sys_permission
+         WHERE sys_permission.permission_id IN (
+         SELECT sys_role_permission.permission_id FROM sys_role_permission WHERE
+          sys_role_permission.role_id IN (SELECT sys_user_role.role_id FROM sys_user_role WHERE
+          sys_user_role.user_id = #{userId}
+          )
+         )
+    </select>
+
+    <!--通过用户工号查询用户的角色信息-->
+    <select id="selectSysRoleByUserId" resultType="com.hebeu.keyan.po.SysRole">
+        SELECT sys_role.* FROM sys_role
+        WHERE sys_role.role_id IN (
+            SELECT sys_user_role.role_id FROM sys_user_role WHERE sys_user_role.user_id = #{userId}
+        )
+    </select>
+
+    <select id="selectAllRole" resultType="com.hebeu.keyan.po.SysRole">
+      SELECT * FROM sys_role WHERE is_effective = 1 ORDER BY role_id ASC
+    </select>
+</mapper>

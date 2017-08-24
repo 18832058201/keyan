@@ -1,0 +1,347 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hebeu.keyan.dao.customMapper.AuditMapper">
+
+    <!--查询学院对应审核状态的项目集合-->
+    <select id="selectCollegeLengthWaysProjectList" resultType="com.hebeu.keyan.po.customPO.EProjectCustom">
+        SELECT v.* FROM view_project v WHERE v.project_id IN
+        (SELECT r.id FROM r_person_project_result r WHERE r.college_id = #{collegeId} AND r.type = 1 AND r.is_leader = 1)
+#             1表示查询待审核
+            <if test="auditType==1">
+                AND v.audit_status_id = 2
+            </if>
+#             2表示查询已审核
+            <if test="auditType==2">
+                AND v.audit_status_id IN (3,4,5)
+            </if>
+#             3表示查询全部
+            <if test="auditType==3">
+                AND v.audit_status_id IN (2,3,4,5)
+            </if>
+    </select>
+
+    <!--查询所有的项目-->
+    <select id="selectAllLengthWaysProjectList" resultType="com.hebeu.keyan.po.customPO.EProjectCustom">
+        SELECT v.* FROM view_project v
+        <where>
+#             1表示查询待审核
+            <if test="auditType==1">
+                v.audit_status_id IN (2,3)
+            </if>
+#             2表示查询已审核
+            <if test="auditType==2">
+                v.audit_status_id IN (5,6)
+            </if>
+#             3表示查询全部
+            <if test="auditType==3">
+                v.audit_status_id IN (2,3,5,6)
+            </if>
+        </where>
+    </select>
+
+
+
+    <!--查询学院对应审核状态的鉴定成果集合-->
+    <select id="selectCollegeIdentifyResultList" resultType="com.hebeu.keyan.po.customPO.EIdentifyCustom">
+        SELECT v.* FROM view_identify v WHERE v.identify_id IN
+        (SELECT r.id FROM r_person_project_result r WHERE r.college_id = #{collegeId} AND r.type = 11 AND r.is_leader = 1)
+        #             1表示查询待审核
+        <if test="auditType==1">
+            AND v.audit_status_id = 2
+        </if>
+        #             2表示查询已审核
+        <if test="auditType==2">
+            AND v.audit_status_id IN (3,4,5)
+        </if>
+        #             3表示查询全部
+        <if test="auditType==3">
+            AND v.audit_status_id IN (2,3,4,5)
+        </if>
+    </select>
+
+    <!--查询所有的鉴定成果-->
+    <select id="selectAllIdentifyResultList" resultType="com.hebeu.keyan.po.customPO.EIdentifyCustom">
+        SELECT v.* FROM view_identify v
+        <where>
+            #             1表示查询待审核
+            <if test="auditType==1">
+                v.audit_status_id IN (2,3)
+            </if>
+            #             2表示查询已审核
+            <if test="auditType==2">
+                v.audit_status_id IN (5,6)
+            </if>
+            #             3表示查询全部
+            <if test="auditType==3">
+                v.audit_status_id IN (2,3,5,6)
+            </if>
+        </where>
+    </select>
+
+
+    <!--查询学院对应审核状态的获奖成果集合-->
+    <select id="selectCollegeRewardResultList" resultType="com.hebeu.keyan.po.customPO.ERewardCustom">
+        SELECT v.* FROM view_reward v WHERE v.reward_id IN
+        (SELECT r.id FROM r_person_project_result r WHERE r.college_id = #{collegeId} AND r.type = 12 AND r.is_leader = 1)
+        #             1表示查询待审核
+        <if test="auditType==1">
+            AND v.audit_status_id = 2
+        </if>
+        #             2表示查询已审核
+        <if test="auditType==2">
+            AND v.audit_status_id IN (3,4,5)
+        </if>
+        #             3表示查询全部
+        <if test="auditType==3">
+            AND v.audit_status_id IN (2,3,4,5)
+        </if>
+    </select>
+
+    <!--查询所有的获奖成果-->
+    <select id="selectAllRewardResultList" resultType="com.hebeu.keyan.po.customPO.ERewardCustom">
+        SELECT v.* FROM view_reward v
+        <where>
+            #             1表示查询待审核
+            <if test="auditType==1">
+                v.audit_status_id IN (2,3)
+            </if>
+            #             2表示查询已审核
+            <if test="auditType==2">
+                v.audit_status_id IN (5,6)
+            </if>
+            #             3表示查询全部
+            <if test="auditType==3">
+                v.audit_status_id IN (2,3,5,6)
+            </if>
+        </where>
+    </select>
+
+
+
+    <!--查询学院对应审核状态的专利成果集合-->
+    <select id="selectCollegePatentResultList" resultType="com.hebeu.keyan.po.customPO.EPatentCustom">
+        SELECT v.* FROM view_patent v WHERE v.patent_id IN
+        (SELECT r.id FROM r_person_project_result r WHERE r.college_id = #{collegeId} AND r.type = 13 AND r.is_leader = 1)
+        #             1表示查询待审核
+        <if test="auditType==1">
+            AND v.audit_status_id = 2
+        </if>
+        #             2表示查询已审核
+        <if test="auditType==2">
+            AND v.audit_status_id IN (3,4,5)
+        </if>
+        #             3表示查询全部
+        <if test="auditType==3">
+            AND v.audit_status_id IN (2,3,4,5)
+        </if>
+    </select>
+
+    <!--查询所有的专利成果-->
+    <select id="selectAllPatentResultList" resultType="com.hebeu.keyan.po.customPO.EPatentCustom">
+        SELECT v.* FROM view_patent v
+        <where>
+            #             1表示查询待审核
+            <if test="auditType==1">
+                v.audit_status_id IN (2,3)
+            </if>
+            #             2表示查询已审核
+            <if test="auditType==2">
+                v.audit_status_id IN (5,6)
+            </if>
+            #             3表示查询全部
+            <if test="auditType==3">
+                v.audit_status_id IN (2,3,5,6)
+            </if>
+        </where>
+    </select>
+
+
+    <!--查询学院对应审核状态的论文成果集合-->
+    <select id="selectCollegePaperResultList" resultType="com.hebeu.keyan.po.customPO.EPaperCustom">
+        SELECT v.* FROM view_paper v WHERE v.paper_id IN
+        (SELECT r.id FROM r_person_project_result r WHERE r.college_id = #{collegeId} AND r.type = 14 AND r.is_leader = 1)
+        #             1表示查询待审核
+        <if test="auditType==1">
+            AND v.audit_status_id = 2
+        </if>
+        #             2表示查询已审核
+        <if test="auditType==2">
+            AND v.audit_status_id IN (3,4,5)
+        </if>
+        #             3表示查询全部
+        <if test="auditType==3">
+            AND v.audit_status_id IN (2,3,4,5)
+        </if>
+    </select>
+
+    <!--查询所有的论文成果-->
+    <select id="selectAllPaperResultList" resultType="com.hebeu.keyan.po.customPO.EPaperCustom">
+        SELECT v.* FROM view_paper v
+        <where>
+            #             1表示查询待审核
+            <if test="auditType==1">
+                v.audit_status_id IN (2,3)
+            </if>
+            #             2表示查询已审核
+            <if test="auditType==2">
+                v.audit_status_id IN (5,6)
+            </if>
+            #             3表示查询全部
+            <if test="auditType==3">
+                v.audit_status_id IN (2,3,5,6)
+            </if>
+        </where>
+    </select>
+
+
+    <!--查询学院对应审核状态的软件成果集合-->
+    <select id="selectCollegeSoftwareResultList" resultType="com.hebeu.keyan.po.customPO.ESoftwareCustom">
+        SELECT v.* FROM view_software v WHERE v.software_id IN
+        (SELECT r.id FROM r_person_project_result r WHERE r.college_id = #{collegeId} AND r.type = 15 AND r.is_leader = 1)
+        #             1表示查询待审核
+        <if test="auditType==1">
+            AND v.audit_status_id = 2
+        </if>
+        #             2表示查询已审核
+        <if test="auditType==2">
+            AND v.audit_status_id IN (3,4,5)
+        </if>
+        #             3表示查询全部
+        <if test="auditType==3">
+            AND v.audit_status_id IN (2,3,4,5)
+        </if>
+    </select>
+
+    <!--查询所有的软件成果-->
+    <select id="selectAllSoftwareResultList" resultType="com.hebeu.keyan.po.customPO.ESoftwareCustom">
+        SELECT v.* FROM view_software v
+        <where>
+            #             1表示查询待审核
+            <if test="auditType==1">
+                v.audit_status_id IN (2,3)
+            </if>
+            #             2表示查询已审核
+            <if test="auditType==2">
+                v.audit_status_id IN (5,6)
+            </if>
+            #             3表示查询全部
+            <if test="auditType==3">
+                v.audit_status_id IN (2,3,5,6)
+            </if>
+        </where>
+    </select>
+
+    <!--查询学院对应审核状态的植物新品种成果集合-->
+    <select id="selectCollegePlantResultList" resultType="com.hebeu.keyan.po.customPO.EPlantCustom">
+        SELECT v.* FROM view_plant v WHERE v.plant_id IN
+        (SELECT r.id FROM r_person_project_result r WHERE r.college_id = #{collegeId} AND r.type = 16 AND r.is_leader = 1)
+        #             1表示查询待审核
+        <if test="auditType==1">
+            AND v.audit_status_id = 2
+        </if>
+        #             2表示查询已审核
+        <if test="auditType==2">
+            AND v.audit_status_id IN (3,4,5)
+        </if>
+        #             3表示查询全部
+        <if test="auditType==3">
+            AND v.audit_status_id IN (2,3,4,5)
+        </if>
+    </select>
+
+    <!--查询所有的植物新品种成果-->
+    <select id="selectAllPlantResultList" resultType="com.hebeu.keyan.po.customPO.EPlantCustom">
+        SELECT v.* FROM view_plant v
+        <where>
+            #             1表示查询待审核
+            <if test="auditType==1">
+                v.audit_status_id IN (2,3)
+            </if>
+            #             2表示查询已审核
+            <if test="auditType==2">
+                v.audit_status_id IN (5,6)
+            </if>
+            #             3表示查询全部
+            <if test="auditType==3">
+                v.audit_status_id IN (2,3,5,6)
+            </if>
+        </where>
+    </select>
+
+
+    <!--查询学院对应审核状态的标准成果集合-->
+    <select id="selectCollegeStandardResultList" resultType="com.hebeu.keyan.po.customPO.EStandardCustom">
+        SELECT v.* FROM view_standard v WHERE v.standard_id IN
+        (SELECT r.id FROM r_person_project_result r WHERE r.college_id = #{collegeId} AND r.type = 17 AND r.is_leader = 1)
+        #             1表示查询待审核
+        <if test="auditType==1">
+            AND v.audit_status_id = 2
+        </if>
+        #             2表示查询已审核
+        <if test="auditType==2">
+            AND v.audit_status_id IN (3,4,5)
+        </if>
+        #             3表示查询全部
+        <if test="auditType==3">
+            AND v.audit_status_id IN (2,3,4,5)
+        </if>
+    </select>
+
+    <!--查询所有的标准管理成果-->
+    <select id="selectAllStandardResultList" resultType="com.hebeu.keyan.po.customPO.EStandardCustom">
+        SELECT v.* FROM view_standard v
+        <where>
+            #             1表示查询待审核
+            <if test="auditType==1">
+                v.audit_status_id IN (2,3)
+            </if>
+            #             2表示查询已审核
+            <if test="auditType==2">
+                v.audit_status_id IN (5,6)
+            </if>
+            #             3表示查询全部
+            <if test="auditType==3">
+                v.audit_status_id IN (2,3,5,6)
+            </if>
+        </where>
+    </select>
+
+    <!--查询学院对应审核状态的著作成果集合-->
+    <select id="selectCollegeBookResultList" resultType="com.hebeu.keyan.po.customPO.EBookCustom">
+        SELECT v.* FROM view_book v WHERE v.book_id IN
+        (SELECT r.id FROM r_person_project_result r WHERE r.college_id = #{collegeId} AND r.type = 18 AND r.is_leader = 1)
+        #             1表示查询待审核
+        <if test="auditType==1">
+            AND v.audit_status_id = 2
+        </if>
+        #             2表示查询已审核
+        <if test="auditType==2">
+            AND v.audit_status_id IN (3,4,5)
+        </if>
+        #             3表示查询全部
+        <if test="auditType==3">
+            AND v.audit_status_id IN (2,3,4,5)
+        </if>
+    </select>
+
+    <!--查询所有的著作管理成果-->
+    <select id="selectAllBookResultList" resultType="com.hebeu.keyan.po.customPO.EBookCustom">
+        SELECT v.* FROM view_book v
+        <where>
+            #             1表示查询待审核
+            <if test="auditType==1">
+                v.audit_status_id IN (2,3)
+            </if>
+            #             2表示查询已审核
+            <if test="auditType==2">
+                v.audit_status_id IN (5,6)
+            </if>
+            #             3表示查询全部
+            <if test="auditType==3">
+                v.audit_status_id IN (2,3,5,6)
+            </if>
+        </where>
+    </select>
+
+
+</mapper>

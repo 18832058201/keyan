@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hebeu.keyan.dao.customMapper.CommonMapper">
+
+    <!--查询相似校内编号中最大的编号-->
+    <select id="findSchoolNumber" resultType="java.lang.String">
+       SELECT max(school_number) FROM ${tableName} WHERE school_number LIKE '%${schoolNumber}%'
+   </select>
+
+    <!--查询申请编号中的最大的编号-->
+    <select id="findMaxApplyId" resultType="java.lang.String">
+        SELECT max(apply_id) FROM manage_money_apply
+    </select>
+
+    <!--查询修改个人信息编号中的最大的编号-->
+    <select id="findMaxPersonEditId" resultType="java.lang.String">
+        SELECT max(person_edit_id) FROM e_person_edit
+    </select>
+
+    <!--查询论文收录编号中的最大的编号-->
+    <select id="findMaxIncludeId" resultType="java.lang.String">
+        SELECT max(include_id) FROM e_include
+    </select>
+
+    <!--通过项目或成果id找到对应的类型编号-->
+    <select id="findTypeById" resultType="java.lang.Integer">
+        SELECT type FROM r_person_project_result WHERE id = #{id} GROUP BY type
+    </select>
+
+    <!--通过workNum查询所有的相关项目（科研处审核通过的）-->
+    <select id="findAllProjectByWorkNum" resultType="com.hebeu.keyan.po.customPO.AllProjectCustom">
+        SELECT v.project_id,v.project_name,v.project_number,v.subject_type_name,v.subject_first_name,v.project_source_name,v.project_type1_name,v.project_type2_name,v.result_form,v.start_date,v.expect_end_date FROM view_project v LEFT JOIN r_person_project_result r ON v.project_id = r.id LEFT JOIN e_college c ON r.college_id = c.college_id WHERE work_num = #{workNum} AND audit_status_id = '5'
+    </select>
+
+    <!--查询所有在职人员的工号、姓名-->
+    <select id="selectAllPeople" resultType="com.hebeu.keyan.po.EPerson">
+        SELECT e_person.work_num,e_person.work_name FROM e_person WHERE e_person.job_status_id='1' ORDER BY CONVERT (e_person.work_name USING gbk)
+    </select>
+
+</mapper>

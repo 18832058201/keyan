@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hebeu.keyan.dao.customMapper.EPersonMapperCustom">
+
+    <!--查询指定工号的人员信息详情-->
+    <select id="selectPersonInfoByWorkNum" resultType="com.hebeu.keyan.po.customPO.EPersonCustom">
+        SELECT * FROM view_e_person v WHERE v.work_num = #{workNum}
+    </select>
+
+    <!--查询指定工号的人员信息暂存详情-->
+    <select id="selectEPersonEditByWorkNum" resultType="com.hebeu.keyan.po.customPO.EPersonEditCustom">
+        SELECT * FROM view_person_edit v WHERE v.work_num = #{workNum} AND v.audit_status_id = 1
+    </select>
+
+    <!--查询指定工号的人员信息暂存详情-->
+    <select id="selectEPersonEditByPersonEditId" resultType="com.hebeu.keyan.po.customPO.EPersonEditCustom">
+        SELECT * FROM view_person_edit v WHERE v.person_edit_id = #{personEditId}
+    </select>
+
+    <!--查询满足PersonInfoSearchVO对象条件的个人信息编辑集合-->
+    <select id="selectEPersonEditCustom" resultType="com.hebeu.keyan.po.customPO.EPersonEditCustom">
+        SELECT * FROM view_person_edit v
+        <if test="personInfoSearchVO.auditType == 1">
+            WHERE
+            (v.college_id2 = #{personInfoSearchVO.collegeId2} AND v.audit_status_id = 1)
+        </if>
+        <if test="personInfoSearchVO.auditType == 2">
+            WHERE
+            (v.college_id2 = #{personInfoSearchVO.collegeId2} AND v.audit_status_id IN (2,3))
+        </if>
+        <if test="personInfoSearchVO.auditType == 3">
+            WHERE
+            (v.college_id2 = #{personInfoSearchVO.collegeId2} AND v.audit_status_id IN (1,2,3))
+        </if>
+    </select>
+
+</mapper>

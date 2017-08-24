@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hebeu.keyan.dao.customMapper.EPaperMapperCustom">
+
+    <!--查询指定 人员 的 论文 集合-->
+    <select id="selectPaperResultByWorkNum" resultType="com.hebeu.keyan.po.customPO.EPaperCustom">
+        SELECT v.*,r.*,c.college_name FROM view_paper v LEFT JOIN r_person_project_result r ON v.paper_id = r.id LEFT JOIN e_college c ON r.college_id = c.college_id WHERE work_num = #{workNum}
+    </select>
+
+    <!--查询指定id的论文详情-->
+    <select id="selectPaperResultInfoByPaperId" resultType="com.hebeu.keyan.po.customPO.EPaperCustom">
+        SELECT * FROM view_paper v WHERE v.paper_id = #{paperId}
+    </select>
+
+    <!--查询指定论文对应的人员列表-->
+    <select id="selectPersonListByPaperId" resultType="com.hebeu.keyan.vo.PersonListVO">
+        SELECT r.* FROM r_person_project_result  r
+        WHERE r.id = #{paperId}
+    </select>
+
+    <!--查询指定论文对应的收录列表-->
+    <select id="selectIncludeListByPaperId" resultType="com.hebeu.keyan.po.customPO.EIncludeCustom">
+        SELECT v.* FROM view_include v
+        WHERE v.paper_id = #{paperId}
+    </select>
+
+</mapper>

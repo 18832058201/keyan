@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hebeu.keyan.dao.customMapper.EPatentMapperCustom">
+
+    <!--查询指定 人员 的 专利成果 集合-->
+    <select id="selectPatentByWorkNum" resultType="com.hebeu.keyan.po.customPO.EPatentCustom">
+        SELECT v.*,r.* FROM view_patent v LEFT JOIN r_person_project_result r ON v.patent_id = r.id WHERE work_num = #{workNum}
+    </select>
+
+    <select id="selectPatentResultInfoById" resultType="com.hebeu.keyan.po.customPO.EPatentCustom">
+        SELECT *from view_patent where patent_id = #{patentId}
+    </select>
+
+    <select id="selectPersonListByPatentId" resultType="com.hebeu.keyan.vo.PersonListVO">
+        select * from r_person_project_result where id = #{patentId};
+    </select>
+</mapper>

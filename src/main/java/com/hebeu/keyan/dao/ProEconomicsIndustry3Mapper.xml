@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hebeu.keyan.dao.ProEconomicsIndustry3Mapper" >
+  <resultMap id="BaseResultMap" type="com.hebeu.keyan.po.ProEconomicsIndustry3" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <id column="economics_industry3_id" property="economicsIndustry3Id" jdbcType="VARCHAR" />
+    <result column="economics_industry3_name" property="economicsIndustry3Name" jdbcType="VARCHAR" />
+    <result column="economics_industry2_id" property="economicsIndustry2Id" jdbcType="VARCHAR" />
+    <result column="is_effective" property="isEffective" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, economics_industry3_id, economics_industry3_name, economics_industry2_id, is_effective
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.hebeu.keyan.po.ProEconomicsIndustry3Example" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from pro_economics_industry3
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="com.hebeu.keyan.po.ProEconomicsIndustry3Key" >
+    select 
+    <include refid="Base_Column_List" />
+    from pro_economics_industry3
+    where id = #{id,jdbcType=INTEGER}
+      and economics_industry3_id = #{economicsIndustry3Id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="com.hebeu.keyan.po.ProEconomicsIndustry3Key" >
+    delete from pro_economics_industry3
+    where id = #{id,jdbcType=INTEGER}
+      and economics_industry3_id = #{economicsIndustry3Id,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.hebeu.keyan.po.ProEconomicsIndustry3Example" >
+    delete from pro_economics_industry3
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.hebeu.keyan.po.ProEconomicsIndustry3" >
+    insert into pro_economics_industry3 (id, economics_industry3_id, economics_industry3_name, 
+      economics_industry2_id, is_effective)
+    values (#{id,jdbcType=INTEGER}, #{economicsIndustry3Id,jdbcType=VARCHAR}, #{economicsIndustry3Name,jdbcType=VARCHAR}, 
+      #{economicsIndustry2Id,jdbcType=VARCHAR}, #{isEffective,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.hebeu.keyan.po.ProEconomicsIndustry3" >
+    insert into pro_economics_industry3
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="economicsIndustry3Id != null" >
+        economics_industry3_id,
+      </if>
+      <if test="economicsIndustry3Name != null" >
+        economics_industry3_name,
+      </if>
+      <if test="economicsIndustry2Id != null" >
+        economics_industry2_id,
+      </if>
+      <if test="isEffective != null" >
+        is_effective,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="economicsIndustry3Id != null" >
+        #{economicsIndustry3Id,jdbcType=VARCHAR},
+      </if>
+      <if test="economicsIndustry3Name != null" >
+        #{economicsIndustry3Name,jdbcType=VARCHAR},
+      </if>
+      <if test="economicsIndustry2Id != null" >
+        #{economicsIndustry2Id,jdbcType=VARCHAR},
+      </if>
+      <if test="isEffective != null" >
+        #{isEffective,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.hebeu.keyan.po.ProEconomicsIndustry3Example" resultType="java.lang.Integer" >
+    select count(*) from pro_economics_industry3
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update pro_economics_industry3
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.economicsIndustry3Id != null" >
+        economics_industry3_id = #{record.economicsIndustry3Id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.economicsIndustry3Name != null" >
+        economics_industry3_name = #{record.economicsIndustry3Name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.economicsIndustry2Id != null" >
+        economics_industry2_id = #{record.economicsIndustry2Id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isEffective != null" >
+        is_effective = #{record.isEffective,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update pro_economics_industry3
+    set id = #{record.id,jdbcType=INTEGER},
+      economics_industry3_id = #{record.economicsIndustry3Id,jdbcType=VARCHAR},
+      economics_industry3_name = #{record.economicsIndustry3Name,jdbcType=VARCHAR},
+      economics_industry2_id = #{record.economicsIndustry2Id,jdbcType=VARCHAR},
+      is_effective = #{record.isEffective,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hebeu.keyan.po.ProEconomicsIndustry3" >
+    update pro_economics_industry3
+    <set >
+      <if test="economicsIndustry3Name != null" >
+        economics_industry3_name = #{economicsIndustry3Name,jdbcType=VARCHAR},
+      </if>
+      <if test="economicsIndustry2Id != null" >
+        economics_industry2_id = #{economicsIndustry2Id,jdbcType=VARCHAR},
+      </if>
+      <if test="isEffective != null" >
+        is_effective = #{isEffective,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+      and economics_industry3_id = #{economicsIndustry3Id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hebeu.keyan.po.ProEconomicsIndustry3" >
+    update pro_economics_industry3
+    set economics_industry3_name = #{economicsIndustry3Name,jdbcType=VARCHAR},
+      economics_industry2_id = #{economicsIndustry2Id,jdbcType=VARCHAR},
+      is_effective = #{isEffective,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+      and economics_industry3_id = #{economicsIndustry3Id,jdbcType=VARCHAR}
+  </update>
+</mapper>

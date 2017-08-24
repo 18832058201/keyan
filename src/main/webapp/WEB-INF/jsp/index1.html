@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>后台管理模板</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../../css/bootstrap.min.css" />
+    <link rel="stylesheet" href="../../css/bootstrap-responsive.min.css" />
+    <link rel="stylesheet" href="../../css/matrix-style.css" />
+    <link rel="stylesheet" href="../../css/matrix-media.css" />
+    <link href="../../font-awesome/css/font-awesome.css" rel="stylesheet" />
+    <script type="text/javascript">
+    function open(hehe){
+    	var id = $(hehe).attr("id");
+    	alert(id);
+    	var ui = document.getElementById("onem");
+    	var state = document.getElementById("onem").style.display;
+    	if(state == "none"){
+    		ui.style.display="";
+    	}else{
+    		ui.style.display="none";
+    	}
+    }
+    </script>
+</head>
+<body>
+    <!--Header-part-->
+    <div id="header">
+      <h1><a href="dashboard.html">信息管理系统平台</a></h1>
+    </div>
+    <!--close-Header-part--> 
+
+    <!--sidebar-menu-->
+    <div id="sidebar" style="OVERFLOW-Y: auto; OVERFLOW-X:hidden;">
+        <ul>
+            <li class="submenu">
+                <a href="#">
+                    <i class="icon icon-table"></i> 
+                    <span>表单</span> 
+                    <span class="label label-important">3</span>
+                </a>
+                <ul>
+               	 	<li>
+                        <!-- 注意：二级菜单的class都是mmm，listId可以任意设置，但是要保证三级菜单的ul的id为listId+m的格式 -->
+                  		<a class="mmm" listId="one"	>
+		                    <i class="icon icon-table"></i> 
+		                    	<span>二级菜单1</span> 
+		               	</a>
+		               	<ul class="submenu" id="onem" style="display: none"><!-- 请看此处的id. -->
+		               		<li><a class="menu_a" link="form-validation.html">&nbsp;&nbsp;&nbsp;&nbsp;三级菜单1</a></li>
+		               	</ul>
+	                </li>
+
+
+                    <li>
+						<a class="mmm" listId="two"	>
+		                    <i class="icon icon-table"></i>
+		                    	<span>二级菜单2</span>
+		               	</a>
+		               	<ul class="submenu" id="twom" style="display: none">
+		               		<li><a class="menu_a" link="form-validation.html">&nbsp;&nbsp;&nbsp;&nbsp;三级菜单2</a></li>
+		               	</ul>
+                    </li>
+                    <li><a class="menu_a" link="form-wizard.html"><i class="icon icon-caret-right"></i>密码修改样式表单</a></li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+    <!--sidebar-menu-->
+
+    <!--main-container-part-->
+    <div id="content">
+        <!--breadcrumbs-->
+        <div id="content-header">
+          <div id="breadcrumb"> <a href="index.html" title="Go to Home" class="tip-bottom"><i class="icon-home"></i> Home</a></div>
+        </div>
+        <!--End-breadcrumbs-->
+        <iframe src="index2.html" id="iframe-main" frameborder='0' style="width:100%;"></iframe>
+    </div>
+    <!--end-main-container-part-->
+
+    <script src="../../js/excanvas.min.js"></script>
+    <script src="../../js/jquery.min.js"></script>
+    <script src="../../js/jquery.ui.custom.js"></script>
+    <script src="../../js/bootstrap.min.js"></script>
+    <script src="../../js/nicescroll/jquery.nicescroll.min.js"></script>
+    <script src="../../js/matrix.js"></script>
+
+
+    <script type="text/javascript">
+
+    //初始化相关元素高度
+    function init(){
+        $("body").height($(window).height()-80);
+        $("#iframe-main").height($(window).height()-90);
+        $("#sidebar").height($(window).height()-50);
+    }
+
+    $(function(){
+        init();
+        $(window).resize(function(){
+            init();
+        });
+        $(".mmm").click(function(){
+        	var value = $(this).attr("listId");
+        	var ui = document.getElementById(value+"m");
+        	var state = document.getElementById(value+"m").style.display;
+        	if(state == "none"){
+        		ui.style.display="";
+        	}else{
+        		ui.style.display="none";
+        	}
+        	
+        	
+        })
+    });
+
+    // This function is called from the pop-up menus to transfer to
+    // a different page. Ignore if the value returned is a null string:
+    function goPage (newURL) {
+        // if url is empty, skip the menu dividers and reset the menu selection to default
+        if (newURL != "") {
+            // if url is "-", it is this page -- reset the menu:
+            if (newURL == "-" ) {
+                resetMenu();            
+            } 
+            // else, send page to designated URL            
+            else {  
+                document.location.href = newURL;
+            }
+        }
+    }
+
+    // resets the menu selection upon entry to this page:
+    function resetMenu() {
+        document.gomenu.selector.selectedIndex = 2;
+    }
+
+    // uniform使用示例：
+    // $.uniform.update($(this).attr("checked", true));
+    </script>
+</body>
+</html>

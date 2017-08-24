@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hebeu.keyan.dao.ProProjectType2Mapper" >
+  <resultMap id="BaseResultMap" type="com.hebeu.keyan.po.ProProjectType2" >
+    <id column="project_type2_id" property="projectType2Id" jdbcType="INTEGER" />
+    <result column="project_type2_name" property="projectType2Name" jdbcType="VARCHAR" />
+    <result column="project_type1_id" property="projectType1Id" jdbcType="INTEGER" />
+    <result column="is_effective" property="isEffective" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    project_type2_id, project_type2_name, project_type1_id, is_effective
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.hebeu.keyan.po.ProProjectType2Example" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from pro_project_type2
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from pro_project_type2
+    where project_type2_id = #{projectType2Id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from pro_project_type2
+    where project_type2_id = #{projectType2Id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.hebeu.keyan.po.ProProjectType2Example" >
+    delete from pro_project_type2
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.hebeu.keyan.po.ProProjectType2" >
+    insert into pro_project_type2 (project_type2_id, project_type2_name, 
+      project_type1_id, is_effective)
+    values (#{projectType2Id,jdbcType=INTEGER}, #{projectType2Name,jdbcType=VARCHAR}, 
+      #{projectType1Id,jdbcType=INTEGER}, #{isEffective,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.hebeu.keyan.po.ProProjectType2" >
+    insert into pro_project_type2
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="projectType2Id != null" >
+        project_type2_id,
+      </if>
+      <if test="projectType2Name != null" >
+        project_type2_name,
+      </if>
+      <if test="projectType1Id != null" >
+        project_type1_id,
+      </if>
+      <if test="isEffective != null" >
+        is_effective,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="projectType2Id != null" >
+        #{projectType2Id,jdbcType=INTEGER},
+      </if>
+      <if test="projectType2Name != null" >
+        #{projectType2Name,jdbcType=VARCHAR},
+      </if>
+      <if test="projectType1Id != null" >
+        #{projectType1Id,jdbcType=INTEGER},
+      </if>
+      <if test="isEffective != null" >
+        #{isEffective,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.hebeu.keyan.po.ProProjectType2Example" resultType="java.lang.Integer" >
+    select count(*) from pro_project_type2
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update pro_project_type2
+    <set >
+      <if test="record.projectType2Id != null" >
+        project_type2_id = #{record.projectType2Id,jdbcType=INTEGER},
+      </if>
+      <if test="record.projectType2Name != null" >
+        project_type2_name = #{record.projectType2Name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.projectType1Id != null" >
+        project_type1_id = #{record.projectType1Id,jdbcType=INTEGER},
+      </if>
+      <if test="record.isEffective != null" >
+        is_effective = #{record.isEffective,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update pro_project_type2
+    set project_type2_id = #{record.projectType2Id,jdbcType=INTEGER},
+      project_type2_name = #{record.projectType2Name,jdbcType=VARCHAR},
+      project_type1_id = #{record.projectType1Id,jdbcType=INTEGER},
+      is_effective = #{record.isEffective,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hebeu.keyan.po.ProProjectType2" >
+    update pro_project_type2
+    <set >
+      <if test="projectType2Name != null" >
+        project_type2_name = #{projectType2Name,jdbcType=VARCHAR},
+      </if>
+      <if test="projectType1Id != null" >
+        project_type1_id = #{projectType1Id,jdbcType=INTEGER},
+      </if>
+      <if test="isEffective != null" >
+        is_effective = #{isEffective,jdbcType=INTEGER},
+      </if>
+    </set>
+    where project_type2_id = #{projectType2Id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hebeu.keyan.po.ProProjectType2" >
+    update pro_project_type2
+    set project_type2_name = #{projectType2Name,jdbcType=VARCHAR},
+      project_type1_id = #{projectType1Id,jdbcType=INTEGER},
+      is_effective = #{isEffective,jdbcType=INTEGER}
+    where project_type2_id = #{projectType2Id,jdbcType=INTEGER}
+  </update>
+</mapper>

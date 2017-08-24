@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+<generatorConfiguration>
+    <context id="testTables" targetRuntime="MyBatis3">
+        <commentGenerator>
+            <!-- 是否去除自动生成的注释 true：是 ： false:否，建议设置为true，生成的mybatis的注释没有意义 -->
+            <property name="suppressAllComments" value="true"/>
+        </commentGenerator>
+        <!--数据库连接的信息：驱动类、连接地址、用户名、密码 -->
+        <!--MySQL数据库连接配置-->
+        <jdbcConnection driverClass="com.mysql.jdbc.Driver"
+                        connectionURL="jdbc:mysql://47.94.251.186:3306/keyan" userId="root"
+                        password="keyan2017">
+        </jdbcConnection>
+        <!--oracle数据库连接配置-->
+        <!-- <jdbcConnection driverClass="oracle.jdbc.OracleDriver"
+            connectionURL="jdbc:oracle:thin:@127.0.0.1:1521:yycg"
+            userId="yycg"
+            password="yycg">
+        </jdbcConnection> -->
+        <!-- 默认false，把JDBC DECIMAL 和 NUMERIC 类型解析为 Integer，为 true时把JDBC DECIMAL 和
+            NUMERIC 类型解析为java.math.BigDecimal -->
+        <javaTypeResolver>
+            <property name="forceBigDecimals" value="false"/>
+        </javaTypeResolver>
+
+        <!-- targetProject:生成PO类的位置 -->
+        <javaModelGenerator targetPackage="com.hebeu.keyan.po"
+                            targetProject=".\src\main\test">
+            <!-- enableSubPackages:是否让schema作为包的后缀 -->
+            <property name="enableSubPackages" value="false"/>
+            <!-- 从数据库返回的值被清理前后的空格 -->
+            <property name="trimStrings" value="true"/>
+        </javaModelGenerator>
+        <!-- targetProject:mapper映射文件生成的位置 -->
+        <sqlMapGenerator targetPackage="com.hebeu.keyan.dao"
+                         targetProject=".\src\main\test">
+            <!-- enableSubPackages:是否让schema作为包的后缀 -->
+            <property name="enableSubPackages" value="false"/>
+        </sqlMapGenerator>
+        <!-- targetPackage：mapper接口生成的位置 -->
+        <javaClientGenerator type="XMLMAPPER"
+                             targetPackage="com.hebeu.keyan.dao"
+                             targetProject=".\src\main\test">
+            <!-- enableSubPackages:是否让schema作为包的后缀 -->
+            <property name="enableSubPackages" value="false"/>
+        </javaClientGenerator>
+
+        <!-- 指定数据库表 -->
+        <!--<table tableName="sys_user" domainObjectName="User"/>-->
+        <!--<table tableName="sys_role" domainObjectName="Role"/>-->
+        <!--<table tableName="sys_permission" domainObjectName="Permission"/>-->
+        <!--<table tableName="sys_user_role" domainObjectName="UserRole"/>-->
+        <!--<table tableName="sys_role_permission" domainObjectName="RolePermission"/>-->
+
+        <!--<table tableName="sys_user" />-->
+        <table tableName="sys_role" />
+        <table tableName="sys_permission" />
+        <table tableName="sys_user_role" />
+        <table tableName="sys_role_permission" />
+        <!--<table tableName="e_person" domainObjectName="UserInfo"/>-->
+        <!--<table tableName="book_press_type"/>-->
+        <!--<table tableName="book_type"/>-->
+        <!--<table tableName="e_book"/>-->
+        <!--<table tableName="e_college"/>-->
+        <!--<table tableName="e_department"/>-->
+        <!--<table tableName="e_identify"/>-->
+        <!--<table tableName="e_include"/>-->
+        <!--<table tableName="e_paper"/>-->
+        <!--<table tableName="e_patent"/>-->
+        <!--<table tableName="e_person"/>-->
+        <!--<table tableName="e_person_edit"/>-->
+        <!--<table tableName="e_plant"/>-->
+        <!--<table tableName="e_project"/>-->
+        <!--<table tableName="e_reward"/>-->
+        <!--<table tableName="e_seal"/>-->
+        <!--<table tableName="e_software"/>-->
+        <!--<table tableName="e_standard"/>-->
+
+        <!--<table tableName="per_country"/>-->
+        <!--<table tableName="per_degree"/>-->
+        <!--<table tableName="per_duty"/>-->
+        <!--<table tableName="per_education"/>-->
+        <!--<table tableName="per_foreign_language"/>-->
+        <!--<table tableName="per_job_status"/>-->
+        <!--<table tableName="per_language_level"/>-->
+        <!--<table tableName="per_nation"/>-->
+        <!--<table tableName="per_post_level"/>-->
+        <!--<table tableName="per_subject_first"/>-->
+        <!--<table tableName="per_subject_second"/>-->
+        <!--<table tableName="per_subject_third"/>-->
+        <!--<table tableName="per_title_level"/>-->
+        <!--<table tableName="per_title_type"/>-->
+        <!--<table tableName="per_tutor_type"/>-->
+
+
+        <!--<table tableName="per_post_type"/>-->
+
+        <!--<table tableName="pro_project_grade"/>-->
+        <!--<table tableName="pat_type"/>-->
+
+        <!--<table tableName="stand_type"/>-->
+        <!--<table tableName="stand_state"/>-->
+        <!--<table tableName="stand_object"/>-->
+        <!--<table tableName="stand_business"/>-->
+        <!--<table tableName="seal_type"/>-->
+        <!--<table tableName="rew_type"/>-->
+        <!--<table tableName="rew_result_type"/>-->
+        <!--<table tableName="rew_level"/>-->
+        <!--<table tableName="rew_grade"/>-->
+        <!--<table tableName="rew_class"/>-->
+        <!--<table tableName="r_reward_result"/>-->
+        <!--<table tableName="r_project_result"/>-->
+        <!--<table tableName="r_person_project_result"/>-->
+        <!--<table tableName="r_identify_result"/>-->
+        <!--<table tableName="pub_subject_type"/>-->
+        <!--<table tableName="pub_sign"/>-->
+        <!--<table tableName="pub_research_type"/>-->
+        <!--<table tableName="pub_audit_status"/>-->
+        <!--<table tableName="pro_result_form"/>-->
+        <!--<table tableName="pro_project_type2"/>-->
+        <!--<table tableName="pro_project_type1"/>-->
+        <!--<table tableName="pro_project_source"/>-->
+        <!--<table tableName="pro_project_domain"/>-->
+        <!--<table tableName="pro_organization_form"/>-->
+        <!--<table tableName="pro_economics_target"/>-->
+        <!--<table tableName="pro_economics_industry1"/>-->
+        <!--<table tableName="pro_economics_industry2"/>-->
+        <!--<table tableName="pro_economics_industry3"/>-->
+        <!--<table tableName="pro_cooperation_type"/>-->
+        <!--<table tableName="pro_end_status"/>-->
+        <!--<table tableName="plant_type"/>-->
+        <!--<table tableName="plant_genus"/>-->
+        <!--<table tableName="plant_grade"/>-->
+        <!--<table tableName="paper_publish_type"/>-->
+        <!--<table tableName="paper_publish_range"/>-->
+        <!--<table tableName="paper_publish_level"/>-->
+        <!--<table tableName="include_tool"/>-->
+        <!--<table tableName="iden_result_level"/>-->
+        <!--<table tableName="iden_level"/>-->
+        <!--<table tableName="iden_form"/>-->
+
+
+        <!--<table tableName="budget_money"/>-->
+
+        <!-- 有些表的字段需要指定java类型
+         <table schema="" tableName="">
+            <columnOverride column="" javaType="" />
+        </table> -->
+    </context>
+</generatorConfiguration>

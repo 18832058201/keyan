@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hebeu.keyan.dao.PerSubjectThirdMapper" >
+  <resultMap id="BaseResultMap" type="com.hebeu.keyan.po.PerSubjectThird" >
+    <id column="subject_third_id" property="subjectThirdId" jdbcType="INTEGER" />
+    <result column="subject_third_name" property="subjectThirdName" jdbcType="VARCHAR" />
+    <result column="subject_second_id" property="subjectSecondId" jdbcType="INTEGER" />
+    <result column="is_effective" property="isEffective" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    subject_third_id, subject_third_name, subject_second_id, is_effective
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.hebeu.keyan.po.PerSubjectThirdExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from per_subject_third
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from per_subject_third
+    where subject_third_id = #{subjectThirdId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from per_subject_third
+    where subject_third_id = #{subjectThirdId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.hebeu.keyan.po.PerSubjectThirdExample" >
+    delete from per_subject_third
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.hebeu.keyan.po.PerSubjectThird" >
+    insert into per_subject_third (subject_third_id, subject_third_name, 
+      subject_second_id, is_effective)
+    values (#{subjectThirdId,jdbcType=INTEGER}, #{subjectThirdName,jdbcType=VARCHAR}, 
+      #{subjectSecondId,jdbcType=INTEGER}, #{isEffective,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.hebeu.keyan.po.PerSubjectThird" >
+    insert into per_subject_third
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="subjectThirdId != null" >
+        subject_third_id,
+      </if>
+      <if test="subjectThirdName != null" >
+        subject_third_name,
+      </if>
+      <if test="subjectSecondId != null" >
+        subject_second_id,
+      </if>
+      <if test="isEffective != null" >
+        is_effective,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="subjectThirdId != null" >
+        #{subjectThirdId,jdbcType=INTEGER},
+      </if>
+      <if test="subjectThirdName != null" >
+        #{subjectThirdName,jdbcType=VARCHAR},
+      </if>
+      <if test="subjectSecondId != null" >
+        #{subjectSecondId,jdbcType=INTEGER},
+      </if>
+      <if test="isEffective != null" >
+        #{isEffective,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.hebeu.keyan.po.PerSubjectThirdExample" resultType="java.lang.Integer" >
+    select count(*) from per_subject_third
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update per_subject_third
+    <set >
+      <if test="record.subjectThirdId != null" >
+        subject_third_id = #{record.subjectThirdId,jdbcType=INTEGER},
+      </if>
+      <if test="record.subjectThirdName != null" >
+        subject_third_name = #{record.subjectThirdName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.subjectSecondId != null" >
+        subject_second_id = #{record.subjectSecondId,jdbcType=INTEGER},
+      </if>
+      <if test="record.isEffective != null" >
+        is_effective = #{record.isEffective,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update per_subject_third
+    set subject_third_id = #{record.subjectThirdId,jdbcType=INTEGER},
+      subject_third_name = #{record.subjectThirdName,jdbcType=VARCHAR},
+      subject_second_id = #{record.subjectSecondId,jdbcType=INTEGER},
+      is_effective = #{record.isEffective,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hebeu.keyan.po.PerSubjectThird" >
+    update per_subject_third
+    <set >
+      <if test="subjectThirdName != null" >
+        subject_third_name = #{subjectThirdName,jdbcType=VARCHAR},
+      </if>
+      <if test="subjectSecondId != null" >
+        subject_second_id = #{subjectSecondId,jdbcType=INTEGER},
+      </if>
+      <if test="isEffective != null" >
+        is_effective = #{isEffective,jdbcType=INTEGER},
+      </if>
+    </set>
+    where subject_third_id = #{subjectThirdId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hebeu.keyan.po.PerSubjectThird" >
+    update per_subject_third
+    set subject_third_name = #{subjectThirdName,jdbcType=VARCHAR},
+      subject_second_id = #{subjectSecondId,jdbcType=INTEGER},
+      is_effective = #{isEffective,jdbcType=INTEGER}
+    where subject_third_id = #{subjectThirdId,jdbcType=INTEGER}
+  </update>
+</mapper>

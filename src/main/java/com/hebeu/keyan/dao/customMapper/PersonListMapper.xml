@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hebeu.keyan.dao.customMapper.PersonListMapper">
+
+    <!--查询学院，只查询教学单位-->
+    <select id="selectECollegeOrderbyName" resultType="com.hebeu.keyan.po.ECollege" >
+        SELECT college_id,college_name FROM e_college
+          WHERE is_effective = 1
+        <if test="order=='ASC'">
+            ORDER BY CONVERT (college_name USING gbk) ASC
+        </if>
+        <if test="order=='DESC'">
+            ORDER BY CONVERT (college_name USING gbk) DESC
+        </if>
+    </select>
+
+    <!--查询教研室-->
+    <select id="selectEDepartmentOrderByName" resultType="com.hebeu.keyan.po.EDepartment">
+        SELECT department_id,department_name FROM e_department
+        <where>
+            <if test="collegeId!=null">
+                AND college_id = #{collegeId}
+            </if>
+        </where>
+        <if test="order=='ASC'">
+            ORDER BY CONVERT (department_name USING gbk) ASC
+        </if>
+        <if test="order=='DESC'">
+            ORDER BY CONVERT (department_name USING gbk) DESC
+        </if>
+    </select>
+
+    <!--查询人员-->
+    <select id="selectUserInfoOrderByName" resultType="com.hebeu.keyan.po.UserInfo">
+        SELECT work_num,work_name FROM e_person
+        <where>
+            <if test="collegeId!=null">
+                AND college_id2 = #{collegeId}
+            </if>
+            <if test="departmentId!=null">
+                AND department_id2 = #{departmentId}
+            </if>
+        </where>
+        <if test="order=='ASC'">
+            ORDER BY CONVERT (work_name USING gbk) ASC
+        </if>
+        <if test="order=='DESC'">
+            ORDER BY CONVERT (work_name USING gbk) DESC
+        </if>
+    </select>
+
+
+</mapper>

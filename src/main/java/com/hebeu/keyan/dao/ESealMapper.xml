@@ -1,0 +1,354 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hebeu.keyan.dao.ESealMapper" >
+  <resultMap id="BaseResultMap" type="com.hebeu.keyan.po.ESeal" >
+    <id column="seal_id" property="sealId" jdbcType="VARCHAR" />
+    <result column="seal_type_id" property="sealTypeId" jdbcType="INTEGER" />
+    <result column="college_id" property="collegeId" jdbcType="INTEGER" />
+    <result column="seal_reason" property="sealReason" jdbcType="VARCHAR" />
+    <result column="seal_num" property="sealNum" jdbcType="INTEGER" />
+    <result column="apply_person_id" property="applyPersonId" jdbcType="VARCHAR" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+    <result column="audit_status_id" property="auditStatusId" jdbcType="INTEGER" />
+    <result column="audit_person_id1" property="auditPersonId1" jdbcType="VARCHAR" />
+    <result column="audit_poinion1" property="auditPoinion1" jdbcType="VARCHAR" />
+    <result column="audit_person_id2" property="auditPersonId2" jdbcType="VARCHAR" />
+    <result column="audit_poinion2" property="auditPoinion2" jdbcType="VARCHAR" />
+    <result column="insert_time" property="insertTime" jdbcType="TIMESTAMP" />
+    <result column="last_time" property="lastTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    seal_id, seal_type_id, college_id, seal_reason, seal_num, apply_person_id, remark, 
+    audit_status_id, audit_person_id1, audit_poinion1, audit_person_id2, audit_poinion2, 
+    insert_time, last_time
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.hebeu.keyan.po.ESealExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from e_seal
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from e_seal
+    where seal_id = #{sealId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from e_seal
+    where seal_id = #{sealId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.hebeu.keyan.po.ESealExample" >
+    delete from e_seal
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.hebeu.keyan.po.ESeal" >
+    insert into e_seal (seal_id, seal_type_id, college_id, 
+      seal_reason, seal_num, apply_person_id, 
+      remark, audit_status_id, audit_person_id1, 
+      audit_poinion1, audit_person_id2, audit_poinion2, 
+      insert_time, last_time)
+    values (#{sealId,jdbcType=VARCHAR}, #{sealTypeId,jdbcType=INTEGER}, #{collegeId,jdbcType=INTEGER}, 
+      #{sealReason,jdbcType=VARCHAR}, #{sealNum,jdbcType=INTEGER}, #{applyPersonId,jdbcType=VARCHAR}, 
+      #{remark,jdbcType=VARCHAR}, #{auditStatusId,jdbcType=INTEGER}, #{auditPersonId1,jdbcType=VARCHAR}, 
+      #{auditPoinion1,jdbcType=VARCHAR}, #{auditPersonId2,jdbcType=VARCHAR}, #{auditPoinion2,jdbcType=VARCHAR}, 
+      #{insertTime,jdbcType=TIMESTAMP}, #{lastTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.hebeu.keyan.po.ESeal" >
+    insert into e_seal
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="sealId != null" >
+        seal_id,
+      </if>
+      <if test="sealTypeId != null" >
+        seal_type_id,
+      </if>
+      <if test="collegeId != null" >
+        college_id,
+      </if>
+      <if test="sealReason != null" >
+        seal_reason,
+      </if>
+      <if test="sealNum != null" >
+        seal_num,
+      </if>
+      <if test="applyPersonId != null" >
+        apply_person_id,
+      </if>
+      <if test="remark != null" >
+        remark,
+      </if>
+      <if test="auditStatusId != null" >
+        audit_status_id,
+      </if>
+      <if test="auditPersonId1 != null" >
+        audit_person_id1,
+      </if>
+      <if test="auditPoinion1 != null" >
+        audit_poinion1,
+      </if>
+      <if test="auditPersonId2 != null" >
+        audit_person_id2,
+      </if>
+      <if test="auditPoinion2 != null" >
+        audit_poinion2,
+      </if>
+      <if test="insertTime != null" >
+        insert_time,
+      </if>
+      <if test="lastTime != null" >
+        last_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="sealId != null" >
+        #{sealId,jdbcType=VARCHAR},
+      </if>
+      <if test="sealTypeId != null" >
+        #{sealTypeId,jdbcType=INTEGER},
+      </if>
+      <if test="collegeId != null" >
+        #{collegeId,jdbcType=INTEGER},
+      </if>
+      <if test="sealReason != null" >
+        #{sealReason,jdbcType=VARCHAR},
+      </if>
+      <if test="sealNum != null" >
+        #{sealNum,jdbcType=INTEGER},
+      </if>
+      <if test="applyPersonId != null" >
+        #{applyPersonId,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="auditStatusId != null" >
+        #{auditStatusId,jdbcType=INTEGER},
+      </if>
+      <if test="auditPersonId1 != null" >
+        #{auditPersonId1,jdbcType=VARCHAR},
+      </if>
+      <if test="auditPoinion1 != null" >
+        #{auditPoinion1,jdbcType=VARCHAR},
+      </if>
+      <if test="auditPersonId2 != null" >
+        #{auditPersonId2,jdbcType=VARCHAR},
+      </if>
+      <if test="auditPoinion2 != null" >
+        #{auditPoinion2,jdbcType=VARCHAR},
+      </if>
+      <if test="insertTime != null" >
+        #{insertTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastTime != null" >
+        #{lastTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.hebeu.keyan.po.ESealExample" resultType="java.lang.Integer" >
+    select count(*) from e_seal
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update e_seal
+    <set >
+      <if test="record.sealId != null" >
+        seal_id = #{record.sealId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sealTypeId != null" >
+        seal_type_id = #{record.sealTypeId,jdbcType=INTEGER},
+      </if>
+      <if test="record.collegeId != null" >
+        college_id = #{record.collegeId,jdbcType=INTEGER},
+      </if>
+      <if test="record.sealReason != null" >
+        seal_reason = #{record.sealReason,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sealNum != null" >
+        seal_num = #{record.sealNum,jdbcType=INTEGER},
+      </if>
+      <if test="record.applyPersonId != null" >
+        apply_person_id = #{record.applyPersonId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.remark != null" >
+        remark = #{record.remark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.auditStatusId != null" >
+        audit_status_id = #{record.auditStatusId,jdbcType=INTEGER},
+      </if>
+      <if test="record.auditPersonId1 != null" >
+        audit_person_id1 = #{record.auditPersonId1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.auditPoinion1 != null" >
+        audit_poinion1 = #{record.auditPoinion1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.auditPersonId2 != null" >
+        audit_person_id2 = #{record.auditPersonId2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.auditPoinion2 != null" >
+        audit_poinion2 = #{record.auditPoinion2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.insertTime != null" >
+        insert_time = #{record.insertTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.lastTime != null" >
+        last_time = #{record.lastTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update e_seal
+    set seal_id = #{record.sealId,jdbcType=VARCHAR},
+      seal_type_id = #{record.sealTypeId,jdbcType=INTEGER},
+      college_id = #{record.collegeId,jdbcType=INTEGER},
+      seal_reason = #{record.sealReason,jdbcType=VARCHAR},
+      seal_num = #{record.sealNum,jdbcType=INTEGER},
+      apply_person_id = #{record.applyPersonId,jdbcType=VARCHAR},
+      remark = #{record.remark,jdbcType=VARCHAR},
+      audit_status_id = #{record.auditStatusId,jdbcType=INTEGER},
+      audit_person_id1 = #{record.auditPersonId1,jdbcType=VARCHAR},
+      audit_poinion1 = #{record.auditPoinion1,jdbcType=VARCHAR},
+      audit_person_id2 = #{record.auditPersonId2,jdbcType=VARCHAR},
+      audit_poinion2 = #{record.auditPoinion2,jdbcType=VARCHAR},
+      insert_time = #{record.insertTime,jdbcType=TIMESTAMP},
+      last_time = #{record.lastTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hebeu.keyan.po.ESeal" >
+    update e_seal
+    <set >
+      <if test="sealTypeId != null" >
+        seal_type_id = #{sealTypeId,jdbcType=INTEGER},
+      </if>
+      <if test="collegeId != null" >
+        college_id = #{collegeId,jdbcType=INTEGER},
+      </if>
+      <if test="sealReason != null" >
+        seal_reason = #{sealReason,jdbcType=VARCHAR},
+      </if>
+      <if test="sealNum != null" >
+        seal_num = #{sealNum,jdbcType=INTEGER},
+      </if>
+      <if test="applyPersonId != null" >
+        apply_person_id = #{applyPersonId,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="auditStatusId != null" >
+        audit_status_id = #{auditStatusId,jdbcType=INTEGER},
+      </if>
+      <if test="auditPersonId1 != null" >
+        audit_person_id1 = #{auditPersonId1,jdbcType=VARCHAR},
+      </if>
+      <if test="auditPoinion1 != null" >
+        audit_poinion1 = #{auditPoinion1,jdbcType=VARCHAR},
+      </if>
+      <if test="auditPersonId2 != null" >
+        audit_person_id2 = #{auditPersonId2,jdbcType=VARCHAR},
+      </if>
+      <if test="auditPoinion2 != null" >
+        audit_poinion2 = #{auditPoinion2,jdbcType=VARCHAR},
+      </if>
+      <if test="insertTime != null" >
+        insert_time = #{insertTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastTime != null" >
+        last_time = #{lastTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where seal_id = #{sealId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hebeu.keyan.po.ESeal" >
+    update e_seal
+    set seal_type_id = #{sealTypeId,jdbcType=INTEGER},
+      college_id = #{collegeId,jdbcType=INTEGER},
+      seal_reason = #{sealReason,jdbcType=VARCHAR},
+      seal_num = #{sealNum,jdbcType=INTEGER},
+      apply_person_id = #{applyPersonId,jdbcType=VARCHAR},
+      remark = #{remark,jdbcType=VARCHAR},
+      audit_status_id = #{auditStatusId,jdbcType=INTEGER},
+      audit_person_id1 = #{auditPersonId1,jdbcType=VARCHAR},
+      audit_poinion1 = #{auditPoinion1,jdbcType=VARCHAR},
+      audit_person_id2 = #{auditPersonId2,jdbcType=VARCHAR},
+      audit_poinion2 = #{auditPoinion2,jdbcType=VARCHAR},
+      insert_time = #{insertTime,jdbcType=TIMESTAMP},
+      last_time = #{lastTime,jdbcType=TIMESTAMP}
+    where seal_id = #{sealId,jdbcType=VARCHAR}
+  </update>
+</mapper>

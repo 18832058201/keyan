@@ -1,0 +1,638 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hebeu.keyan.dao.EPaperMapper" >
+  <resultMap id="BaseResultMap" type="com.hebeu.keyan.po.EPaper" >
+    <id column="paper_id" property="paperId" jdbcType="VARCHAR" />
+    <result column="paper_name" property="paperName" jdbcType="VARCHAR" />
+    <result column="school_number" property="schoolNumber" jdbcType="VARCHAR" />
+    <result column="subject_type_id" property="subjectTypeId" jdbcType="INTEGER" />
+    <result column="subject_first_id" property="subjectFirstId" jdbcType="INTEGER" />
+    <result column="research_type_id" property="researchTypeId" jdbcType="INTEGER" />
+    <result column="sign_id" property="signId" jdbcType="INTEGER" />
+    <result column="publish_name" property="publishName" jdbcType="VARCHAR" />
+    <result column="publish_type_id" property="publishTypeId" jdbcType="INTEGER" />
+    <result column="publish_range_id" property="publishRangeId" jdbcType="INTEGER" />
+    <result column="publish_level_id" property="publishLevelId" jdbcType="INTEGER" />
+    <result column="reel_number" property="reelNumber" jdbcType="VARCHAR" />
+    <result column="issue" property="issue" jdbcType="VARCHAR" />
+    <result column="page_number" property="pageNumber" jdbcType="VARCHAR" />
+    <result column="publish_date" property="publishDate" jdbcType="TIMESTAMP" />
+    <result column="contact_author" property="contactAuthor" jdbcType="VARCHAR" />
+    <result column="ISSN" property="issn" jdbcType="VARCHAR" />
+    <result column="CN" property="cn" jdbcType="VARCHAR" />
+    <result column="bonus" property="bonus" jdbcType="DOUBLE" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+    <result column="leader" property="leader" jdbcType="VARCHAR" />
+    <result column="registrant" property="registrant" jdbcType="VARCHAR" />
+    <result column="person_list" property="personList" jdbcType="VARCHAR" />
+    <result column="attachment" property="attachment" jdbcType="VARCHAR" />
+    <result column="audit_status_id" property="auditStatusId" jdbcType="INTEGER" />
+    <result column="audit_person_id1" property="auditPersonId1" jdbcType="VARCHAR" />
+    <result column="audit_poinion1" property="auditPoinion1" jdbcType="VARCHAR" />
+    <result column="audit_person_id2" property="auditPersonId2" jdbcType="VARCHAR" />
+    <result column="audit_poinion2" property="auditPoinion2" jdbcType="VARCHAR" />
+    <result column="insert_time" property="insertTime" jdbcType="TIMESTAMP" />
+    <result column="last_time" property="lastTime" jdbcType="TIMESTAMP" />
+    <result column="score" property="score" jdbcType="DOUBLE" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    paper_id, paper_name, school_number, subject_type_id, subject_first_id, research_type_id, 
+    sign_id, publish_name, publish_type_id, publish_range_id, publish_level_id, reel_number, 
+    issue, page_number, publish_date, contact_author, ISSN, CN, bonus, remark, leader, 
+    registrant, person_list, attachment, audit_status_id, audit_person_id1, audit_poinion1, 
+    audit_person_id2, audit_poinion2, insert_time, last_time, score
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.hebeu.keyan.po.EPaperExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from e_paper
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from e_paper
+    where paper_id = #{paperId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from e_paper
+    where paper_id = #{paperId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.hebeu.keyan.po.EPaperExample" >
+    delete from e_paper
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.hebeu.keyan.po.EPaper" >
+    insert into e_paper (paper_id, paper_name, school_number, 
+      subject_type_id, subject_first_id, research_type_id, 
+      sign_id, publish_name, publish_type_id, 
+      publish_range_id, publish_level_id, reel_number, 
+      issue, page_number, publish_date, 
+      contact_author, ISSN, CN, 
+      bonus, remark, leader, 
+      registrant, person_list, attachment, 
+      audit_status_id, audit_person_id1, audit_poinion1, 
+      audit_person_id2, audit_poinion2, insert_time, 
+      last_time, score)
+    values (#{paperId,jdbcType=VARCHAR}, #{paperName,jdbcType=VARCHAR}, #{schoolNumber,jdbcType=VARCHAR}, 
+      #{subjectTypeId,jdbcType=INTEGER}, #{subjectFirstId,jdbcType=INTEGER}, #{researchTypeId,jdbcType=INTEGER}, 
+      #{signId,jdbcType=INTEGER}, #{publishName,jdbcType=VARCHAR}, #{publishTypeId,jdbcType=INTEGER}, 
+      #{publishRangeId,jdbcType=INTEGER}, #{publishLevelId,jdbcType=INTEGER}, #{reelNumber,jdbcType=VARCHAR}, 
+      #{issue,jdbcType=VARCHAR}, #{pageNumber,jdbcType=VARCHAR}, #{publishDate,jdbcType=TIMESTAMP}, 
+      #{contactAuthor,jdbcType=VARCHAR}, #{issn,jdbcType=VARCHAR}, #{cn,jdbcType=VARCHAR}, 
+      #{bonus,jdbcType=DOUBLE}, #{remark,jdbcType=VARCHAR}, #{leader,jdbcType=VARCHAR}, 
+      #{registrant,jdbcType=VARCHAR}, #{personList,jdbcType=VARCHAR}, #{attachment,jdbcType=VARCHAR}, 
+      #{auditStatusId,jdbcType=INTEGER}, #{auditPersonId1,jdbcType=VARCHAR}, #{auditPoinion1,jdbcType=VARCHAR}, 
+      #{auditPersonId2,jdbcType=VARCHAR}, #{auditPoinion2,jdbcType=VARCHAR}, #{insertTime,jdbcType=TIMESTAMP}, 
+      #{lastTime,jdbcType=TIMESTAMP}, #{score,jdbcType=DOUBLE})
+  </insert>
+  <insert id="insertSelective" parameterType="com.hebeu.keyan.po.EPaper" >
+    insert into e_paper
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="paperId != null" >
+        paper_id,
+      </if>
+      <if test="paperName != null" >
+        paper_name,
+      </if>
+      <if test="schoolNumber != null" >
+        school_number,
+      </if>
+      <if test="subjectTypeId != null" >
+        subject_type_id,
+      </if>
+      <if test="subjectFirstId != null" >
+        subject_first_id,
+      </if>
+      <if test="researchTypeId != null" >
+        research_type_id,
+      </if>
+      <if test="signId != null" >
+        sign_id,
+      </if>
+      <if test="publishName != null" >
+        publish_name,
+      </if>
+      <if test="publishTypeId != null" >
+        publish_type_id,
+      </if>
+      <if test="publishRangeId != null" >
+        publish_range_id,
+      </if>
+      <if test="publishLevelId != null" >
+        publish_level_id,
+      </if>
+      <if test="reelNumber != null" >
+        reel_number,
+      </if>
+      <if test="issue != null" >
+        issue,
+      </if>
+      <if test="pageNumber != null" >
+        page_number,
+      </if>
+      <if test="publishDate != null" >
+        publish_date,
+      </if>
+      <if test="contactAuthor != null" >
+        contact_author,
+      </if>
+      <if test="issn != null" >
+        ISSN,
+      </if>
+      <if test="cn != null" >
+        CN,
+      </if>
+      <if test="bonus != null" >
+        bonus,
+      </if>
+      <if test="remark != null" >
+        remark,
+      </if>
+      <if test="leader != null" >
+        leader,
+      </if>
+      <if test="registrant != null" >
+        registrant,
+      </if>
+      <if test="personList != null" >
+        person_list,
+      </if>
+      <if test="attachment != null" >
+        attachment,
+      </if>
+      <if test="auditStatusId != null" >
+        audit_status_id,
+      </if>
+      <if test="auditPersonId1 != null" >
+        audit_person_id1,
+      </if>
+      <if test="auditPoinion1 != null" >
+        audit_poinion1,
+      </if>
+      <if test="auditPersonId2 != null" >
+        audit_person_id2,
+      </if>
+      <if test="auditPoinion2 != null" >
+        audit_poinion2,
+      </if>
+      <if test="insertTime != null" >
+        insert_time,
+      </if>
+      <if test="lastTime != null" >
+        last_time,
+      </if>
+      <if test="score != null" >
+        score,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="paperId != null" >
+        #{paperId,jdbcType=VARCHAR},
+      </if>
+      <if test="paperName != null" >
+        #{paperName,jdbcType=VARCHAR},
+      </if>
+      <if test="schoolNumber != null" >
+        #{schoolNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="subjectTypeId != null" >
+        #{subjectTypeId,jdbcType=INTEGER},
+      </if>
+      <if test="subjectFirstId != null" >
+        #{subjectFirstId,jdbcType=INTEGER},
+      </if>
+      <if test="researchTypeId != null" >
+        #{researchTypeId,jdbcType=INTEGER},
+      </if>
+      <if test="signId != null" >
+        #{signId,jdbcType=INTEGER},
+      </if>
+      <if test="publishName != null" >
+        #{publishName,jdbcType=VARCHAR},
+      </if>
+      <if test="publishTypeId != null" >
+        #{publishTypeId,jdbcType=INTEGER},
+      </if>
+      <if test="publishRangeId != null" >
+        #{publishRangeId,jdbcType=INTEGER},
+      </if>
+      <if test="publishLevelId != null" >
+        #{publishLevelId,jdbcType=INTEGER},
+      </if>
+      <if test="reelNumber != null" >
+        #{reelNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="issue != null" >
+        #{issue,jdbcType=VARCHAR},
+      </if>
+      <if test="pageNumber != null" >
+        #{pageNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="publishDate != null" >
+        #{publishDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="contactAuthor != null" >
+        #{contactAuthor,jdbcType=VARCHAR},
+      </if>
+      <if test="issn != null" >
+        #{issn,jdbcType=VARCHAR},
+      </if>
+      <if test="cn != null" >
+        #{cn,jdbcType=VARCHAR},
+      </if>
+      <if test="bonus != null" >
+        #{bonus,jdbcType=DOUBLE},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="leader != null" >
+        #{leader,jdbcType=VARCHAR},
+      </if>
+      <if test="registrant != null" >
+        #{registrant,jdbcType=VARCHAR},
+      </if>
+      <if test="personList != null" >
+        #{personList,jdbcType=VARCHAR},
+      </if>
+      <if test="attachment != null" >
+        #{attachment,jdbcType=VARCHAR},
+      </if>
+      <if test="auditStatusId != null" >
+        #{auditStatusId,jdbcType=INTEGER},
+      </if>
+      <if test="auditPersonId1 != null" >
+        #{auditPersonId1,jdbcType=VARCHAR},
+      </if>
+      <if test="auditPoinion1 != null" >
+        #{auditPoinion1,jdbcType=VARCHAR},
+      </if>
+      <if test="auditPersonId2 != null" >
+        #{auditPersonId2,jdbcType=VARCHAR},
+      </if>
+      <if test="auditPoinion2 != null" >
+        #{auditPoinion2,jdbcType=VARCHAR},
+      </if>
+      <if test="insertTime != null" >
+        #{insertTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastTime != null" >
+        #{lastTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="score != null" >
+        #{score,jdbcType=DOUBLE},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.hebeu.keyan.po.EPaperExample" resultType="java.lang.Integer" >
+    select count(*) from e_paper
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update e_paper
+    <set >
+      <if test="record.paperId != null" >
+        paper_id = #{record.paperId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.paperName != null" >
+        paper_name = #{record.paperName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.schoolNumber != null" >
+        school_number = #{record.schoolNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="record.subjectTypeId != null" >
+        subject_type_id = #{record.subjectTypeId,jdbcType=INTEGER},
+      </if>
+      <if test="record.subjectFirstId != null" >
+        subject_first_id = #{record.subjectFirstId,jdbcType=INTEGER},
+      </if>
+      <if test="record.researchTypeId != null" >
+        research_type_id = #{record.researchTypeId,jdbcType=INTEGER},
+      </if>
+      <if test="record.signId != null" >
+        sign_id = #{record.signId,jdbcType=INTEGER},
+      </if>
+      <if test="record.publishName != null" >
+        publish_name = #{record.publishName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.publishTypeId != null" >
+        publish_type_id = #{record.publishTypeId,jdbcType=INTEGER},
+      </if>
+      <if test="record.publishRangeId != null" >
+        publish_range_id = #{record.publishRangeId,jdbcType=INTEGER},
+      </if>
+      <if test="record.publishLevelId != null" >
+        publish_level_id = #{record.publishLevelId,jdbcType=INTEGER},
+      </if>
+      <if test="record.reelNumber != null" >
+        reel_number = #{record.reelNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="record.issue != null" >
+        issue = #{record.issue,jdbcType=VARCHAR},
+      </if>
+      <if test="record.pageNumber != null" >
+        page_number = #{record.pageNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="record.publishDate != null" >
+        publish_date = #{record.publishDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.contactAuthor != null" >
+        contact_author = #{record.contactAuthor,jdbcType=VARCHAR},
+      </if>
+      <if test="record.issn != null" >
+        ISSN = #{record.issn,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cn != null" >
+        CN = #{record.cn,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bonus != null" >
+        bonus = #{record.bonus,jdbcType=DOUBLE},
+      </if>
+      <if test="record.remark != null" >
+        remark = #{record.remark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.leader != null" >
+        leader = #{record.leader,jdbcType=VARCHAR},
+      </if>
+      <if test="record.registrant != null" >
+        registrant = #{record.registrant,jdbcType=VARCHAR},
+      </if>
+      <if test="record.personList != null" >
+        person_list = #{record.personList,jdbcType=VARCHAR},
+      </if>
+      <if test="record.attachment != null" >
+        attachment = #{record.attachment,jdbcType=VARCHAR},
+      </if>
+      <if test="record.auditStatusId != null" >
+        audit_status_id = #{record.auditStatusId,jdbcType=INTEGER},
+      </if>
+      <if test="record.auditPersonId1 != null" >
+        audit_person_id1 = #{record.auditPersonId1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.auditPoinion1 != null" >
+        audit_poinion1 = #{record.auditPoinion1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.auditPersonId2 != null" >
+        audit_person_id2 = #{record.auditPersonId2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.auditPoinion2 != null" >
+        audit_poinion2 = #{record.auditPoinion2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.insertTime != null" >
+        insert_time = #{record.insertTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.lastTime != null" >
+        last_time = #{record.lastTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.score != null" >
+        score = #{record.score,jdbcType=DOUBLE},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update e_paper
+    set paper_id = #{record.paperId,jdbcType=VARCHAR},
+      paper_name = #{record.paperName,jdbcType=VARCHAR},
+      school_number = #{record.schoolNumber,jdbcType=VARCHAR},
+      subject_type_id = #{record.subjectTypeId,jdbcType=INTEGER},
+      subject_first_id = #{record.subjectFirstId,jdbcType=INTEGER},
+      research_type_id = #{record.researchTypeId,jdbcType=INTEGER},
+      sign_id = #{record.signId,jdbcType=INTEGER},
+      publish_name = #{record.publishName,jdbcType=VARCHAR},
+      publish_type_id = #{record.publishTypeId,jdbcType=INTEGER},
+      publish_range_id = #{record.publishRangeId,jdbcType=INTEGER},
+      publish_level_id = #{record.publishLevelId,jdbcType=INTEGER},
+      reel_number = #{record.reelNumber,jdbcType=VARCHAR},
+      issue = #{record.issue,jdbcType=VARCHAR},
+      page_number = #{record.pageNumber,jdbcType=VARCHAR},
+      publish_date = #{record.publishDate,jdbcType=TIMESTAMP},
+      contact_author = #{record.contactAuthor,jdbcType=VARCHAR},
+      ISSN = #{record.issn,jdbcType=VARCHAR},
+      CN = #{record.cn,jdbcType=VARCHAR},
+      bonus = #{record.bonus,jdbcType=DOUBLE},
+      remark = #{record.remark,jdbcType=VARCHAR},
+      leader = #{record.leader,jdbcType=VARCHAR},
+      registrant = #{record.registrant,jdbcType=VARCHAR},
+      person_list = #{record.personList,jdbcType=VARCHAR},
+      attachment = #{record.attachment,jdbcType=VARCHAR},
+      audit_status_id = #{record.auditStatusId,jdbcType=INTEGER},
+      audit_person_id1 = #{record.auditPersonId1,jdbcType=VARCHAR},
+      audit_poinion1 = #{record.auditPoinion1,jdbcType=VARCHAR},
+      audit_person_id2 = #{record.auditPersonId2,jdbcType=VARCHAR},
+      audit_poinion2 = #{record.auditPoinion2,jdbcType=VARCHAR},
+      insert_time = #{record.insertTime,jdbcType=TIMESTAMP},
+      last_time = #{record.lastTime,jdbcType=TIMESTAMP},
+      score = #{record.score,jdbcType=DOUBLE}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hebeu.keyan.po.EPaper" >
+    update e_paper
+    <set >
+      <if test="paperName != null" >
+        paper_name = #{paperName,jdbcType=VARCHAR},
+      </if>
+      <if test="schoolNumber != null" >
+        school_number = #{schoolNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="subjectTypeId != null" >
+        subject_type_id = #{subjectTypeId,jdbcType=INTEGER},
+      </if>
+      <if test="subjectFirstId != null" >
+        subject_first_id = #{subjectFirstId,jdbcType=INTEGER},
+      </if>
+      <if test="researchTypeId != null" >
+        research_type_id = #{researchTypeId,jdbcType=INTEGER},
+      </if>
+      <if test="signId != null" >
+        sign_id = #{signId,jdbcType=INTEGER},
+      </if>
+      <if test="publishName != null" >
+        publish_name = #{publishName,jdbcType=VARCHAR},
+      </if>
+      <if test="publishTypeId != null" >
+        publish_type_id = #{publishTypeId,jdbcType=INTEGER},
+      </if>
+      <if test="publishRangeId != null" >
+        publish_range_id = #{publishRangeId,jdbcType=INTEGER},
+      </if>
+      <if test="publishLevelId != null" >
+        publish_level_id = #{publishLevelId,jdbcType=INTEGER},
+      </if>
+      <if test="reelNumber != null" >
+        reel_number = #{reelNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="issue != null" >
+        issue = #{issue,jdbcType=VARCHAR},
+      </if>
+      <if test="pageNumber != null" >
+        page_number = #{pageNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="publishDate != null" >
+        publish_date = #{publishDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="contactAuthor != null" >
+        contact_author = #{contactAuthor,jdbcType=VARCHAR},
+      </if>
+      <if test="issn != null" >
+        ISSN = #{issn,jdbcType=VARCHAR},
+      </if>
+      <if test="cn != null" >
+        CN = #{cn,jdbcType=VARCHAR},
+      </if>
+      <if test="bonus != null" >
+        bonus = #{bonus,jdbcType=DOUBLE},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="leader != null" >
+        leader = #{leader,jdbcType=VARCHAR},
+      </if>
+      <if test="registrant != null" >
+        registrant = #{registrant,jdbcType=VARCHAR},
+      </if>
+      <if test="personList != null" >
+        person_list = #{personList,jdbcType=VARCHAR},
+      </if>
+      <if test="attachment != null" >
+        attachment = #{attachment,jdbcType=VARCHAR},
+      </if>
+      <if test="auditStatusId != null" >
+        audit_status_id = #{auditStatusId,jdbcType=INTEGER},
+      </if>
+      <if test="auditPersonId1 != null" >
+        audit_person_id1 = #{auditPersonId1,jdbcType=VARCHAR},
+      </if>
+      <if test="auditPoinion1 != null" >
+        audit_poinion1 = #{auditPoinion1,jdbcType=VARCHAR},
+      </if>
+      <if test="auditPersonId2 != null" >
+        audit_person_id2 = #{auditPersonId2,jdbcType=VARCHAR},
+      </if>
+      <if test="auditPoinion2 != null" >
+        audit_poinion2 = #{auditPoinion2,jdbcType=VARCHAR},
+      </if>
+      <if test="insertTime != null" >
+        insert_time = #{insertTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastTime != null" >
+        last_time = #{lastTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="score != null" >
+        score = #{score,jdbcType=DOUBLE},
+      </if>
+    </set>
+    where paper_id = #{paperId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hebeu.keyan.po.EPaper" >
+    update e_paper
+    set paper_name = #{paperName,jdbcType=VARCHAR},
+      school_number = #{schoolNumber,jdbcType=VARCHAR},
+      subject_type_id = #{subjectTypeId,jdbcType=INTEGER},
+      subject_first_id = #{subjectFirstId,jdbcType=INTEGER},
+      research_type_id = #{researchTypeId,jdbcType=INTEGER},
+      sign_id = #{signId,jdbcType=INTEGER},
+      publish_name = #{publishName,jdbcType=VARCHAR},
+      publish_type_id = #{publishTypeId,jdbcType=INTEGER},
+      publish_range_id = #{publishRangeId,jdbcType=INTEGER},
+      publish_level_id = #{publishLevelId,jdbcType=INTEGER},
+      reel_number = #{reelNumber,jdbcType=VARCHAR},
+      issue = #{issue,jdbcType=VARCHAR},
+      page_number = #{pageNumber,jdbcType=VARCHAR},
+      publish_date = #{publishDate,jdbcType=TIMESTAMP},
+      contact_author = #{contactAuthor,jdbcType=VARCHAR},
+      ISSN = #{issn,jdbcType=VARCHAR},
+      CN = #{cn,jdbcType=VARCHAR},
+      bonus = #{bonus,jdbcType=DOUBLE},
+      remark = #{remark,jdbcType=VARCHAR},
+      leader = #{leader,jdbcType=VARCHAR},
+      registrant = #{registrant,jdbcType=VARCHAR},
+      person_list = #{personList,jdbcType=VARCHAR},
+      attachment = #{attachment,jdbcType=VARCHAR},
+      audit_status_id = #{auditStatusId,jdbcType=INTEGER},
+      audit_person_id1 = #{auditPersonId1,jdbcType=VARCHAR},
+      audit_poinion1 = #{auditPoinion1,jdbcType=VARCHAR},
+      audit_person_id2 = #{auditPersonId2,jdbcType=VARCHAR},
+      audit_poinion2 = #{auditPoinion2,jdbcType=VARCHAR},
+      insert_time = #{insertTime,jdbcType=TIMESTAMP},
+      last_time = #{lastTime,jdbcType=TIMESTAMP},
+      score = #{score,jdbcType=DOUBLE}
+    where paper_id = #{paperId,jdbcType=VARCHAR}
+  </update>
+</mapper>

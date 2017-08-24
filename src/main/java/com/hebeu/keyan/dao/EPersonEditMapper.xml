@@ -1,0 +1,338 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hebeu.keyan.dao.EPersonEditMapper" >
+  <resultMap id="BaseResultMap" type="com.hebeu.keyan.po.EPersonEdit" >
+    <id column="person_edit_id" property="personEditId" jdbcType="VARCHAR" />
+    <result column="work_num" property="workNum" jdbcType="VARCHAR" />
+    <result column="work_name" property="workName" jdbcType="VARCHAR" />
+    <result column="college_id2" property="collegeId2" jdbcType="INTEGER" />
+    <result column="post_type_id" property="postTypeId" jdbcType="INTEGER" />
+    <result column="post_level_id" property="postLevelId" jdbcType="INTEGER" />
+    <result column="title_type_id" property="titleTypeId" jdbcType="INTEGER" />
+    <result column="title_level_id" property="titleLevelId" jdbcType="INTEGER" />
+    <result column="edit_content" property="editContent" jdbcType="VARCHAR" />
+    <result column="audit_status_id" property="auditStatusId" jdbcType="INTEGER" />
+    <result column="audit_person_id" property="auditPersonId" jdbcType="VARCHAR" />
+    <result column="audit_poinion" property="auditPoinion" jdbcType="VARCHAR" />
+    <result column="last_time" property="lastTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    person_edit_id, work_num, work_name, college_id2, post_type_id, post_level_id, title_type_id, 
+    title_level_id, edit_content, audit_status_id, audit_person_id, audit_poinion, last_time
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.hebeu.keyan.po.EPersonEditExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from e_person_edit
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from e_person_edit
+    where person_edit_id = #{personEditId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from e_person_edit
+    where person_edit_id = #{personEditId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.hebeu.keyan.po.EPersonEditExample" >
+    delete from e_person_edit
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.hebeu.keyan.po.EPersonEdit" >
+    insert into e_person_edit (person_edit_id, work_num, work_name, 
+      college_id2, post_type_id, post_level_id, 
+      title_type_id, title_level_id, edit_content, 
+      audit_status_id, audit_person_id, audit_poinion, 
+      last_time)
+    values (#{personEditId,jdbcType=VARCHAR}, #{workNum,jdbcType=VARCHAR}, #{workName,jdbcType=VARCHAR}, 
+      #{collegeId2,jdbcType=INTEGER}, #{postTypeId,jdbcType=INTEGER}, #{postLevelId,jdbcType=INTEGER}, 
+      #{titleTypeId,jdbcType=INTEGER}, #{titleLevelId,jdbcType=INTEGER}, #{editContent,jdbcType=VARCHAR}, 
+      #{auditStatusId,jdbcType=INTEGER}, #{auditPersonId,jdbcType=VARCHAR}, #{auditPoinion,jdbcType=VARCHAR}, 
+      #{lastTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.hebeu.keyan.po.EPersonEdit" >
+    insert into e_person_edit
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="personEditId != null" >
+        person_edit_id,
+      </if>
+      <if test="workNum != null" >
+        work_num,
+      </if>
+      <if test="workName != null" >
+        work_name,
+      </if>
+      <if test="collegeId2 != null" >
+        college_id2,
+      </if>
+      <if test="postTypeId != null" >
+        post_type_id,
+      </if>
+      <if test="postLevelId != null" >
+        post_level_id,
+      </if>
+      <if test="titleTypeId != null" >
+        title_type_id,
+      </if>
+      <if test="titleLevelId != null" >
+        title_level_id,
+      </if>
+      <if test="editContent != null" >
+        edit_content,
+      </if>
+      <if test="auditStatusId != null" >
+        audit_status_id,
+      </if>
+      <if test="auditPersonId != null" >
+        audit_person_id,
+      </if>
+      <if test="auditPoinion != null" >
+        audit_poinion,
+      </if>
+      <if test="lastTime != null" >
+        last_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="personEditId != null" >
+        #{personEditId,jdbcType=VARCHAR},
+      </if>
+      <if test="workNum != null" >
+        #{workNum,jdbcType=VARCHAR},
+      </if>
+      <if test="workName != null" >
+        #{workName,jdbcType=VARCHAR},
+      </if>
+      <if test="collegeId2 != null" >
+        #{collegeId2,jdbcType=INTEGER},
+      </if>
+      <if test="postTypeId != null" >
+        #{postTypeId,jdbcType=INTEGER},
+      </if>
+      <if test="postLevelId != null" >
+        #{postLevelId,jdbcType=INTEGER},
+      </if>
+      <if test="titleTypeId != null" >
+        #{titleTypeId,jdbcType=INTEGER},
+      </if>
+      <if test="titleLevelId != null" >
+        #{titleLevelId,jdbcType=INTEGER},
+      </if>
+      <if test="editContent != null" >
+        #{editContent,jdbcType=VARCHAR},
+      </if>
+      <if test="auditStatusId != null" >
+        #{auditStatusId,jdbcType=INTEGER},
+      </if>
+      <if test="auditPersonId != null" >
+        #{auditPersonId,jdbcType=VARCHAR},
+      </if>
+      <if test="auditPoinion != null" >
+        #{auditPoinion,jdbcType=VARCHAR},
+      </if>
+      <if test="lastTime != null" >
+        #{lastTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.hebeu.keyan.po.EPersonEditExample" resultType="java.lang.Integer" >
+    select count(*) from e_person_edit
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update e_person_edit
+    <set >
+      <if test="record.personEditId != null" >
+        person_edit_id = #{record.personEditId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.workNum != null" >
+        work_num = #{record.workNum,jdbcType=VARCHAR},
+      </if>
+      <if test="record.workName != null" >
+        work_name = #{record.workName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.collegeId2 != null" >
+        college_id2 = #{record.collegeId2,jdbcType=INTEGER},
+      </if>
+      <if test="record.postTypeId != null" >
+        post_type_id = #{record.postTypeId,jdbcType=INTEGER},
+      </if>
+      <if test="record.postLevelId != null" >
+        post_level_id = #{record.postLevelId,jdbcType=INTEGER},
+      </if>
+      <if test="record.titleTypeId != null" >
+        title_type_id = #{record.titleTypeId,jdbcType=INTEGER},
+      </if>
+      <if test="record.titleLevelId != null" >
+        title_level_id = #{record.titleLevelId,jdbcType=INTEGER},
+      </if>
+      <if test="record.editContent != null" >
+        edit_content = #{record.editContent,jdbcType=VARCHAR},
+      </if>
+      <if test="record.auditStatusId != null" >
+        audit_status_id = #{record.auditStatusId,jdbcType=INTEGER},
+      </if>
+      <if test="record.auditPersonId != null" >
+        audit_person_id = #{record.auditPersonId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.auditPoinion != null" >
+        audit_poinion = #{record.auditPoinion,jdbcType=VARCHAR},
+      </if>
+      <if test="record.lastTime != null" >
+        last_time = #{record.lastTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update e_person_edit
+    set person_edit_id = #{record.personEditId,jdbcType=VARCHAR},
+      work_num = #{record.workNum,jdbcType=VARCHAR},
+      work_name = #{record.workName,jdbcType=VARCHAR},
+      college_id2 = #{record.collegeId2,jdbcType=INTEGER},
+      post_type_id = #{record.postTypeId,jdbcType=INTEGER},
+      post_level_id = #{record.postLevelId,jdbcType=INTEGER},
+      title_type_id = #{record.titleTypeId,jdbcType=INTEGER},
+      title_level_id = #{record.titleLevelId,jdbcType=INTEGER},
+      edit_content = #{record.editContent,jdbcType=VARCHAR},
+      audit_status_id = #{record.auditStatusId,jdbcType=INTEGER},
+      audit_person_id = #{record.auditPersonId,jdbcType=VARCHAR},
+      audit_poinion = #{record.auditPoinion,jdbcType=VARCHAR},
+      last_time = #{record.lastTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hebeu.keyan.po.EPersonEdit" >
+    update e_person_edit
+    <set >
+      <if test="workNum != null" >
+        work_num = #{workNum,jdbcType=VARCHAR},
+      </if>
+      <if test="workName != null" >
+        work_name = #{workName,jdbcType=VARCHAR},
+      </if>
+      <if test="collegeId2 != null" >
+        college_id2 = #{collegeId2,jdbcType=INTEGER},
+      </if>
+      <if test="postTypeId != null" >
+        post_type_id = #{postTypeId,jdbcType=INTEGER},
+      </if>
+      <if test="postLevelId != null" >
+        post_level_id = #{postLevelId,jdbcType=INTEGER},
+      </if>
+      <if test="titleTypeId != null" >
+        title_type_id = #{titleTypeId,jdbcType=INTEGER},
+      </if>
+      <if test="titleLevelId != null" >
+        title_level_id = #{titleLevelId,jdbcType=INTEGER},
+      </if>
+      <if test="editContent != null" >
+        edit_content = #{editContent,jdbcType=VARCHAR},
+      </if>
+      <if test="auditStatusId != null" >
+        audit_status_id = #{auditStatusId,jdbcType=INTEGER},
+      </if>
+      <if test="auditPersonId != null" >
+        audit_person_id = #{auditPersonId,jdbcType=VARCHAR},
+      </if>
+      <if test="auditPoinion != null" >
+        audit_poinion = #{auditPoinion,jdbcType=VARCHAR},
+      </if>
+      <if test="lastTime != null" >
+        last_time = #{lastTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where person_edit_id = #{personEditId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hebeu.keyan.po.EPersonEdit" >
+    update e_person_edit
+    set work_num = #{workNum,jdbcType=VARCHAR},
+      work_name = #{workName,jdbcType=VARCHAR},
+      college_id2 = #{collegeId2,jdbcType=INTEGER},
+      post_type_id = #{postTypeId,jdbcType=INTEGER},
+      post_level_id = #{postLevelId,jdbcType=INTEGER},
+      title_type_id = #{titleTypeId,jdbcType=INTEGER},
+      title_level_id = #{titleLevelId,jdbcType=INTEGER},
+      edit_content = #{editContent,jdbcType=VARCHAR},
+      audit_status_id = #{auditStatusId,jdbcType=INTEGER},
+      audit_person_id = #{auditPersonId,jdbcType=VARCHAR},
+      audit_poinion = #{auditPoinion,jdbcType=VARCHAR},
+      last_time = #{lastTime,jdbcType=TIMESTAMP}
+    where person_edit_id = #{personEditId,jdbcType=VARCHAR}
+  </update>
+</mapper>

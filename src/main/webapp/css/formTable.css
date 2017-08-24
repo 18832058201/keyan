@@ -1,0 +1,86 @@
+/*标题信息*/
+.content-h1{
+    color: #666666;
+    font-size: 14px;
+    float: none;
+    text-shadow: 0 1px 0 #ffffff;
+    padding-top: 3px;
+    padding-bottom: 3px;
+    position: relative;
+    border-bottom: 2px solid #EE7600;
+    margin: 0 20px 10px 20px;
+}
+/*定义table表格样式*/
+.formtable{
+    font-size: 14px;
+    width: 95%;
+    margin: 0 auto;
+    background: #f7f7f7;
+    border-top: 2px solid #000000;
+    border-bottom: 2px solid #000000;
+}
+/*table表的td间隔*/
+.formtable td {
+    padding: 2px 3px;
+}
+/*table表的tr块状化，并添加下划线*/
+.formtable tr{
+    float:left;display:inline;
+    border-bottom: 1px dotted #ccc;
+}
+/*定义table表中input、select等标签与边框的距离*/
+.pad{
+    padding-top: 2px;
+    padding-bottom: 2px;
+}
+/*td标签内容靠右*/
+.td1{
+    text-align: right;
+}
+/*td标签内容靠左*/
+.td2{
+    text-align: left;
+}
+/*td标签右边框*/
+.right{
+    border-right: 1px dotted #ccc;
+}
+/*td标签左边框*/
+.left{
+    border-left: 1px dotted #ccc;
+}
+/*定义select标签最小宽度*/
+.select-min {
+    min-width: 150px;
+}
+/*定义td标签的宽度*/
+.width-100{
+    width: 100px;
+}
+.width-150{
+    width: 150px;
+}
+.width-200{
+    width: 200px;
+}
+.width-250{
+    width: 250px;
+}
+.width-300{
+    width: 300px;
+}
+.width-350{
+    width: 350px;
+}
+.width-400{
+    width: 400px;
+}
+.width-450{
+    width: 450px;
+}
+.width-500{
+    width: 500px;
+}
+.width-1000{
+    width: 1000px;
+}

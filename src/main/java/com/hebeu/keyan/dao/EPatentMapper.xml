@@ -1,0 +1,561 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hebeu.keyan.dao.EPatentMapper" >
+  <resultMap id="BaseResultMap" type="com.hebeu.keyan.po.EPatent" >
+    <id column="patent_id" property="patentId" jdbcType="VARCHAR" />
+    <result column="patent_name" property="patentName" jdbcType="VARCHAR" />
+    <result column="school_number" property="schoolNumber" jdbcType="VARCHAR" />
+    <result column="subject_type_id" property="subjectTypeId" jdbcType="INTEGER" />
+    <result column="subject_first_id" property="subjectFirstId" jdbcType="INTEGER" />
+    <result column="pat_type_id" property="patTypeId" jdbcType="INTEGER" />
+    <result column="patentee" property="patentee" jdbcType="VARCHAR" />
+    <result column="apply_number" property="applyNumber" jdbcType="VARCHAR" />
+    <result column="patent_number" property="patentNumber" jdbcType="VARCHAR" />
+    <result column="pat_certificate_num" property="patCertificateNum" jdbcType="VARCHAR" />
+    <result column="certificate_date" property="certificateDate" jdbcType="TIMESTAMP" />
+    <result column="pat_apply_date" property="patApplyDate" jdbcType="TIMESTAMP" />
+    <result column="empower_date" property="empowerDate" jdbcType="TIMESTAMP" />
+    <result column="bonus" property="bonus" jdbcType="DOUBLE" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+    <result column="leader" property="leader" jdbcType="VARCHAR" />
+    <result column="registrant" property="registrant" jdbcType="VARCHAR" />
+    <result column="person_list" property="personList" jdbcType="VARCHAR" />
+    <result column="attachment" property="attachment" jdbcType="VARCHAR" />
+    <result column="audit_status_id" property="auditStatusId" jdbcType="INTEGER" />
+    <result column="audit_person_id1" property="auditPersonId1" jdbcType="VARCHAR" />
+    <result column="audit_poinion1" property="auditPoinion1" jdbcType="VARCHAR" />
+    <result column="audit_person_id2" property="auditPersonId2" jdbcType="VARCHAR" />
+    <result column="audit_poinion2" property="auditPoinion2" jdbcType="VARCHAR" />
+    <result column="insert_time" property="insertTime" jdbcType="TIMESTAMP" />
+    <result column="last_time" property="lastTime" jdbcType="TIMESTAMP" />
+    <result column="score" property="score" jdbcType="DOUBLE" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    patent_id, patent_name, school_number, subject_type_id, subject_first_id, pat_type_id, 
+    patentee, apply_number, patent_number, pat_certificate_num, certificate_date, pat_apply_date, 
+    empower_date, bonus, remark, leader, registrant, person_list, attachment, audit_status_id, 
+    audit_person_id1, audit_poinion1, audit_person_id2, audit_poinion2, insert_time, 
+    last_time, score
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.hebeu.keyan.po.EPatentExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from e_patent
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from e_patent
+    where patent_id = #{patentId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from e_patent
+    where patent_id = #{patentId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.hebeu.keyan.po.EPatentExample" >
+    delete from e_patent
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.hebeu.keyan.po.EPatent" >
+    insert into e_patent (patent_id, patent_name, school_number, 
+      subject_type_id, subject_first_id, pat_type_id, 
+      patentee, apply_number, patent_number, 
+      pat_certificate_num, certificate_date, pat_apply_date, 
+      empower_date, bonus, remark, 
+      leader, registrant, person_list, 
+      attachment, audit_status_id, audit_person_id1, 
+      audit_poinion1, audit_person_id2, audit_poinion2, 
+      insert_time, last_time, score
+      )
+    values (#{patentId,jdbcType=VARCHAR}, #{patentName,jdbcType=VARCHAR}, #{schoolNumber,jdbcType=VARCHAR}, 
+      #{subjectTypeId,jdbcType=INTEGER}, #{subjectFirstId,jdbcType=INTEGER}, #{patTypeId,jdbcType=INTEGER}, 
+      #{patentee,jdbcType=VARCHAR}, #{applyNumber,jdbcType=VARCHAR}, #{patentNumber,jdbcType=VARCHAR}, 
+      #{patCertificateNum,jdbcType=VARCHAR}, #{certificateDate,jdbcType=TIMESTAMP}, #{patApplyDate,jdbcType=TIMESTAMP}, 
+      #{empowerDate,jdbcType=TIMESTAMP}, #{bonus,jdbcType=DOUBLE}, #{remark,jdbcType=VARCHAR}, 
+      #{leader,jdbcType=VARCHAR}, #{registrant,jdbcType=VARCHAR}, #{personList,jdbcType=VARCHAR}, 
+      #{attachment,jdbcType=VARCHAR}, #{auditStatusId,jdbcType=INTEGER}, #{auditPersonId1,jdbcType=VARCHAR}, 
+      #{auditPoinion1,jdbcType=VARCHAR}, #{auditPersonId2,jdbcType=VARCHAR}, #{auditPoinion2,jdbcType=VARCHAR}, 
+      #{insertTime,jdbcType=TIMESTAMP}, #{lastTime,jdbcType=TIMESTAMP}, #{score,jdbcType=DOUBLE}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.hebeu.keyan.po.EPatent" >
+    insert into e_patent
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="patentId != null" >
+        patent_id,
+      </if>
+      <if test="patentName != null" >
+        patent_name,
+      </if>
+      <if test="schoolNumber != null" >
+        school_number,
+      </if>
+      <if test="subjectTypeId != null" >
+        subject_type_id,
+      </if>
+      <if test="subjectFirstId != null" >
+        subject_first_id,
+      </if>
+      <if test="patTypeId != null" >
+        pat_type_id,
+      </if>
+      <if test="patentee != null" >
+        patentee,
+      </if>
+      <if test="applyNumber != null" >
+        apply_number,
+      </if>
+      <if test="patentNumber != null" >
+        patent_number,
+      </if>
+      <if test="patCertificateNum != null" >
+        pat_certificate_num,
+      </if>
+      <if test="certificateDate != null" >
+        certificate_date,
+      </if>
+      <if test="patApplyDate != null" >
+        pat_apply_date,
+      </if>
+      <if test="empowerDate != null" >
+        empower_date,
+      </if>
+      <if test="bonus != null" >
+        bonus,
+      </if>
+      <if test="remark != null" >
+        remark,
+      </if>
+      <if test="leader != null" >
+        leader,
+      </if>
+      <if test="registrant != null" >
+        registrant,
+      </if>
+      <if test="personList != null" >
+        person_list,
+      </if>
+      <if test="attachment != null" >
+        attachment,
+      </if>
+      <if test="auditStatusId != null" >
+        audit_status_id,
+      </if>
+      <if test="auditPersonId1 != null" >
+        audit_person_id1,
+      </if>
+      <if test="auditPoinion1 != null" >
+        audit_poinion1,
+      </if>
+      <if test="auditPersonId2 != null" >
+        audit_person_id2,
+      </if>
+      <if test="auditPoinion2 != null" >
+        audit_poinion2,
+      </if>
+      <if test="insertTime != null" >
+        insert_time,
+      </if>
+      <if test="lastTime != null" >
+        last_time,
+      </if>
+      <if test="score != null" >
+        score,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="patentId != null" >
+        #{patentId,jdbcType=VARCHAR},
+      </if>
+      <if test="patentName != null" >
+        #{patentName,jdbcType=VARCHAR},
+      </if>
+      <if test="schoolNumber != null" >
+        #{schoolNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="subjectTypeId != null" >
+        #{subjectTypeId,jdbcType=INTEGER},
+      </if>
+      <if test="subjectFirstId != null" >
+        #{subjectFirstId,jdbcType=INTEGER},
+      </if>
+      <if test="patTypeId != null" >
+        #{patTypeId,jdbcType=INTEGER},
+      </if>
+      <if test="patentee != null" >
+        #{patentee,jdbcType=VARCHAR},
+      </if>
+      <if test="applyNumber != null" >
+        #{applyNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="patentNumber != null" >
+        #{patentNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="patCertificateNum != null" >
+        #{patCertificateNum,jdbcType=VARCHAR},
+      </if>
+      <if test="certificateDate != null" >
+        #{certificateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="patApplyDate != null" >
+        #{patApplyDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="empowerDate != null" >
+        #{empowerDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="bonus != null" >
+        #{bonus,jdbcType=DOUBLE},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="leader != null" >
+        #{leader,jdbcType=VARCHAR},
+      </if>
+      <if test="registrant != null" >
+        #{registrant,jdbcType=VARCHAR},
+      </if>
+      <if test="personList != null" >
+        #{personList,jdbcType=VARCHAR},
+      </if>
+      <if test="attachment != null" >
+        #{attachment,jdbcType=VARCHAR},
+      </if>
+      <if test="auditStatusId != null" >
+        #{auditStatusId,jdbcType=INTEGER},
+      </if>
+      <if test="auditPersonId1 != null" >
+        #{auditPersonId1,jdbcType=VARCHAR},
+      </if>
+      <if test="auditPoinion1 != null" >
+        #{auditPoinion1,jdbcType=VARCHAR},
+      </if>
+      <if test="auditPersonId2 != null" >
+        #{auditPersonId2,jdbcType=VARCHAR},
+      </if>
+      <if test="auditPoinion2 != null" >
+        #{auditPoinion2,jdbcType=VARCHAR},
+      </if>
+      <if test="insertTime != null" >
+        #{insertTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastTime != null" >
+        #{lastTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="score != null" >
+        #{score,jdbcType=DOUBLE},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.hebeu.keyan.po.EPatentExample" resultType="java.lang.Integer" >
+    select count(*) from e_patent
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update e_patent
+    <set >
+      <if test="record.patentId != null" >
+        patent_id = #{record.patentId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.patentName != null" >
+        patent_name = #{record.patentName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.schoolNumber != null" >
+        school_number = #{record.schoolNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="record.subjectTypeId != null" >
+        subject_type_id = #{record.subjectTypeId,jdbcType=INTEGER},
+      </if>
+      <if test="record.subjectFirstId != null" >
+        subject_first_id = #{record.subjectFirstId,jdbcType=INTEGER},
+      </if>
+      <if test="record.patTypeId != null" >
+        pat_type_id = #{record.patTypeId,jdbcType=INTEGER},
+      </if>
+      <if test="record.patentee != null" >
+        patentee = #{record.patentee,jdbcType=VARCHAR},
+      </if>
+      <if test="record.applyNumber != null" >
+        apply_number = #{record.applyNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="record.patentNumber != null" >
+        patent_number = #{record.patentNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="record.patCertificateNum != null" >
+        pat_certificate_num = #{record.patCertificateNum,jdbcType=VARCHAR},
+      </if>
+      <if test="record.certificateDate != null" >
+        certificate_date = #{record.certificateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.patApplyDate != null" >
+        pat_apply_date = #{record.patApplyDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.empowerDate != null" >
+        empower_date = #{record.empowerDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.bonus != null" >
+        bonus = #{record.bonus,jdbcType=DOUBLE},
+      </if>
+      <if test="record.remark != null" >
+        remark = #{record.remark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.leader != null" >
+        leader = #{record.leader,jdbcType=VARCHAR},
+      </if>
+      <if test="record.registrant != null" >
+        registrant = #{record.registrant,jdbcType=VARCHAR},
+      </if>
+      <if test="record.personList != null" >
+        person_list = #{record.personList,jdbcType=VARCHAR},
+      </if>
+      <if test="record.attachment != null" >
+        attachment = #{record.attachment,jdbcType=VARCHAR},
+      </if>
+      <if test="record.auditStatusId != null" >
+        audit_status_id = #{record.auditStatusId,jdbcType=INTEGER},
+      </if>
+      <if test="record.auditPersonId1 != null" >
+        audit_person_id1 = #{record.auditPersonId1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.auditPoinion1 != null" >
+        audit_poinion1 = #{record.auditPoinion1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.auditPersonId2 != null" >
+        audit_person_id2 = #{record.auditPersonId2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.auditPoinion2 != null" >
+        audit_poinion2 = #{record.auditPoinion2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.insertTime != null" >
+        insert_time = #{record.insertTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.lastTime != null" >
+        last_time = #{record.lastTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.score != null" >
+        score = #{record.score,jdbcType=DOUBLE},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update e_patent
+    set patent_id = #{record.patentId,jdbcType=VARCHAR},
+      patent_name = #{record.patentName,jdbcType=VARCHAR},
+      school_number = #{record.schoolNumber,jdbcType=VARCHAR},
+      subject_type_id = #{record.subjectTypeId,jdbcType=INTEGER},
+      subject_first_id = #{record.subjectFirstId,jdbcType=INTEGER},
+      pat_type_id = #{record.patTypeId,jdbcType=INTEGER},
+      patentee = #{record.patentee,jdbcType=VARCHAR},
+      apply_number = #{record.applyNumber,jdbcType=VARCHAR},
+      patent_number = #{record.patentNumber,jdbcType=VARCHAR},
+      pat_certificate_num = #{record.patCertificateNum,jdbcType=VARCHAR},
+      certificate_date = #{record.certificateDate,jdbcType=TIMESTAMP},
+      pat_apply_date = #{record.patApplyDate,jdbcType=TIMESTAMP},
+      empower_date = #{record.empowerDate,jdbcType=TIMESTAMP},
+      bonus = #{record.bonus,jdbcType=DOUBLE},
+      remark = #{record.remark,jdbcType=VARCHAR},
+      leader = #{record.leader,jdbcType=VARCHAR},
+      registrant = #{record.registrant,jdbcType=VARCHAR},
+      person_list = #{record.personList,jdbcType=VARCHAR},
+      attachment = #{record.attachment,jdbcType=VARCHAR},
+      audit_status_id = #{record.auditStatusId,jdbcType=INTEGER},
+      audit_person_id1 = #{record.auditPersonId1,jdbcType=VARCHAR},
+      audit_poinion1 = #{record.auditPoinion1,jdbcType=VARCHAR},
+      audit_person_id2 = #{record.auditPersonId2,jdbcType=VARCHAR},
+      audit_poinion2 = #{record.auditPoinion2,jdbcType=VARCHAR},
+      insert_time = #{record.insertTime,jdbcType=TIMESTAMP},
+      last_time = #{record.lastTime,jdbcType=TIMESTAMP},
+      score = #{record.score,jdbcType=DOUBLE}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hebeu.keyan.po.EPatent" >
+    update e_patent
+    <set >
+      <if test="patentName != null" >
+        patent_name = #{patentName,jdbcType=VARCHAR},
+      </if>
+      <if test="schoolNumber != null" >
+        school_number = #{schoolNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="subjectTypeId != null" >
+        subject_type_id = #{subjectTypeId,jdbcType=INTEGER},
+      </if>
+      <if test="subjectFirstId != null" >
+        subject_first_id = #{subjectFirstId,jdbcType=INTEGER},
+      </if>
+      <if test="patTypeId != null" >
+        pat_type_id = #{patTypeId,jdbcType=INTEGER},
+      </if>
+      <if test="patentee != null" >
+        patentee = #{patentee,jdbcType=VARCHAR},
+      </if>
+      <if test="applyNumber != null" >
+        apply_number = #{applyNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="patentNumber != null" >
+        patent_number = #{patentNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="patCertificateNum != null" >
+        pat_certificate_num = #{patCertificateNum,jdbcType=VARCHAR},
+      </if>
+      <if test="certificateDate != null" >
+        certificate_date = #{certificateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="patApplyDate != null" >
+        pat_apply_date = #{patApplyDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="empowerDate != null" >
+        empower_date = #{empowerDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="bonus != null" >
+        bonus = #{bonus,jdbcType=DOUBLE},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="leader != null" >
+        leader = #{leader,jdbcType=VARCHAR},
+      </if>
+      <if test="registrant != null" >
+        registrant = #{registrant,jdbcType=VARCHAR},
+      </if>
+      <if test="personList != null" >
+        person_list = #{personList,jdbcType=VARCHAR},
+      </if>
+      <if test="attachment != null" >
+        attachment = #{attachment,jdbcType=VARCHAR},
+      </if>
+      <if test="auditStatusId != null" >
+        audit_status_id = #{auditStatusId,jdbcType=INTEGER},
+      </if>
+      <if test="auditPersonId1 != null" >
+        audit_person_id1 = #{auditPersonId1,jdbcType=VARCHAR},
+      </if>
+      <if test="auditPoinion1 != null" >
+        audit_poinion1 = #{auditPoinion1,jdbcType=VARCHAR},
+      </if>
+      <if test="auditPersonId2 != null" >
+        audit_person_id2 = #{auditPersonId2,jdbcType=VARCHAR},
+      </if>
+      <if test="auditPoinion2 != null" >
+        audit_poinion2 = #{auditPoinion2,jdbcType=VARCHAR},
+      </if>
+      <if test="insertTime != null" >
+        insert_time = #{insertTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastTime != null" >
+        last_time = #{lastTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="score != null" >
+        score = #{score,jdbcType=DOUBLE},
+      </if>
+    </set>
+    where patent_id = #{patentId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hebeu.keyan.po.EPatent" >
+    update e_patent
+    set patent_name = #{patentName,jdbcType=VARCHAR},
+      school_number = #{schoolNumber,jdbcType=VARCHAR},
+      subject_type_id = #{subjectTypeId,jdbcType=INTEGER},
+      subject_first_id = #{subjectFirstId,jdbcType=INTEGER},
+      pat_type_id = #{patTypeId,jdbcType=INTEGER},
+      patentee = #{patentee,jdbcType=VARCHAR},
+      apply_number = #{applyNumber,jdbcType=VARCHAR},
+      patent_number = #{patentNumber,jdbcType=VARCHAR},
+      pat_certificate_num = #{patCertificateNum,jdbcType=VARCHAR},
+      certificate_date = #{certificateDate,jdbcType=TIMESTAMP},
+      pat_apply_date = #{patApplyDate,jdbcType=TIMESTAMP},
+      empower_date = #{empowerDate,jdbcType=TIMESTAMP},
+      bonus = #{bonus,jdbcType=DOUBLE},
+      remark = #{remark,jdbcType=VARCHAR},
+      leader = #{leader,jdbcType=VARCHAR},
+      registrant = #{registrant,jdbcType=VARCHAR},
+      person_list = #{personList,jdbcType=VARCHAR},
+      attachment = #{attachment,jdbcType=VARCHAR},
+      audit_status_id = #{auditStatusId,jdbcType=INTEGER},
+      audit_person_id1 = #{auditPersonId1,jdbcType=VARCHAR},
+      audit_poinion1 = #{auditPoinion1,jdbcType=VARCHAR},
+      audit_person_id2 = #{auditPersonId2,jdbcType=VARCHAR},
+      audit_poinion2 = #{auditPoinion2,jdbcType=VARCHAR},
+      insert_time = #{insertTime,jdbcType=TIMESTAMP},
+      last_time = #{lastTime,jdbcType=TIMESTAMP},
+      score = #{score,jdbcType=DOUBLE}
+    where patent_id = #{patentId,jdbcType=VARCHAR}
+  </update>
+</mapper>

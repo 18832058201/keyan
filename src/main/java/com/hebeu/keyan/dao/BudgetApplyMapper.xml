@@ -1,0 +1,513 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hebeu.keyan.dao.BudgetApplyMapper" >
+  <resultMap id="BaseResultMap" type="com.hebeu.keyan.po.BudgetApply" >
+    <id column="apply_id" property="applyId" jdbcType="VARCHAR" />
+    <result column="work_num" property="workNum" jdbcType="VARCHAR" />
+    <result column="project_id" property="projectId" jdbcType="VARCHAR" />
+    <result column="publish_apply" property="publishApply" jdbcType="DOUBLE" />
+    <result column="materials_apply" property="materialsApply" jdbcType="DOUBLE" />
+    <result column="test_apply" property="testApply" jdbcType="DOUBLE" />
+    <result column="fuel_apply" property="fuelApply" jdbcType="DOUBLE" />
+    <result column="travel_apply" property="travelApply" jdbcType="DOUBLE" />
+    <result column="meet_apply" property="meetApply" jdbcType="DOUBLE" />
+    <result column="international_apply" property="internationalApply" jdbcType="DOUBLE" />
+    <result column="facility_apply" property="facilityApply" jdbcType="DOUBLE" />
+    <result column="labour_apply" property="labourApply" jdbcType="DOUBLE" />
+    <result column="expert_apply" property="expertApply" jdbcType="DOUBLE" />
+    <result column="datum_apply" property="datumApply" jdbcType="DOUBLE" />
+    <result column="print_apply" property="printApply" jdbcType="DOUBLE" />
+    <result column="other_apply" property="otherApply" jdbcType="DOUBLE" />
+    <result column="audit_status_id" property="auditStatusId" jdbcType="INTEGER" />
+    <result column="audit_person_id1" property="auditPersonId1" jdbcType="VARCHAR" />
+    <result column="audit_poinion1" property="auditPoinion1" jdbcType="VARCHAR" />
+    <result column="audit_person_id2" property="auditPersonId2" jdbcType="VARCHAR" />
+    <result column="audit_poinion2" property="auditPoinion2" jdbcType="VARCHAR" />
+    <result column="audit_person_id3" property="auditPersonId3" jdbcType="VARCHAR" />
+    <result column="audit_poinion3" property="auditPoinion3" jdbcType="VARCHAR" />
+    <result column="last_time" property="lastTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    apply_id, work_num, project_id, publish_apply, materials_apply, test_apply, fuel_apply, 
+    travel_apply, meet_apply, international_apply, facility_apply, labour_apply, expert_apply, 
+    datum_apply, print_apply, other_apply, audit_status_id, audit_person_id1, audit_poinion1, 
+    audit_person_id2, audit_poinion2, audit_person_id3, audit_poinion3, last_time
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.hebeu.keyan.po.BudgetApplyExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from budget_apply
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from budget_apply
+    where apply_id = #{applyId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from budget_apply
+    where apply_id = #{applyId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.hebeu.keyan.po.BudgetApplyExample" >
+    delete from budget_apply
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.hebeu.keyan.po.BudgetApply" >
+    insert into budget_apply (apply_id, work_num, project_id, 
+      publish_apply, materials_apply, test_apply, 
+      fuel_apply, travel_apply, meet_apply, 
+      international_apply, facility_apply, labour_apply, 
+      expert_apply, datum_apply, print_apply, 
+      other_apply, audit_status_id, audit_person_id1, 
+      audit_poinion1, audit_person_id2, audit_poinion2, 
+      audit_person_id3, audit_poinion3, last_time
+      )
+    values (#{applyId,jdbcType=VARCHAR}, #{workNum,jdbcType=VARCHAR}, #{projectId,jdbcType=VARCHAR}, 
+      #{publishApply,jdbcType=DOUBLE}, #{materialsApply,jdbcType=DOUBLE}, #{testApply,jdbcType=DOUBLE}, 
+      #{fuelApply,jdbcType=DOUBLE}, #{travelApply,jdbcType=DOUBLE}, #{meetApply,jdbcType=DOUBLE}, 
+      #{internationalApply,jdbcType=DOUBLE}, #{facilityApply,jdbcType=DOUBLE}, #{labourApply,jdbcType=DOUBLE}, 
+      #{expertApply,jdbcType=DOUBLE}, #{datumApply,jdbcType=DOUBLE}, #{printApply,jdbcType=DOUBLE}, 
+      #{otherApply,jdbcType=DOUBLE}, #{auditStatusId,jdbcType=INTEGER}, #{auditPersonId1,jdbcType=VARCHAR}, 
+      #{auditPoinion1,jdbcType=VARCHAR}, #{auditPersonId2,jdbcType=VARCHAR}, #{auditPoinion2,jdbcType=VARCHAR}, 
+      #{auditPersonId3,jdbcType=VARCHAR}, #{auditPoinion3,jdbcType=VARCHAR}, #{lastTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.hebeu.keyan.po.BudgetApply" >
+    insert into budget_apply
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="applyId != null" >
+        apply_id,
+      </if>
+      <if test="workNum != null" >
+        work_num,
+      </if>
+      <if test="projectId != null" >
+        project_id,
+      </if>
+      <if test="publishApply != null" >
+        publish_apply,
+      </if>
+      <if test="materialsApply != null" >
+        materials_apply,
+      </if>
+      <if test="testApply != null" >
+        test_apply,
+      </if>
+      <if test="fuelApply != null" >
+        fuel_apply,
+      </if>
+      <if test="travelApply != null" >
+        travel_apply,
+      </if>
+      <if test="meetApply != null" >
+        meet_apply,
+      </if>
+      <if test="internationalApply != null" >
+        international_apply,
+      </if>
+      <if test="facilityApply != null" >
+        facility_apply,
+      </if>
+      <if test="labourApply != null" >
+        labour_apply,
+      </if>
+      <if test="expertApply != null" >
+        expert_apply,
+      </if>
+      <if test="datumApply != null" >
+        datum_apply,
+      </if>
+      <if test="printApply != null" >
+        print_apply,
+      </if>
+      <if test="otherApply != null" >
+        other_apply,
+      </if>
+      <if test="auditStatusId != null" >
+        audit_status_id,
+      </if>
+      <if test="auditPersonId1 != null" >
+        audit_person_id1,
+      </if>
+      <if test="auditPoinion1 != null" >
+        audit_poinion1,
+      </if>
+      <if test="auditPersonId2 != null" >
+        audit_person_id2,
+      </if>
+      <if test="auditPoinion2 != null" >
+        audit_poinion2,
+      </if>
+      <if test="auditPersonId3 != null" >
+        audit_person_id3,
+      </if>
+      <if test="auditPoinion3 != null" >
+        audit_poinion3,
+      </if>
+      <if test="lastTime != null" >
+        last_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="applyId != null" >
+        #{applyId,jdbcType=VARCHAR},
+      </if>
+      <if test="workNum != null" >
+        #{workNum,jdbcType=VARCHAR},
+      </if>
+      <if test="projectId != null" >
+        #{projectId,jdbcType=VARCHAR},
+      </if>
+      <if test="publishApply != null" >
+        #{publishApply,jdbcType=DOUBLE},
+      </if>
+      <if test="materialsApply != null" >
+        #{materialsApply,jdbcType=DOUBLE},
+      </if>
+      <if test="testApply != null" >
+        #{testApply,jdbcType=DOUBLE},
+      </if>
+      <if test="fuelApply != null" >
+        #{fuelApply,jdbcType=DOUBLE},
+      </if>
+      <if test="travelApply != null" >
+        #{travelApply,jdbcType=DOUBLE},
+      </if>
+      <if test="meetApply != null" >
+        #{meetApply,jdbcType=DOUBLE},
+      </if>
+      <if test="internationalApply != null" >
+        #{internationalApply,jdbcType=DOUBLE},
+      </if>
+      <if test="facilityApply != null" >
+        #{facilityApply,jdbcType=DOUBLE},
+      </if>
+      <if test="labourApply != null" >
+        #{labourApply,jdbcType=DOUBLE},
+      </if>
+      <if test="expertApply != null" >
+        #{expertApply,jdbcType=DOUBLE},
+      </if>
+      <if test="datumApply != null" >
+        #{datumApply,jdbcType=DOUBLE},
+      </if>
+      <if test="printApply != null" >
+        #{printApply,jdbcType=DOUBLE},
+      </if>
+      <if test="otherApply != null" >
+        #{otherApply,jdbcType=DOUBLE},
+      </if>
+      <if test="auditStatusId != null" >
+        #{auditStatusId,jdbcType=INTEGER},
+      </if>
+      <if test="auditPersonId1 != null" >
+        #{auditPersonId1,jdbcType=VARCHAR},
+      </if>
+      <if test="auditPoinion1 != null" >
+        #{auditPoinion1,jdbcType=VARCHAR},
+      </if>
+      <if test="auditPersonId2 != null" >
+        #{auditPersonId2,jdbcType=VARCHAR},
+      </if>
+      <if test="auditPoinion2 != null" >
+        #{auditPoinion2,jdbcType=VARCHAR},
+      </if>
+      <if test="auditPersonId3 != null" >
+        #{auditPersonId3,jdbcType=VARCHAR},
+      </if>
+      <if test="auditPoinion3 != null" >
+        #{auditPoinion3,jdbcType=VARCHAR},
+      </if>
+      <if test="lastTime != null" >
+        #{lastTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.hebeu.keyan.po.BudgetApplyExample" resultType="java.lang.Integer" >
+    select count(*) from budget_apply
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update budget_apply
+    <set >
+      <if test="record.applyId != null" >
+        apply_id = #{record.applyId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.workNum != null" >
+        work_num = #{record.workNum,jdbcType=VARCHAR},
+      </if>
+      <if test="record.projectId != null" >
+        project_id = #{record.projectId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.publishApply != null" >
+        publish_apply = #{record.publishApply,jdbcType=DOUBLE},
+      </if>
+      <if test="record.materialsApply != null" >
+        materials_apply = #{record.materialsApply,jdbcType=DOUBLE},
+      </if>
+      <if test="record.testApply != null" >
+        test_apply = #{record.testApply,jdbcType=DOUBLE},
+      </if>
+      <if test="record.fuelApply != null" >
+        fuel_apply = #{record.fuelApply,jdbcType=DOUBLE},
+      </if>
+      <if test="record.travelApply != null" >
+        travel_apply = #{record.travelApply,jdbcType=DOUBLE},
+      </if>
+      <if test="record.meetApply != null" >
+        meet_apply = #{record.meetApply,jdbcType=DOUBLE},
+      </if>
+      <if test="record.internationalApply != null" >
+        international_apply = #{record.internationalApply,jdbcType=DOUBLE},
+      </if>
+      <if test="record.facilityApply != null" >
+        facility_apply = #{record.facilityApply,jdbcType=DOUBLE},
+      </if>
+      <if test="record.labourApply != null" >
+        labour_apply = #{record.labourApply,jdbcType=DOUBLE},
+      </if>
+      <if test="record.expertApply != null" >
+        expert_apply = #{record.expertApply,jdbcType=DOUBLE},
+      </if>
+      <if test="record.datumApply != null" >
+        datum_apply = #{record.datumApply,jdbcType=DOUBLE},
+      </if>
+      <if test="record.printApply != null" >
+        print_apply = #{record.printApply,jdbcType=DOUBLE},
+      </if>
+      <if test="record.otherApply != null" >
+        other_apply = #{record.otherApply,jdbcType=DOUBLE},
+      </if>
+      <if test="record.auditStatusId != null" >
+        audit_status_id = #{record.auditStatusId,jdbcType=INTEGER},
+      </if>
+      <if test="record.auditPersonId1 != null" >
+        audit_person_id1 = #{record.auditPersonId1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.auditPoinion1 != null" >
+        audit_poinion1 = #{record.auditPoinion1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.auditPersonId2 != null" >
+        audit_person_id2 = #{record.auditPersonId2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.auditPoinion2 != null" >
+        audit_poinion2 = #{record.auditPoinion2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.auditPersonId3 != null" >
+        audit_person_id3 = #{record.auditPersonId3,jdbcType=VARCHAR},
+      </if>
+      <if test="record.auditPoinion3 != null" >
+        audit_poinion3 = #{record.auditPoinion3,jdbcType=VARCHAR},
+      </if>
+      <if test="record.lastTime != null" >
+        last_time = #{record.lastTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update budget_apply
+    set apply_id = #{record.applyId,jdbcType=VARCHAR},
+      work_num = #{record.workNum,jdbcType=VARCHAR},
+      project_id = #{record.projectId,jdbcType=VARCHAR},
+      publish_apply = #{record.publishApply,jdbcType=DOUBLE},
+      materials_apply = #{record.materialsApply,jdbcType=DOUBLE},
+      test_apply = #{record.testApply,jdbcType=DOUBLE},
+      fuel_apply = #{record.fuelApply,jdbcType=DOUBLE},
+      travel_apply = #{record.travelApply,jdbcType=DOUBLE},
+      meet_apply = #{record.meetApply,jdbcType=DOUBLE},
+      international_apply = #{record.internationalApply,jdbcType=DOUBLE},
+      facility_apply = #{record.facilityApply,jdbcType=DOUBLE},
+      labour_apply = #{record.labourApply,jdbcType=DOUBLE},
+      expert_apply = #{record.expertApply,jdbcType=DOUBLE},
+      datum_apply = #{record.datumApply,jdbcType=DOUBLE},
+      print_apply = #{record.printApply,jdbcType=DOUBLE},
+      other_apply = #{record.otherApply,jdbcType=DOUBLE},
+      audit_status_id = #{record.auditStatusId,jdbcType=INTEGER},
+      audit_person_id1 = #{record.auditPersonId1,jdbcType=VARCHAR},
+      audit_poinion1 = #{record.auditPoinion1,jdbcType=VARCHAR},
+      audit_person_id2 = #{record.auditPersonId2,jdbcType=VARCHAR},
+      audit_poinion2 = #{record.auditPoinion2,jdbcType=VARCHAR},
+      audit_person_id3 = #{record.auditPersonId3,jdbcType=VARCHAR},
+      audit_poinion3 = #{record.auditPoinion3,jdbcType=VARCHAR},
+      last_time = #{record.lastTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hebeu.keyan.po.BudgetApply" >
+    update budget_apply
+    <set >
+      <if test="workNum != null" >
+        work_num = #{workNum,jdbcType=VARCHAR},
+      </if>
+      <if test="projectId != null" >
+        project_id = #{projectId,jdbcType=VARCHAR},
+      </if>
+      <if test="publishApply != null" >
+        publish_apply = #{publishApply,jdbcType=DOUBLE},
+      </if>
+      <if test="materialsApply != null" >
+        materials_apply = #{materialsApply,jdbcType=DOUBLE},
+      </if>
+      <if test="testApply != null" >
+        test_apply = #{testApply,jdbcType=DOUBLE},
+      </if>
+      <if test="fuelApply != null" >
+        fuel_apply = #{fuelApply,jdbcType=DOUBLE},
+      </if>
+      <if test="travelApply != null" >
+        travel_apply = #{travelApply,jdbcType=DOUBLE},
+      </if>
+      <if test="meetApply != null" >
+        meet_apply = #{meetApply,jdbcType=DOUBLE},
+      </if>
+      <if test="internationalApply != null" >
+        international_apply = #{internationalApply,jdbcType=DOUBLE},
+      </if>
+      <if test="facilityApply != null" >
+        facility_apply = #{facilityApply,jdbcType=DOUBLE},
+      </if>
+      <if test="labourApply != null" >
+        labour_apply = #{labourApply,jdbcType=DOUBLE},
+      </if>
+      <if test="expertApply != null" >
+        expert_apply = #{expertApply,jdbcType=DOUBLE},
+      </if>
+      <if test="datumApply != null" >
+        datum_apply = #{datumApply,jdbcType=DOUBLE},
+      </if>
+      <if test="printApply != null" >
+        print_apply = #{printApply,jdbcType=DOUBLE},
+      </if>
+      <if test="otherApply != null" >
+        other_apply = #{otherApply,jdbcType=DOUBLE},
+      </if>
+      <if test="auditStatusId != null" >
+        audit_status_id = #{auditStatusId,jdbcType=INTEGER},
+      </if>
+      <if test="auditPersonId1 != null" >
+        audit_person_id1 = #{auditPersonId1,jdbcType=VARCHAR},
+      </if>
+      <if test="auditPoinion1 != null" >
+        audit_poinion1 = #{auditPoinion1,jdbcType=VARCHAR},
+      </if>
+      <if test="auditPersonId2 != null" >
+        audit_person_id2 = #{auditPersonId2,jdbcType=VARCHAR},
+      </if>
+      <if test="auditPoinion2 != null" >
+        audit_poinion2 = #{auditPoinion2,jdbcType=VARCHAR},
+      </if>
+      <if test="auditPersonId3 != null" >
+        audit_person_id3 = #{auditPersonId3,jdbcType=VARCHAR},
+      </if>
+      <if test="auditPoinion3 != null" >
+        audit_poinion3 = #{auditPoinion3,jdbcType=VARCHAR},
+      </if>
+      <if test="lastTime != null" >
+        last_time = #{lastTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where apply_id = #{applyId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hebeu.keyan.po.BudgetApply" >
+    update budget_apply
+    set work_num = #{workNum,jdbcType=VARCHAR},
+      project_id = #{projectId,jdbcType=VARCHAR},
+      publish_apply = #{publishApply,jdbcType=DOUBLE},
+      materials_apply = #{materialsApply,jdbcType=DOUBLE},
+      test_apply = #{testApply,jdbcType=DOUBLE},
+      fuel_apply = #{fuelApply,jdbcType=DOUBLE},
+      travel_apply = #{travelApply,jdbcType=DOUBLE},
+      meet_apply = #{meetApply,jdbcType=DOUBLE},
+      international_apply = #{internationalApply,jdbcType=DOUBLE},
+      facility_apply = #{facilityApply,jdbcType=DOUBLE},
+      labour_apply = #{labourApply,jdbcType=DOUBLE},
+      expert_apply = #{expertApply,jdbcType=DOUBLE},
+      datum_apply = #{datumApply,jdbcType=DOUBLE},
+      print_apply = #{printApply,jdbcType=DOUBLE},
+      other_apply = #{otherApply,jdbcType=DOUBLE},
+      audit_status_id = #{auditStatusId,jdbcType=INTEGER},
+      audit_person_id1 = #{auditPersonId1,jdbcType=VARCHAR},
+      audit_poinion1 = #{auditPoinion1,jdbcType=VARCHAR},
+      audit_person_id2 = #{auditPersonId2,jdbcType=VARCHAR},
+      audit_poinion2 = #{auditPoinion2,jdbcType=VARCHAR},
+      audit_person_id3 = #{auditPersonId3,jdbcType=VARCHAR},
+      audit_poinion3 = #{auditPoinion3,jdbcType=VARCHAR},
+      last_time = #{lastTime,jdbcType=TIMESTAMP}
+    where apply_id = #{applyId,jdbcType=VARCHAR}
+  </update>
+</mapper>

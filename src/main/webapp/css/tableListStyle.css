@@ -1,0 +1,12 @@
+.table thead th {
+    font-size: 14px;
+}
+
+.table tbody td {
+    font-size: 14px;
+}
+/*th鼠标响应*/
+.table thead th:hover {
+    cursor: pointer;
+    color: #41BEDD;
+}

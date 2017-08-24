@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hebeu.keyan.dao.customMapper.EBookMapperCustom">
+
+    <!--查询指定 人员 的 著作成果 集合-->
+    <select id="selectBookByWorkNum" resultType="com.hebeu.keyan.po.customPO.EBookCustom">
+        SELECT v.*,r.*,c.college_name FROM view_book v LEFT JOIN r_person_project_result r ON v.book_id = r.id LEFT JOIN e_college c ON r.college_id = c.college_id WHERE work_num = #{workNum}
+    </select>
+
+    <!--查询指定id的著作成果详情-->
+    <select id="selectBookResultInfoById" resultType="com.hebeu.keyan.po.customPO.EBookCustom">
+        SELECT * FROM view_book b WHERE b.book_id = #{bookId}
+    </select>
+
+    <!--查询指定著作成果对应的人员列表-->
+    <select id="selectPersonListByBookId" resultType="com.hebeu.keyan.vo.PersonListVO">
+        SELECT r.* FROM r_person_project_result  r
+        WHERE r.id = #{bookId}
+    </select>
+
+</mapper>
